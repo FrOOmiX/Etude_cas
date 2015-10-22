@@ -3,7 +3,7 @@ Projet étudiant Ruzzle
 
 -----
 
-Ressources :
+----- Ressources -----
 
 Général :
 
