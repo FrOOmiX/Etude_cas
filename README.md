@@ -20,3 +20,6 @@ http://c.learncodethehardway.org/book/ex37.html
 Trie :
 
 http://simplestcodings.blogspot.fr/2012/11/trie-implementation-in-c.html
+https://www.cs.bu.edu/teaching/c/tree/trie/
+http://www.geeksforgeeks.org/trie-insert-and-search/
+http://programminggeeks.com/c-code-for-radix-tree-or-trie/
