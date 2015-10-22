@@ -30,3 +30,7 @@ http://www.geeksforgeeks.org/trie-insert-and-search/
 http://codereview.stackexchange.com/questions/25248/sorted-trie-implementation-in-c
 
 http://programminggeeks.com/c-code-for-radix-tree-or-trie/
+
+http://www.mathcs.emory.edu/~cheung/Courses/323/Syllabus/Text/trie01.html
+
+https://cristibalas.wordpress.com/2008/05/11/generic-string-trie-implementation/
