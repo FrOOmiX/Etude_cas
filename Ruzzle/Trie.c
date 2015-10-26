@@ -33,24 +33,25 @@ int insertNode(Trie *t, unsigned char *string) {
     int position = 0;
     unsigned char c = (unsigned char)string[position];
 
-    if(c) {
+    if(c) {                                         // if string not finished
 
-        if(0 == t->root->child[c]) {
+        if(t->root->child[c] == 0) {                // if no child, create node
 
             t->root->child[c] = malloc(sizeof(Node));
 
-            if(0 == t->root->child[c])
+            if(t->root->child[c] == 0) {
+
                 return 0;
+            }
 
-            initNode(t);
-
+            initNode(t);                            // create node
         }
 
-        position++;
+        position++;                                 // incremente position in string
         return insertNode(t, &c);
-    } else {
+    } else {                                        // if string finished, everything is okay
 
-
+        return 1;
     }
 }
 
