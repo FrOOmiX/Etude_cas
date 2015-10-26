@@ -45,6 +45,7 @@
 		<Unit filename="Trie.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Trie.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
