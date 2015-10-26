@@ -2,70 +2,62 @@
 #include <stdlib.h>
 #include "Trie.h"
 
-void initNode(Trie *t) {                            // init a Node
+void initNode(Node *n) {                            // init a Node
 
-    t->root = createNode();
-}
+    int i;
+    for(i = 0; i < 26; i++) {
 
-Node *createNode() {                                // create a new Node and initialize his parameters
-
-    Node *pNode = NULL;
-
-    pNode = (Node *)malloc(sizeof(Node));
-
-    if(pNode) {
-
-        int i;
-
-        pNode->letter = 0;
-
-        for(i = 0; i < ALPHABET; i++) {
-
-            pNode->child[i] = NULL;
-        }
+        n->child[i] = 0;
     }
 
-    return pNode;
+    n->letter = 0;
 }
 
-int insertNode(Trie *t, char *string) {
+Trie *createTrie() {                                // Create a new trie and initialize the root
 
-    int position = 0;
+    Trie *t = malloc(sizeof(Trie));
+    t->root = malloc(sizeof(Node));
+    initNode(t->root);
+    return t;
+}
+
+int insertNode(Node *n, char *string, int position) {
+
     unsigned char c = (unsigned char)string[position];
 
-    if(c) {                                         // if string not finished
+    if (c) {                                        // if string not finished
 
-        if(t->root->child[c] == 0) {                // if no child, create node
+        if (n->child[c] == 0) {
 
-            t->root->child[c] = malloc(sizeof(Node));
+            n->child[c] = malloc(sizeof(Node));
 
-            if(t->root->child[c] == 0) {
+            if (n->child[c] == NULL) {
 
                 return 0;
             }
 
-            initNode(t);                            // create node
+            initNode(n);                            // create node
+            n->letter = c;
         }
 
-        position++;                                 // incremente position in string
-        return insertNode(t, string);
+        position++;                                 // increment position in string
+        return insertNode(n, string, position);
     } else {                                        // if string finished, everything is okay
 
         return 1;
     }
 }
 
-int searchNode(Trie *t, char *string) {
+int searchNode(Node *n, char *string, int position) {
 
-    int position = 0;
     unsigned char c = (unsigned char)string[position];
 
-    if(c) {                                         // if string not finished
+    if (c) {                                         // if string not finished
 
-        if(t->root->child[c]) {
+        if (n->child[c]) {
 
             position++;
-            return searchNode(t, string);
+            return searchNode(n, string, position);
         } else {
 
             return 0;                               // char not found
