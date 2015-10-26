@@ -17,7 +17,7 @@ typedef struct sTrie {
     Node *root;
 } Trie;
 
-void initNode(Trie *t);
+void initNode(Trie *);
 Node *createNode();
-
+int insertNode(Trie *, char *);
 #endif // _TRIE_H

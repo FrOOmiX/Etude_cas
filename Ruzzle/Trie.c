@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include "Trie.h"
 
-void initNode(Trie *t) {
+void initNode(Trie *t) {                            // init a Node
 
     t->root = createNode();
 }
 
-Node *createNode() {
+Node *createNode() {                                // create a new Node and initialize his parameters
 
     Node *pNode = NULL;
 
@@ -28,7 +28,7 @@ Node *createNode() {
     return pNode;
 }
 
-int insertNode(Trie *t, unsigned char *string) {
+int insertNode(Trie *t, char *string) {
 
     int position = 0;
     unsigned char c = (unsigned char)string[position];
@@ -48,10 +48,30 @@ int insertNode(Trie *t, unsigned char *string) {
         }
 
         position++;                                 // incremente position in string
-        return insertNode(t, &c);
+        return insertNode(t, string);
     } else {                                        // if string finished, everything is okay
 
         return 1;
     }
 }
 
+int searchNode(Trie *t, char *string) {
+
+    int position = 0;
+    unsigned char c = (unsigned char)string[position];
+
+    if(c) {                                         // if string not finished
+
+        if(t->root->child[c]) {
+
+            position++;
+            return searchNode(t, string);
+        } else {
+
+            return 0;                               // char not found
+        }
+    } else {                                        // string found
+
+        return 1;
+    }
+}
