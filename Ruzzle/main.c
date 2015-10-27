@@ -7,13 +7,13 @@
 
 int main(int argc, char *argv[]) {
 
-    /***** Test de lecture de fichier *****/
-    FILE* readFile = NULL;                        // pointeur sur le fichier
+    FILE* readFile = NULL;
     char myString[MAX_LENGTH];
     char *string;
 
     // open the file (r)
-    readFile = fopen("./mots.txt", "r");
+    // There must be a \n at the end of the file
+    readFile = fopen("./dico.txt", "r");
 
     if (readFile != NULL) {
 
@@ -21,12 +21,24 @@ int main(int argc, char *argv[]) {
         Trie t;
         createTrie(&t);
 
+        // Populate the Trie
         while ((string = fgets(myString, MAX_LENGTH, readFile))) {
 
+            // Erase the \n at the end of each word
             int i = strlen(string);
             string[i - 1] = '\0';
 
             insertNode(&t, string);
+        }
+
+        // Search for a word
+        int i = searchNode(&t, "zwinglianismes");
+
+        if (i == 1) {
+            printf("Word found");
+        }
+        else {
+            printf("Not found");
         }
 
         // close file

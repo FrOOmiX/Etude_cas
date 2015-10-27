@@ -3,15 +3,16 @@
 #include <string.h>
 #include "Trie.h"
 
-Node *createNode() {                            // create a Node and init his parameters
+Node *createNode() {                                    // create a Node and init his parameters
 
     Node *n = (Node *)malloc(sizeof(Node));
 
     if (n) {
 
         int i;
+        n->isEnd = 0;
 
-        for(i = 0; i < 26; i++) {
+        for (i = 0; i < 26; i++) {
 
             n->child[i] = NULL;
         }
@@ -20,7 +21,7 @@ Node *createNode() {                            // create a Node and init his pa
     return n;
 }
 
-void createTrie(Trie *t) {                      // Create a new trie and init the root
+void createTrie(Trie *t) {                              // Create a new trie and init the root
 
     t->root = createNode();
 }
@@ -33,32 +34,36 @@ void insertNode(Trie *t, char *string) {
 
     for (i = 0; i < length; i++) {
 
-        int letter = string[i] - 'a';
-        if (temp->child[letter] == NULL) {
+        int indexLetter = string[i] - 'a';              // For each letter, fetch his index
 
-            temp->child[letter] = createNode();
+        if (temp->child[indexLetter] == NULL) {          // No child for this letter
+
+            temp->child[indexLetter] = createNode();
         }
 
-        temp = temp->child[letter];
+        temp = temp->child[indexLetter];                // New temp is the old temp
     }
+
+    temp->isEnd = 1;                                    // Mark last node as leaf
 }
 
-int searchNode(Node *n, char *string, int position) {
+int searchNode(Trie *t, char *string) {
 
-    unsigned char c = (unsigned char)string[position];
+    int i;
+    int length = strlen(string);
+    Node *temp = t->root;
 
-    if (c) {                                         // if string not finished
+    for (i = 0; i < length; i++) {
 
-        if (n->child[c]) {
+        int indexLetter = string[i] - 'a';
 
-            position++;
-            return searchNode(n, string, position);
-        } else {
+        if (temp->child[indexLetter] == NULL) {          // No match
 
-            return 0;                               // char not found
+            return 0;
         }
-    } else {                                        // string found
 
-        return 1;
+        temp = temp->child[indexLetter];
     }
+
+    return (temp != 0 && temp->isEnd);                  // Temp and isEnd shoud be != 0
 }

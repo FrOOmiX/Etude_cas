@@ -6,8 +6,8 @@
 // struct for a node in the trie
 typedef struct sNode {
 
-    char letter;
-    struct sNode *child[ALPHABET];
+    int isEnd;                                  // if 1, node is a leaf
+    struct sNode *child[ALPHABET];              // pointer to every child
 
 } Node;
 
@@ -20,6 +20,6 @@ typedef struct sTrie {
 void createTrie(Trie *);
 Node *createNode();
 void insertNode(Trie *, char *);
-int searchNode(Node *, char *, int);
+int searchNode(Trie *, char *);
 
 #endif // _TRIE_H
