@@ -1,50 +1,45 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Trie.h"
 
-void initNode(Node *n) {                            // init a Node
+Node *createNode() {                            // create a Node and init his parameters
 
-    int i;
-    for(i = 0; i < 26; i++) {
+    Node *n = (Node *)malloc(sizeof(Node));
 
-        n->child[i] = 0;
+    if (n) {
+
+        int i;
+
+        for(i = 0; i < 26; i++) {
+
+            n->child[i] = NULL;
+        }
     }
 
-    n->letter = 0;
+    return n;
 }
 
-Trie *createTrie() {                                // Create a new trie and initialize the root
+void createTrie(Trie *t) {                      // Create a new trie and init the root
 
-    Trie *t = malloc(sizeof(Trie));
-    t->root = malloc(sizeof(Node));
-    initNode(t->root);
-    return t;
+    t->root = createNode();
 }
 
-int insertNode(Node *n, char *string, int position) {
+void insertNode(Trie *t, char *string) {
 
-    unsigned char c = (unsigned char)string[position];
+    int i;
+    int length = strlen(string);
+    Node *temp = t->root;
 
-    if (c) {                                        // if string not finished
+    for (i = 0; i < length; i++) {
 
-        if (n->child[c] == 0) {
+        int letter = string[i] - 'a';
+        if (temp->child[letter] == NULL) {
 
-            n->child[c] = malloc(sizeof(Node));
-
-            if (n->child[c] == NULL) {
-
-                return 0;
-            }
-
-            initNode(n);                            // create node
-            n->letter = c;
+            temp->child[letter] = createNode();
         }
 
-        position++;                                 // increment position in string
-        return insertNode(n, string, position);
-    } else {                                        // if string finished, everything is okay
-
-        return 1;
+        temp = temp->child[letter];
     }
 }
 

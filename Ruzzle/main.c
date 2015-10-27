@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Trie.h"
 
 #define MAX_LENGTH 512
@@ -17,27 +18,15 @@ int main(int argc, char *argv[]) {
     if (readFile != NULL) {
 
         // Create a new trie
-        Trie *t = createTrie();
-
-        /*do {
-
-            string = fgets(myString, MAX_LENGTH, readFile);
-            insertNode(t->root, string, 0);
-            //printf(string);
-        } while (*string != EOF);
-        */
+        Trie t;
+        createTrie(&t);
 
         while ((string = fgets(myString, MAX_LENGTH, readFile))) {
 
-            insertNode(t->root, string, 0);
-        }
+            int i = strlen(string);
+            string[i - 1] = '\0';
 
-        if (searchNode(t->root, "page", 0)) {
-
-            printf("Le mot a ete trouve");
-        } else {
-
-            printf("Le mot pas trouve");
+            insertNode(&t, string);
         }
 
         // close file
