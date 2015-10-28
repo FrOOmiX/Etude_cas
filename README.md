@@ -34,3 +34,11 @@ http://programminggeeks.com/c-code-for-radix-tree-or-trie/
 http://www.mathcs.emory.edu/~cheung/Courses/323/Syllabus/Text/trie01.html
 
 https://cristibalas.wordpress.com/2008/05/11/generic-string-trie-implementation/
+
+Grille :
+
+https://github.com/giacomodrago/ruzzlesolverpro/tree/master/src/com/giacomodrago/ruzzlesolverpro/dictionary
+
+https://github.com/ibaaj/Ruzzle-Solver-in-Java
+
+https://gist.github.com/Upliner/10133074
