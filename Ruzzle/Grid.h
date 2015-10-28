@@ -12,4 +12,6 @@ typedef struct sGrid {
     Cell *root;
 } Grid;
 
+createFullGrid(char *nameFile);
+
 #endif // _GRID_H

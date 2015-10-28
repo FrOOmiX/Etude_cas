@@ -42,6 +42,10 @@
 			<Add library="dxguid" />
 			<Add directory="C:/Program Files (x86)/CodeBlocks/SDL_windows/lib" />
 		</Linker>
+		<Unit filename="Grid.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Grid.h" />
 		<Unit filename="Trie.c">
 			<Option compilerVar="CC" />
 		</Unit>
