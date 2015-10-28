@@ -3,6 +3,8 @@
 #include <string.h>
 #include "Trie.h"
 
+#define MAX_LENGTH 512
+
 Node *createNode() {                                    // create a Node and init his parameters
 
     Node *n = (Node *)malloc(sizeof(Node));
@@ -66,4 +68,48 @@ int searchNode(Trie *t, char *string) {
     }
 
     return (temp != 0 && temp->isEnd);                  // Temp and isEnd shoud be != 0
+}
+
+void createFullTrie(char *nameFile) {
+
+    FILE* readFile = NULL;
+    char myString[MAX_LENGTH];
+    char *string;
+
+    // open the file (r)
+    // There must be a \n at the end of the file
+    readFile = fopen(nameFile, "r");
+
+    if (readFile != NULL) {
+
+        // Create a new trie
+        Trie t;
+        createTrie(&t);
+
+        // Populate the Trie
+        while ((string = fgets(myString, MAX_LENGTH, readFile))) {
+
+            // Erase the \n at the end of each word
+            int i = strlen(string);
+            string[i - 1] = '\0';
+
+            insertNode(&t, string);
+        }
+
+        // Search for a word
+        int i = searchNode(&t, "zwinglianismes");
+
+        if (i == 1)
+            printf("Word found");
+        else
+            printf("Not found");
+
+        // close file
+        fclose(readFile);
+    } else {
+
+        // reading file failed
+        printf("File not found");
+        exit(1);
+    }
 }
