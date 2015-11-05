@@ -96,6 +96,7 @@ void createFullTrie(char *nameFile) {
             insertNode(&t, string);
         }
 
+        /*
         // Search for a word
         int i = searchNode(&t, "zwinglianismes");
 
@@ -103,6 +104,7 @@ void createFullTrie(char *nameFile) {
             printf("Word found");
         else
             printf("Not found");
+        */
 
         // close file
         fclose(readFile);
