@@ -44,3 +44,13 @@ https://github.com/ibaaj/Ruzzle-Solver-in-Java
 https://gist.github.com/Upliner/10133074
 
 https://github.com/DanAurea
+
+https://github.com/baldepro/Ruzzle
+
+https://github.com/Drakirus/Ruzzle
+
+https://github.com/batebates/Decrand_Gerbault
+
+https://github.com/nadilo72/Ruzzle_Solver
+
+https://github.com/etudedecasruzzle/ruzzle
