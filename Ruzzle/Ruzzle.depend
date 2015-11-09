@@ -202,11 +202,12 @@
 	<stdio.h>
 	<stdlib.h>
 
-1446742806 source:c:\users\froomix\desktop\etude_cas\ruzzle\main.c
+1447084082 source:c:\users\froomix\desktop\etude_cas\ruzzle\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"Trie.h"
+	"Grid.h"
 
 1446743069 source:c:\users\froomix\desktop\etude_cas\ruzzle\trie.c
 	<stdio.h>
@@ -216,10 +217,11 @@
 
 1446054442 c:\users\froomix\desktop\etude_cas\ruzzle\trie.h
 
-1446748614 source:c:\users\froomix\desktop\etude_cas\ruzzle\grid.c
+1447084931 source:c:\users\froomix\desktop\etude_cas\ruzzle\grid.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 	"Grid.h"
 
-1446747364 c:\users\froomix\desktop\etude_cas\ruzzle\grid.h
+1447084243 c:\users\froomix\desktop\etude_cas\ruzzle\grid.h
 

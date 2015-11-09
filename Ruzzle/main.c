@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Trie.h"
+#include "Grid.h"
 
 #define LOCATION_DICO "./res/txt/dico.txt"
 #define LOCATION_GRID "./res/txt/grille.txt"
