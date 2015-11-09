@@ -42,3 +42,5 @@ https://github.com/giacomodrago/ruzzlesolverpro/tree/master/src/com/giacomodrago
 https://github.com/ibaaj/Ruzzle-Solver-in-Java
 
 https://gist.github.com/Upliner/10133074
+
+https://github.com/DanAurea
