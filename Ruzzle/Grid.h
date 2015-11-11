@@ -1,7 +1,7 @@
 #ifndef _GRID_H
 #define _GRID_H
 
-#define N 4
+#define N 16
 
 /** Grid representation
  *
@@ -26,9 +26,9 @@ typedef struct sCell {
     char bonW[2];
 } Cell;
 
-void createGrid(Cell* grid[N][N], char charFile[]);
-void initGrid(Cell (*grid)[N][N]);
-Cell *createCell(char c);
+void createGrid(Cell (*grid)[N], char charFile[]);
+void initGrid(Cell (*grid)[16]);
+Cell createCell(char c);
 void createFullGrid(char *nameFile);
 int getScore(char c);
 void toString(Cell (*grid)[N][N]);

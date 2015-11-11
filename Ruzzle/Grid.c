@@ -3,48 +3,42 @@
 #include <string.h>
 #include "Grid.h"
 
-void createGrid(Cell* grid[N][N], char charFile[]) {
+void createGrid(Cell (*grid)[N], char charFile[]) {
 
-    int i, j;
-
-    for(i = 0; i < N; i++) {
-
-        for(j = 0; j < N; j++) {
-
-            grid[i][j] = createCell(charFile[i]);
-        }
-    }
-}
-
-void initGrid(Cell (*grid)[N][N]) {
-
-    int i, j;
+    int i;
 
     for (i = 0; i < N; i++) {
 
-        for (j = 0; j < N; j++) {
+        grid[i] = createCell(charFile[i]);
+    }
+}
 
-            grid[i][j]->letter = ' ';
-            grid[i][j]->score = 0;
-            grid[i][j]->isEmpty = 0;
-            strcpy(grid[i][j]->bonL, "  ");
-            strcpy(grid[i][j]->bonW, "  ");
-        }
+void initGrid(Cell (*grid)[N]) {
+
+    int i;
+
+    for (i = 0; i < N; i++) {
+
+        grid[i]->letter = ' ';
+        grid[i]->score = 0;
+        grid[i]->isEmpty = 0;
+        strcpy(grid[i]->bonL, "  ");
+        strcpy(grid[i]->bonW, "  ");
     }
 
     // Set bonuses
-    strcpy(grid[0][1]->bonW, "DW");
-    strcpy(grid[3][1]->bonW, "TW");
-    strcpy(grid[2][2]->bonL, "DL");
-    strcpy(grid[3][0]->bonL, "TL");
+    strcpy(grid[1]->bonW, "DW");
+    strcpy(grid[7]->bonW, "TW");
+    strcpy(grid[10]->bonL, "DL");
+    strcpy(grid[12]->bonL, "TL");
 }
 
-Cell *createCell(char c) {
+Cell createCell(char c) {
 
-    Cell *cell = (Cell *)malloc(sizeof(Cell));
-    cell->letter = c;
-    cell->score = getScore(c);
-    cell->isEmpty = 1;
+    Cell cell;
+    cell.letter = c;
+    cell.score = getScore(c);
+    cell.isEmpty = 1;
 
     return cell;
 }
@@ -62,7 +56,7 @@ void createFullGrid(char *nameFile) {
 
     if (readFile != NULL) {
 
-        Cell (*grid)[N][N];
+        Cell (*grid)[16];
 
         i = 0;
 
