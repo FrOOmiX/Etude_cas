@@ -20,15 +20,17 @@
 typedef struct sCell {
 
     char letter;
-    int isEmpty;
     int score;
+    int isEmpty;
     char bonL[2];
     char bonW[2];
 } Cell;
 
-void createGrid(Cell grid[N][N], char c);
-Cell createCell(char c);
+void createGrid(Cell* grid[N][N], char charFile[]);
+void initGrid(Cell (*grid)[N][N]);
+Cell *createCell(char c);
 void createFullGrid(char *nameFile);
-void toString(Cell grid[N][N]);
+int getScore(char c);
+void toString(Cell (*grid)[N][N]);
 
 #endif // _GRID_H
