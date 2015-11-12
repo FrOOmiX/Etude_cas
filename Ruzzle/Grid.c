@@ -46,9 +46,9 @@ Cell *createCell(char c) {
 void createFullGrid(char *nameFile) {
 
     FILE* readFile = NULL;
-    int i;
-    char charFile[16];
-    char c;
+    //int i;
+    // char charFile[16];
+    //char c;
 
     // open the file (r)
     // There must be a \n at the end of the file
@@ -57,8 +57,9 @@ void createFullGrid(char *nameFile) {
     if (readFile != NULL) {
 
         Cell grid[N];
-        i = 0;
+        //i = 0;
 
+        /*
         do {
 
             c = getc(readFile);
@@ -69,8 +70,9 @@ void createFullGrid(char *nameFile) {
                 i++;
             }
         } while (c != EOF);
+        */
 
-        initGrid(&grid);
+        initGrid(grid);
         //createGrid(grid, charFile);
         //toString(grid);
 
