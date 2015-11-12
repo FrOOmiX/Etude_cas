@@ -9,7 +9,7 @@ void createGrid(Cell (*grid)[N], char charFile[]) {
 
     for (i = 0; i < N; i++) {
 
-        grid[i] = createCell(charFile[i]);
+        //grid[i] = createCell(charFile[i]);
     }
 }
 
@@ -33,12 +33,12 @@ void initGrid(Cell (*grid)[N]) {
     strcpy(grid[12]->bonL, "TL");
 }
 
-Cell createCell(char c) {
+Cell *createCell(char c) {
 
-    Cell cell;
-    cell.letter = c;
-    cell.score = getScore(c);
-    cell.isEmpty = 1;
+    Cell *cell = (Cell*)malloc(sizeof(Cell));
+    cell->letter = c;
+    cell->score = getScore(c);
+    cell->isEmpty = 1;
 
     return cell;
 }
@@ -56,8 +56,7 @@ void createFullGrid(char *nameFile) {
 
     if (readFile != NULL) {
 
-        Cell (*grid)[16];
-
+        Cell grid[N];
         i = 0;
 
         do {
@@ -71,7 +70,7 @@ void createFullGrid(char *nameFile) {
             }
         } while (c != EOF);
 
-        initGrid(grid);
+        initGrid(&grid);
         //createGrid(grid, charFile);
         //toString(grid);
 
@@ -110,15 +109,12 @@ int getScore(char c) {
     return score;
 }
 
-void toString(Cell (*grid)[N][N]) {
+void toString(Cell (*grid)[N]) {
 
-    int i, j;
+    int i;
 
-    for (i = 0; i > N; i++) {
+    for (i = 0; i < N; i++) {
 
-        for (j = 0; j > N; i++) {
-
-            printf("%c - score : %d", grid[i][j]->letter, grid[i][j]->score);
-        }
+        printf("%c - score : %d", grid[i]->letter, grid[i]->score);
     }
 }
