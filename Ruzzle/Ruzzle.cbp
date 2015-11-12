@@ -40,6 +40,8 @@
 			<Add library="gdi32" />
 			<Add library="winmm" />
 			<Add library="dxguid" />
+			<Add library="lib\SDL_image.lib" />
+			<Add library="lib\SDL_ttf.lib" />
 			<Add directory="C:/Program Files (x86)/CodeBlocks/SDL_windows/lib" />
 		</Linker>
 		<Unit filename="Grid.c">
@@ -50,6 +52,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Trie.h" />
+		<Unit filename="interfaces.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="interfaces.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
