@@ -12,32 +12,33 @@
 const unsigned int SCREEN_WIDTH = 480;
 const unsigned int SCREEN_HEIGHT = 800;
 
-void close()
-{
+void close() {
+
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
 }
 
-int init(){
-     if ( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER ) == -1 )
-    {
+int init() {
+
+     if ( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER ) == -1 ) {
+
         fprintf(stderr,"SDL init failed\n");
         return -1;
     }
 
-
-
     return 0;
 }
 
-int main(int argc, char* argv[]){
+int main(int argc, char* argv[]) {
 
+    /*
     // Create Trie with all words (and search a specific word)
     createFullTrie(LOCATION_DICO);
 
     // Create grid
     createFullGrid(LOCATION_GRID);
+    */
 
     /*pour la fenetre avec la grid*/
     TTF_Init();
@@ -99,6 +100,6 @@ int main(int argc, char* argv[]){
 		}
     }
 
- close();
+    close();
     return 0;
 }

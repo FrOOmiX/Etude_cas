@@ -26,11 +26,11 @@ typedef struct sCell {
     char bonW[2];
 } Cell;
 
-void createGrid(Cell (*grid)[N], char charFile[]);
+void createGrid(Cell grid[N], char charFile[]);
 void initGrid(Cell grid[N]);
 Cell *createCell(char c);
 void createFullGrid(char *nameFile);
 int getScore(char c);
-void toString(Cell (*grid)[N]);
+void toString(Cell grid[N]);
 
 #endif // _GRID_H
