@@ -13,24 +13,24 @@ void createGrid(Cell (*grid)[N], char charFile[]) {
     }
 }
 
-void initGrid(Cell (*grid)[N]) {
+void initGrid(Cell grid[N]) {
 
     int i;
 
     for (i = 0; i < N; i++) {
 
-        grid[i]->letter = ' ';
-        grid[i]->score = 0;
-        grid[i]->isEmpty = 0;
-        strcpy(grid[i]->bonL, "  ");
-        strcpy(grid[i]->bonW, "  ");
+        grid[i].letter = ' ';
+        grid[i].score = 0;
+        grid[i].isEmpty = 0;
+        strcpy(grid[i].bonL, "  ");
+        strcpy(grid[i].bonW, "  ");
     }
 
     // Set bonuses
-    strcpy(grid[1]->bonW, "DW");
-    strcpy(grid[7]->bonW, "TW");
-    strcpy(grid[10]->bonL, "DL");
-    strcpy(grid[12]->bonL, "TL");
+    strcpy(grid[1].bonW, "DW");
+    strcpy(grid[7].bonW, "TW");
+    strcpy(grid[10].bonL, "DL");
+    strcpy(grid[12].bonL, "TL");
 }
 
 Cell *createCell(char c) {
