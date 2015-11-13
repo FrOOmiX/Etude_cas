@@ -22,15 +22,7 @@ void initGrid(Cell grid[N]) {
         grid[i].letter = ' ';
         grid[i].score = 0;
         grid[i].isEmpty = 0;
-        strcpy(grid[i].bonL, "");
-        strcpy(grid[i].bonW, "");
     }
-
-    // Set bonuses
-    strcpy(grid[1].bonW, "DW");
-    strcpy(grid[7].bonW, "TW");
-    strcpy(grid[10].bonL, "DL");
-    strcpy(grid[12].bonL, "TL");
 }
 
 Cell createCell(char c) {
@@ -39,8 +31,19 @@ Cell createCell(char c) {
     cell.letter = c;
     cell.score = getScore(c);
     cell.isEmpty = 1;
+    strcpy(cell.bonus, " ");
 
     return cell;
+}
+
+void setBonus(Cell grid[N]) {
+
+    Cell c = grid[2];
+    Cell c1 = grid[8];
+    strcpy(grid[1].bonus, "DW");
+    strcpy(grid[7].bonus, "TW");
+    strcpy(grid[10].bonus, "DL");
+    strcpy(grid[12].bonus, "TL");
 }
 
 void createFullGrid(char *nameFile) {
@@ -74,8 +77,9 @@ void createFullGrid(char *nameFile) {
         fclose(readFile);
 
         initGrid(grid);
+        createGrid(grid, charFile);
+        setBonus(grid);
         toString(grid);
-        //createGrid(grid, charFile);
 
     } else {
 
@@ -117,6 +121,19 @@ void toString(Cell grid[N]) {
 
     for (i = 0; i < N; i++) {
 
-        printf("%c - score : %d - bonusL : %s - \tbonusW : %s\n", grid[i].letter, grid[i].score, grid[i].bonL, grid[i].bonW);
+        printf("%c - score : %d - bonus : %s\n", grid[i].letter, grid[i].score, grid[i].bonus);
     }
 }
+
+/*
+int scoreWord(Trie *t, char word[]) {
+
+    if (searchWord(word)) {
+
+        for (i = 0; word[i] != '\0'; i++) {
+
+
+        }
+    }
+}
+*/

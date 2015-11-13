@@ -7,6 +7,7 @@
 
 #define LOCATION_DICO "./res/txt/dico.txt"
 #define LOCATION_GRID "./res/txt/grille.txt"
+#define LOCATION_GRIDVALIDATION "./res/txt/grille_validation.txt"
 
 int main(int argc, char* argv[]) {
 
@@ -17,15 +18,17 @@ int main(int argc, char* argv[]) {
     Trie *t = (Trie*)malloc(sizeof(Trie));
 
     // Create Trie with all words (and search a specific word)
-    createFullTrie(LOCATION_DICO, t);
+    //createFullTrie(LOCATION_DICO, t);
 
     // Search a word
-    //searchWord(t, "arbre");
+    //searchWord(t, "arbres");
 
     // Create grid
-    // createFullGrid(LOCATION_GRID);
+    createFullGrid(LOCATION_GRIDVALIDATION);
 
     //mainDisplay();
+    free(t->root);
+    free(t);
 
     return 0;
 }

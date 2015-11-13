@@ -70,14 +70,18 @@ int searchNode(Trie *t, char *string) {
     return (temp != 0 && temp->isEnd);                  // Temp and isEnd shoud be != 0
 }
 
-void searchWord(Trie *t, char *string) {
+int searchWord(Trie *t, char *string) {
 
     int i = searchNode(t, string);
+    int res = 0;
 
-    if (i == 1)
+    if (i == 1) {
         printf("Word found");
-    else
+        res = 1;
+    } else
         printf("Not found");
+
+    return res;
 }
 
 void createFullTrie(char *nameFile, Trie *t) {
