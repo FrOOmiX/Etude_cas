@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
     createFullTrie(LOCATION_DICO, t);
 
     // Search a word
-    searchWord(t, "deferrise");
+    //searchWord(t, "arbre");
 
     // Create grid
     // createFullGrid(LOCATION_GRID);
