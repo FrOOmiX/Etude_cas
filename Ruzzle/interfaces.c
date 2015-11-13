@@ -1,134 +1,119 @@
 #include "interfaces.h"
 
-/*Pour l'screen principal au lancement du RUZZLE */
+/*For principal screen*/
 
-PrincipalWindow* principal_window_create(){
+PrincipalWindow* principal_window_create()
+{
     PrincipalWindow* principal = (PrincipalWindow*)malloc(sizeof(PrincipalWindow));
-     if(principal == NULL){
-      return principal;
-    }
 
-    char const *logoRuzzle = "./assets/gfx/game_over_logo.png";
-    char const *backgroundIMG = "./assets/gfx/background.png";
-    char const *text = "./assets/fonts/Palamecia.otf";
+    char const *logoRuzzle = "./res/gfx/game_over_logo.png";
+    char const *backgroundIMG = "./res/gfx/background.png";
+    char const *text = "./res/fonts/edgothic.ttf";
 
-     //Background
-     principal->background = IMG_Load(backgroundIMG);
-     if(principal->background == NULL){
-        //principal_window_destroy(principal);
-        return NULL;
-     }
-     principal->backgroundPosition.x = 0;
-     principal->backgroundPosition.y = 0;
+    //Background
+    principal->background = IMG_Load(backgroundIMG);
 
-     principal->gameStartPosition.x = 185 ;
-     principal->gameStartPosition.y = 400 ;
+    principal->backgroundPosition.x = 0;
+    principal->backgroundPosition.y = 0;
 
-     //chargement du logo ruzzle
-     principal->title = IMG_Load(logoRuzzle);
-     if ( principal->title == NULL){
-        //principal_window_destroy(principal);
-        return NULL;
-     }
-     principal->logoRuzzlePosition.x = 150;
-     principal->logoRuzzlePosition.y = 50;
+    principal->gameStartPosition.x = 185 ;
+    principal->gameStartPosition.y = 400 ;
 
-     principal->font = TTF_OpenFont(text, 10);
-     SDL_Color textColor = {0,0,0};
-     principal->gameStart = TTF_RenderText_Solid(principal->font,"COMMENCER",textColor);
-     principal->gameStartPosition.x = 150;
-     principal->gameStartPosition.y = 400;
+    //for title logo
+    principal->title = IMG_Load(logoRuzzle);
 
-     return  principal;
+    principal->logoRuzzlePosition.x = 150;
+    principal->logoRuzzlePosition.y = 50;
+
+    //To play new game
+    principal->font = TTF_OpenFont(text, 10);
+    SDL_Color textColor = {255,255,255};
+    principal->gameStart = TTF_RenderText_Solid(principal->font,"COMMENCER",textColor);
+    principal->gameStartPosition.x = 150;
+    principal->gameStartPosition.y = 400;
+
+    return  principal;
 }
 
-int principal_window_load_window_grid(PrincipalWindow* game_menu, SDL_Event event){
-    if ( event.type == SDL_MOUSEBUTTONDOWN){
-        if( event.button.button == SDL_BUTTON_LEFT ){
+//function to catch the clic event on the principal screen
+int principal_window_load_window_grid(PrincipalWindow* game_menu, SDL_Event event)
+{
+    if ( event.type == SDL_MOUSEBUTTONDOWN)
+    {
+        if( event.button.button == SDL_BUTTON_LEFT )
+        {
             return 1;
         }
     }
     return 0;
 }
 
-void principal_window_draw(PrincipalWindow* menu,SDL_Surface* screen){
-        SDL_BlitSurface(menu->background,NULL,screen,&(menu->backgroundPosition));
-        SDL_BlitSurface(menu->title,NULL,screen,&(menu->logoRuzzlePosition));
-        SDL_BlitSurface(menu->gameStart,NULL,screen,&(menu->gameStartPosition));
+//function to draw elements on the screen
+void principal_window_draw(PrincipalWindow* menu,SDL_Surface* screen)
+{
+    SDL_BlitSurface(menu->background,NULL,screen,&(menu->backgroundPosition));
+    SDL_BlitSurface(menu->title,NULL,screen,&(menu->logoRuzzlePosition));
+    SDL_BlitSurface(menu->gameStart,NULL,screen,&(menu->gameStartPosition));
 }
 
-void principal_window_destroy(PrincipalWindow* menu){
+//destroy elements -> free memory
+void principal_window_destroy(PrincipalWindow* menu)
+{
     SDL_FreeSurface(menu->title);
     SDL_FreeSurface(menu->background);
     SDL_FreeSurface(menu->gameStart);
     free(menu);
 }
 
-/*Pour l'screen avec la grid du RUZZLE */
+/*For game screen with the grid */
 
-GridWindow* grid_window_create(){
+GridWindow* grid_window_create()
+{
     const int SHEET_WIDTH = 200;
     const int SHEET_HEIGHT = 512;
-  /*fenetre sans grille*/
-  GridWindow* grid = (GridWindow*)malloc(sizeof(GridWindow));
-  if(grid == NULL){
-      return grid;
-  }
+    /*fenetre sans grille*/
+    GridWindow* grid = (GridWindow*)malloc(sizeof(GridWindow));
 
-    char const *titleIMG = "./assets/gfx/game_over_logo.png";
-    char const *backgroundIMG = "./assets/gfx/background.png";
-    char const *trophyIMG = "./assets/gfx/trophy_decoration.png";
+    char const *titleIMG = "./res/gfx/game_over_logo.png";
+    char const *backgroundIMG = "./res/gfx/background.png";
+    char const *trophyIMG = "./res/gfx/trophy_decoration.png";
 
-     //Background
-     grid->background = IMG_Load(backgroundIMG);
-     if(grid->background == NULL){
-        //principal_window_destroy(principal);
-        return NULL;
-     }
-     grid->backgroundPosition.x = 0;
-     grid->backgroundPosition.y = 0;
+    //Background
+    grid->background = IMG_Load(backgroundIMG);
 
-     //chargement du logo Ruzzle
-     grid->title = IMG_Load(titleIMG);
-     if ( grid->title == NULL){
-        //principal_window_destroy(principal);
-        return NULL;
-     }
-     grid->logoRuzzlePosition.x = 150;
-     grid->logoRuzzlePosition.y = 50;
+    grid->backgroundPosition.x = 0;
+    grid->backgroundPosition.y = 0;
 
-     //chargement du bottom
-     grid->trophy = IMG_Load(trophyIMG);
-     if (grid->trophy == NULL){
-        //principal_window_destroy(principal);
-        return NULL;
-     }
-     grid->trophyPosition.x = 0;
-     grid->trophyPosition.y = 600;
+    //for title logo
+    grid->title = IMG_Load(titleIMG);
 
-    /*pour la grille*/
-    grid->faces = IMG_Load("./assets/gfx/tile_spritesheet_lowres.png");
+    grid->logoRuzzlePosition.x = 150;
+    grid->logoRuzzlePosition.y = 50;
 
-    //On coupe la partie en haut à gauche (premier sprite)
-    //On coupe la partie case sans bonus
+    //bottom img
+    grid->trophy = IMG_Load(trophyIMG);
+
+    grid->trophyPosition.x = 0;
+    grid->trophyPosition.y = 600;
+
+    //for the grid (srpitesheet)
+    grid->faces = IMG_Load("./res/gfx/tile_spritesheet_lowres.png");
+
     grid->clip[ 0 ].x = 0;
     grid->clip[ 0 ].y = 0;
     grid->clip[ 0 ].w = SHEET_WIDTH/2;
     grid->clip[ 0 ].h = SHEET_HEIGHT/5;
 
-    //On coupe la partie en haut à droite (second sprite)
     grid->clip[ 1 ].x = 0;
     grid->clip[ 1 ].y = SHEET_HEIGHT/5;
     grid->clip[ 1 ].w = SHEET_WIDTH/2;
     grid->clip[ 1 ].h = SHEET_HEIGHT/5;
 
-    //On coupe la partie en bas à gauche (troisième sprite)
     grid->clip[ 2 ].x = 0;
     grid->clip[ 2 ].y = (SHEET_HEIGHT/5)*2;
     grid->clip[ 2 ].w = SHEET_WIDTH/2;
     grid->clip[ 2 ].h = SHEET_HEIGHT/5;
 
-    //On coupe la partie en bas à droite (quatrième sprite)
     grid->clip[ 3 ].x = 0;
     grid->clip[ 3 ].y = (SHEET_HEIGHT/5)*3;
     grid->clip[ 3 ].w = SHEET_WIDTH/2;
@@ -139,12 +124,13 @@ GridWindow* grid_window_create(){
     grid->clip[ 4 ].w = SHEET_WIDTH/2;
     grid->clip[ 4 ].h = SHEET_HEIGHT/5;
 
-
-
     return  grid;
 }
 
-void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SDL_Rect* clip ){
+//to draw the boxes imgs
+void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SDL_Rect* clip )
+{
+
     SDL_Rect pos;
 
     pos.x = x;
@@ -154,8 +140,9 @@ void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SDL_Rect*
     SDL_BlitSurface( src, clip, dest, &pos );
 }
 
-void grid_window_draw(GridWindow* grid, SDL_Surface* screen){ //GridWindow* grid, SDL_Surface* screen
-
+//to draw all elements on the play scren (with grid)
+void grid_window_draw(GridWindow* grid, SDL_Surface* screen)
+{
 
     SDL_BlitSurface(grid->background,NULL,screen,&(grid->backgroundPosition));
     SDL_BlitSurface(grid->title,NULL,screen,&(grid->logoRuzzlePosition));
@@ -185,15 +172,18 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen){ //GridWindow* grid
 
 }
 
-void grid_window_destroy(GridWindow* grid){
+//destroy elements -> free memory
+void grid_window_destroy(GridWindow* grid)
+{
     SDL_FreeSurface(grid->background);
     SDL_FreeSurface(grid->trophy);
     SDL_FreeSurface(grid->faces);
     SDL_FreeSurface(grid->title);
-    //SDL_FreeSurface(grid->pFontSurface);
     free(grid);
 }
 
+
+//to SDL
 void close()
 {
     TTF_Quit();
@@ -201,59 +191,68 @@ void close()
     SDL_Quit();
 }
 
-int init(){
-     if ( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER ) == -1 )
+//to init SDL
+int init()
+{
+    if ( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER ) == -1 )
     {
         fprintf(stderr,"SDL init failed\n");
-        printf("SDL init failed\n");
         return -1;
     }
     return 0;
 }
 
-
-int mainInterface(){
-        /*pour la fenetre avec la grid*/
+//to test application
+int mainDisplay()
+{
     const unsigned int SCREEN_WIDTH = 480;
     const unsigned int SCREEN_HEIGHT = 800;
 
     TTF_Init();
 
     SDL_Surface* screen = NULL; // screen principal
-    char continu = 1; // Indicateur boolean pour la boucle principale
+    char continu = 1;
     int state = 0;
-    // Creer la fenetre
-    if( init() != 0){
+
+    if( init() != 0)
+    {
+        fprintf(stderr,"SDL init failed\n");
         return -1;
     }
-    //a mettre sur windows pour voir les messages des printf etc
-    //freopen( "CON", "w", stdout );
-    //freopen( "CON", "w", stderr );
+
+    freopen( "CON", "w", stdout );
+    freopen( "CON", "w", stderr );
+
     screen = SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,32,SDL_SWSURFACE | SDL_DOUBLEBUF);
 
     SDL_WM_SetCaption("RUZZLE : Etude de Cas", NULL);
-	if ( screen == NULL )
-	{
-	    fprintf(stderr,"Open Window Failed\n");
-	    close();
+
+    if ( screen == NULL )
+    {
+        fprintf(stderr,"Open Window Failed\n");
+        close();
         return -2;
-	}
+    }
 
 
     PrincipalWindow* principal = principal_window_create();
     GridWindow *grid = NULL;
     SDL_Event event;
 
+
+
     // Boucle principale
-	while ( continu )
-	{
-	    switch( state){
+    while ( continu )
+    {
+        switch( state)
+        {
         case 0:
             principal_window_draw(principal,screen);
-            if (principal_window_load_window_grid(principal,event) != 0){
-                   principal_window_destroy(principal);
-                   grid = grid_window_create();
-                   state = 1;
+            if (principal_window_load_window_grid(principal,event) != 0)
+            {
+                principal_window_destroy(principal);
+                grid = grid_window_create();
+                state = 1;
             }
             break;
         case 1:
@@ -262,20 +261,19 @@ int mainInterface(){
 
             break;
 
-	    }
-
+        }
 
         SDL_Flip(screen);
 
 
-	    SDL_PollEvent(&event);
+        SDL_PollEvent(&event);
 
-        // Pour fermer la fenetre de jeu en cliquant sur la croix
-	    if( event.type == SDL_QUIT )
-	    {
-            //On quitte la boucle principale
+        //to close application on cross clic
+        if( event.type == SDL_QUIT )
+        {
+            //leave the principal loop
             continu = 0;
-		}
+        }
     }
     close();
     return 0;

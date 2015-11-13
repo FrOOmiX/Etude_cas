@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
     createFullGrid(LOCATION_GRID);
     */
 
-    mainInterface();
+    mainDisplay();
 
     return 0;
 }
