@@ -70,7 +70,17 @@ int searchNode(Trie *t, char *string) {
     return (temp != 0 && temp->isEnd);                  // Temp and isEnd shoud be != 0
 }
 
-void createFullTrie(char *nameFile) {
+void searchWord(Trie *t, char *string) {
+
+    int i = searchNode(t, string);
+
+    if (i == 1)
+        printf("Word found");
+    else
+        printf("Not found");
+}
+
+void createFullTrie(char *nameFile, Trie *t) {
 
     FILE* readFile = NULL;
     char myString[MAX_LENGTH];
@@ -83,8 +93,7 @@ void createFullTrie(char *nameFile) {
     if (readFile != NULL) {
 
         // Create a new trie
-        Trie t;
-        createTrie(&t);
+        createTrie(t);
 
         // Populate the Trie
         while ((string = fgets(myString, MAX_LENGTH, readFile))) {
@@ -93,18 +102,8 @@ void createFullTrie(char *nameFile) {
             int i = strlen(string);
             string[i - 1] = '\0';
 
-            insertNode(&t, string);
+            insertNode(t, string);
         }
-
-        /*
-        // Search for a word
-        int i = searchNode(&t, "zwinglianismes");
-
-        if (i == 1)
-            printf("Word found");
-        else
-            printf("Not found");
-        */
 
         // close file
         fclose(readFile);

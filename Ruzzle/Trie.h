@@ -21,6 +21,7 @@ void createTrie(Trie *);
 Node *createNode();
 void insertNode(Trie *, char *);
 int searchNode(Trie *, char *);
-void createFullTrie(char *);
+void searchWord(Trie *, char *);
+void createFullTrie(char *, Trie *);
 
 #endif // _TRIE_H

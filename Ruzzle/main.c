@@ -10,15 +10,22 @@
 
 int main(int argc, char* argv[]) {
 
-    /*
+    freopen("CON", "w", stdout);
+    freopen("CON", "r", stdin);
+    freopen("CON", "w", stderr);
+
+    Trie *t = (Trie*)malloc(sizeof(Trie));
+
     // Create Trie with all words (and search a specific word)
-    createFullTrie(LOCATION_DICO);
+    createFullTrie(LOCATION_DICO, t);
+
+    // Search a word
+    // searchWord(t, "griffusssss");
 
     // Create grid
     createFullGrid(LOCATION_GRID);
-    */
 
-    mainDisplay();
+    //mainDisplay();
 
     return 0;
 }

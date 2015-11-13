@@ -9,7 +9,7 @@ void createGrid(Cell grid[N], char charFile[]) {
 
     for (i = 0; i < N; i++) {
 
-        //grid[i] = createCell(charFile[i]);
+        grid[i] = createCell(charFile[i]);
     }
 }
 
@@ -22,8 +22,8 @@ void initGrid(Cell grid[N]) {
         grid[i].letter = ' ';
         grid[i].score = 0;
         grid[i].isEmpty = 0;
-        strcpy(grid[i].bonL, "  ");
-        strcpy(grid[i].bonW, "  ");
+        strcpy(grid[i].bonL, "");
+        strcpy(grid[i].bonW, "");
     }
 
     // Set bonuses
@@ -33,12 +33,12 @@ void initGrid(Cell grid[N]) {
     strcpy(grid[12].bonL, "TL");
 }
 
-Cell *createCell(char c) {
+Cell createCell(char c) {
 
-    Cell *cell = (Cell*)malloc(sizeof(Cell));
-    cell->letter = c;
-    cell->score = getScore(c);
-    cell->isEmpty = 1;
+    Cell cell;
+    cell.letter = c;
+    cell.score = getScore(c);
+    cell.isEmpty = 1;
 
     return cell;
 }
@@ -70,12 +70,13 @@ void createFullGrid(char *nameFile) {
             }
         } while (c != EOF);
 
-        initGrid(grid);
-        //createGrid(grid, charFile);
-        //toString(grid);
-
         // close file
         fclose(readFile);
+
+        initGrid(grid);
+        toString(grid);
+        //createGrid(grid, charFile);
+
     } else {
 
         // reading file failed
@@ -103,6 +104,7 @@ int getScore(char c) {
         if (boxScore[i].letter == c) {
 
             score = boxScore[i].score;
+            break;
         }
     }
 
@@ -115,6 +117,6 @@ void toString(Cell grid[N]) {
 
     for (i = 0; i < N; i++) {
 
-        printf("%c - score : %d", grid[i].letter, grid[i].score);
+        printf("%c - score : %d - bonusL : %s - \tbonusW : %s\n", grid[i].letter, grid[i].score, grid[i].bonL, grid[i].bonW);
     }
 }

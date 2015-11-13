@@ -26,7 +26,7 @@ PrincipalWindow* principal_window_create()
     principal->logoRuzzlePosition.y = 50;
 
     //To play new game
-    principal->font = TTF_OpenFont(text, 10);
+    principal->font = TTF_OpenFont(text, 40);
     SDL_Color textColor = {255,255,255};
     principal->gameStart = TTF_RenderText_Solid(principal->font,"COMMENCER",textColor);
     principal->gameStartPosition.x = 150;
@@ -219,9 +219,6 @@ int mainDisplay()
         fprintf(stderr,"SDL init failed\n");
         return -1;
     }
-
-    freopen( "CON", "w", stdout );
-    freopen( "CON", "w", stderr );
 
     screen = SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,32,SDL_SWSURFACE | SDL_DOUBLEBUF);
 
