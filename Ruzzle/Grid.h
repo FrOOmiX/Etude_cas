@@ -21,7 +21,6 @@ typedef struct sCell {
 
     char letter;
     int score;
-    int isEmpty;
     char bonus[2];
 } Cell;
 

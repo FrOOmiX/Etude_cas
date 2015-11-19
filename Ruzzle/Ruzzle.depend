@@ -198,7 +198,7 @@
 	<stdio.h>
 	<stdlib.h>
 
-1447431835 source:c:\users\romain\desktop\etude_cas\ruzzle\main.c
+1447435944 source:c:\users\romain\desktop\etude_cas\ruzzle\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -249,13 +249,14 @@
 	"begin_code.h"
 	"close_code.h"
 
-1447431920 source:c:\users\romain\desktop\etude_cas\ruzzle\grid.c
+1447435198 source:c:\users\romain\desktop\etude_cas\ruzzle\grid.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"Trie.h"
 	"Grid.h"
 
-1447432105 c:\users\romain\desktop\etude_cas\ruzzle\grid.h
+1447432259 c:\users\romain\desktop\etude_cas\ruzzle\grid.h
 
 1447425659 source:c:\users\romain\desktop\etude_cas\ruzzle\interfaces.c
 	"interfaces.h"

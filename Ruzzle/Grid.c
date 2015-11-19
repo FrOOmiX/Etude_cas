@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "Trie.h"
 #include "Grid.h"
 
 void createGrid(Cell grid[N], char charFile[]) {
@@ -21,7 +22,6 @@ void initGrid(Cell grid[N]) {
 
         grid[i].letter = ' ';
         grid[i].score = 0;
-        grid[i].isEmpty = 0;
     }
 }
 
@@ -30,7 +30,6 @@ Cell createCell(char c) {
     Cell cell;
     cell.letter = c;
     cell.score = getScore(c);
-    cell.isEmpty = 1;
     strcpy(cell.bonus, " ");
 
     return cell;
@@ -38,8 +37,6 @@ Cell createCell(char c) {
 
 void setBonus(Cell grid[N]) {
 
-    Cell c = grid[2];
-    Cell c1 = grid[8];
     strcpy(grid[1].bonus, "DW");
     strcpy(grid[7].bonus, "TW");
     strcpy(grid[10].bonus, "DL");
@@ -98,7 +95,7 @@ int getScore(char c) {
         {'e', 1}, {'f', 3}, {'g', 3}, {'h', 3},
         {'i', 1}, {'j', 10}, {'k', 12}, {'l', 2},
         {'m', 2}, {'n', 1}, {'o', 2}, {'p', 2},
-        {'q', 6}, {'r', 1},{'s', 1}, {'t', 1},
+        {'q', 6}, {'r', 1}, {'s', 1}, {'t', 1},
         {'u', 2}, {'v', 4}, {'w', 15}, {'x', 10},
         {'y', 10}, {'z', 4}
     };
@@ -124,9 +121,14 @@ void toString(Cell grid[N]) {
         printf("%c - score : %d - bonus : %s\n", grid[i].letter, grid[i].score, grid[i].bonus);
     }
 }
-
 /*
-int scoreWord(Trie *t, char word[]) {
+int inGrid(Cell grid[], char word[]) {
+
+
+    return 0;
+}
+
+int scoreWord(Trie *t, Cell grid[], char word[]) {
 
     if (searchWord(word)) {
 
@@ -135,5 +137,7 @@ int scoreWord(Trie *t, char word[]) {
 
         }
     }
+
+    return 0;
 }
 */

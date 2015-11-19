@@ -21,12 +21,13 @@ int main(int argc, char* argv[]) {
     //createFullTrie(LOCATION_DICO, t);
 
     // Search a word
-    //searchWord(t, "arbres");
+    //searchWord(t, "sers");
 
     // Create grid
     createFullGrid(LOCATION_GRIDVALIDATION);
 
     //mainDisplay();
+
     free(t->root);
     free(t);
 
