@@ -1,5 +1,5 @@
 #include "interfaces.h"
-
+#define LOCATION_GRID "./res/txt/grille.txt"
 /*For principal screen*/
 
 PrincipalWindow* principal_window_create()
@@ -140,6 +140,45 @@ void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SDL_Rect*
     SDL_BlitSurface( src, clip, dest, &pos );
 }
 
+void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen){
+
+    char const *text = "./res/fonts/helvetica.ttf";
+    FILE* readFile= NULL;
+    int i,j,k,s;
+    char c;
+    readFile = fopen(nameFile,"r");
+    j=85;
+    k=70;
+
+    grid->fontLetter = TTF_OpenFont(text,40);
+    SDL_Color textColor = {0,0,0};
+
+    if(readFile != NULL){
+        do{
+
+
+                grid->letterPosition.x = k;
+                for (i = 0; i < 4; i++){
+                    for (s = 0; s < 4; s++){
+                       c = getc(readFile);
+                        if(c != "\n"){
+                            grid->letter = TTF_RenderText_Blended(grid->fontLetter,&c,textColor);
+                            grid->letterPosition.y += 100;
+                            SDL_BlitSurface(grid->letter,NULL,screen,&(grid->letterPosition));
+                        }
+                    }
+
+                    grid->letterPosition.y = j;
+                    grid->letterPosition.x += 100;
+
+
+                }
+        }while(c != EOF);
+        fclose(readFile);
+    }
+
+}
+
 //to draw all elements on the play scren (with grid)
 void grid_window_draw(GridWindow* grid, SDL_Surface* screen)
 {
@@ -169,6 +208,7 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen)
     apply_surface( 340, 350, grid->faces, screen, &(grid->clip[ 0 ]) );
     apply_surface( 340, 450, grid->faces, screen, &(grid->clip[ 0 ]) );
 
+    letter_display(LOCATION_GRID, grid, screen);
 
 }
 
@@ -275,3 +315,4 @@ int mainDisplay()
     close();
     return 0;
 }
+
