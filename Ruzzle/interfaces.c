@@ -145,37 +145,36 @@ void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen){
     char const *text = "./res/fonts/helvetica.ttf";
     FILE* readFile= NULL;
     int i,j,k,s;
+    char *str = (char*)malloc(26);
     char c;
     readFile = fopen(nameFile,"r");
-    j=85;
-    k=70;
+    j=-25;
+    k=185;
 
     grid->fontLetter = TTF_OpenFont(text,40);
     SDL_Color textColor = {0,0,0};
 
-    if(readFile != NULL){
-        do{
-
-
-                grid->letterPosition.x = k;
+    if(readFile != NULL ){
+                grid->letterPosition.y = k;
                 for (i = 0; i < 4; i++){
+                         str =fgets(str, 26, readFile);
                     for (s = 0; s < 4; s++){
-                       c = getc(readFile);
-                        if(c != "\n"){
+                        if(c !='\0'){
+                                 c = str[s];
+                                 c = toupper(c);
                             grid->letter = TTF_RenderText_Blended(grid->fontLetter,&c,textColor);
-                            grid->letterPosition.y += 100;
+                            grid->letterPosition.x += 100;
                             SDL_BlitSurface(grid->letter,NULL,screen,&(grid->letterPosition));
                         }
                     }
 
-                    grid->letterPosition.y = j;
-                    grid->letterPosition.x += 100;
-
-
+                    grid->letterPosition.x = j;
+                    grid->letterPosition.y += 100;
                 }
-        }while(c != EOF);
+
         fclose(readFile);
     }
+    free(str);
 
 }
 

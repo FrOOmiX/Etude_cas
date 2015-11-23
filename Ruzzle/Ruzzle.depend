@@ -4,7 +4,7 @@
 	<stdlib.h>
 	<SDL.h>
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_audio.h"
@@ -23,14 +23,14 @@
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_main.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_stdinc.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -56,7 +56,7 @@
 	<stdlib.h>
 	"close_code.h"
 
-1326114586 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_config.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_config.h
 	"SDL_platform.h"
 	"SDL_config_dreamcast.h"
 	"SDL_config_macos.h"
@@ -66,16 +66,16 @@
 	"SDL_config_os2.h"
 	"SDL_config_minimal.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_platform.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_platform.h
 
-1326114594 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_config_win32.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_config_win32.h
 	"SDL_platform.h"
 
-1326114600 c:\program files (x86)\codeblocks\sdl_windows\include\begin_code.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\begin_code.h
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\close_code.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\close_code.h
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_audio.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -85,24 +85,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_error.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_endian.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_mutex.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_thread.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_mutex.h"
@@ -110,24 +110,24 @@
 	<process.h>
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_rwops.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_cdrom.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_cdrom.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_cpuinfo.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_events.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_active.h"
@@ -138,58 +138,58 @@
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_active.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_active.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_keyboard.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keysym.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_keysym.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_keysym.h
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_mouse.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_video.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_joystick.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_quit.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_loadso.h
-	"SDL_stdinc.h"
-	"SDL_error.h"
-	"begin_code.h"
-	"close_code.h"
-
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_timer.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325742238 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_version.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
@@ -239,13 +239,13 @@
 	<SDL_image.h>
 	<SDL_ttf.h>
 
-1325792434 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_image.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_image.h
 	"SDL.h"
 	"SDL_version.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325796794 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_ttf.h
+1444915915 c:\program files (x86)\codeblocks\sdl_windows\include\sdl_ttf.h
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
@@ -274,4 +274,37 @@
 	<stdlib.h>
 	<string.h>
 	"Trie.h"
+
+1448292879 source:d:\documents\github\etude_cas\ruzzle\grid.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Trie.h"
+	"Grid.h"
+
+1448292879 d:\documents\github\etude_cas\ruzzle\trie.h
+
+1448292879 d:\documents\github\etude_cas\ruzzle\grid.h
+
+1448296642 source:d:\documents\github\etude_cas\ruzzle\interfaces.c
+	"interfaces.h"
+
+1448292879 d:\documents\github\etude_cas\ruzzle\interfaces.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+
+1448292879 source:d:\documents\github\etude_cas\ruzzle\trie.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Trie.h"
+
+1448292937 source:d:\documents\github\etude_cas\ruzzle\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Trie.h"
+	"Grid.h"
+	"interfaces.h"
 

@@ -24,9 +24,9 @@ int main(int argc, char* argv[]) {
     //searchWord(t, "sers");
 
     // Create grid
-    createFullGrid(LOCATION_GRIDVALIDATION);
+   // createFullGrid(LOCATION_GRIDVALIDATION);
 
-    //mainDisplay();
+    mainDisplay();
 
     free(t->root);
     free(t);
