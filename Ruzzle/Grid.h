@@ -21,6 +21,7 @@ typedef struct sCell {
 
     char letter;
     int score;
+    int isVisited;
     char bonus[2];
 } Cell;
 
@@ -31,6 +32,6 @@ void createFullGrid(char *nameFile);
 int getScore(char c);
 void setBonus(Cell grid[N][N]);
 void toString(Cell grid[N][N]);
-int scoreWord(Trie *t, Cell grid[], Cell word[]);
+int searchWordGrid(Trie *t, Cell grid[N][N], char word[]);
 
 #endif // _GRID_H

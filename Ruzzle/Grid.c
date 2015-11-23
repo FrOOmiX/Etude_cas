@@ -29,6 +29,7 @@ void initGrid(Cell grid[N][N]) {
 
             grid[i][j].letter = ' ';
             grid[i][j].score = 0;
+            grid[i][j].isVisited = 0;
         }
     }
 }
@@ -38,6 +39,7 @@ Cell createCell(char c) {
     Cell cell;
     cell.letter = c;
     cell.score = getScore(c);
+    cell.isVisited = 0;
     strcpy(cell.bonus, " ");
 
     return cell;
@@ -128,33 +130,34 @@ void toString(Cell grid[N][N]) {
 
         for (j = 0; j < N; j++) {
 
-            printf("%c - score : %d - bonus : %s\n", grid[i][j].letter, grid[i][j].score, grid[i][j].bonus);
+            printf("%c - score : %d - bonus : %s - isVisited : %d\n", grid[i][j].letter, grid[i][j].score, grid[i][j].bonus, grid[i][j].isVisited);
         }
     }
 }
 
+int searchWordGrid(Trie *t, Cell grid[N][N], char word[]) {
 
-/*
-int inGrid(Cell grid[], char word[]) {
+    int i, j;
 
+    if (searchWord(t, word)) {
+
+
+
+
+    }
 
     return 0;
 }
-*/
 
-int scoreWord(Trie *t, Cell grid[], char word[]) {
 
-    if (searchWord(word)) {
-
-        for (i = 0; i < N; i++) {
+for (i = 0; i < N; i++) {
 
             for (j = 0; j < N; j++) {
 
+                if (word[0] == grid[i][j].letter && !grid[i][j].isVisited) {
 
+                    // the first letter of the word is in the grid
+                    grid[i][j].isVisited = 1;
+                }
             }
         }
-    }
-
-    return 0;
-}
-
