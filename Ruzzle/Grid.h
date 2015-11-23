@@ -1,14 +1,14 @@
 #ifndef _GRID_H
 #define _GRID_H
 
-#define N 16
+#define N 4
 
 /** Grid representation
  *
- *  DW : Double Word    -> [1]
- *  TW : Triple Word    -> [7]
- *  DL : Double Letter  -> [10]
- *  TL : Triple Letter  -> [12]
+ *  DW : Double Word    -> [0][1]
+ *  TW : Triple Word    -> [3][0]
+ *  DL : Double Letter  -> [2][2]
+ *  TL : Triple Letter  -> [1][3]
  *
  *  . DW  .  .
  *  .  .  . TL
@@ -24,12 +24,13 @@ typedef struct sCell {
     char bonus[2];
 } Cell;
 
-void createGrid(Cell grid[N], char charFile[]);
-void initGrid(Cell grid[N]);
+void createGrid(Cell grid[N][N], char charFile[]);
+void initGrid(Cell grid[N][N]);
 Cell createCell(char c);
 void createFullGrid(char *nameFile);
 int getScore(char c);
-void setBonus(Cell grid[N]);
-void toString(Cell grid[N]);
+void setBonus(Cell grid[N][N]);
+void toString(Cell grid[N][N]);
+int scoreWord(Trie *t, Cell grid[], Cell word[]);
 
 #endif // _GRID_H

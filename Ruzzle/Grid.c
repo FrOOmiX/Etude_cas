@@ -4,24 +4,32 @@
 #include "Trie.h"
 #include "Grid.h"
 
-void createGrid(Cell grid[N], char charFile[]) {
+void createGrid(Cell grid[N][N], char charFile[]) {
 
-    int i;
+    int i, j;
+    int x = 0;
 
     for (i = 0; i < N; i++) {
 
-        grid[i] = createCell(charFile[i]);
+        for (j = 0; j < N; j++) {
+
+            grid[i][j] = createCell(charFile[x]);
+            x++;
+        }
     }
 }
 
-void initGrid(Cell grid[N]) {
+void initGrid(Cell grid[N][N]) {
 
-    int i;
+    int i, j;
 
     for (i = 0; i < N; i++) {
 
-        grid[i].letter = ' ';
-        grid[i].score = 0;
+        for (j = 0; j < N; j++) {
+
+            grid[i][j].letter = ' ';
+            grid[i][j].score = 0;
+        }
     }
 }
 
@@ -35,12 +43,12 @@ Cell createCell(char c) {
     return cell;
 }
 
-void setBonus(Cell grid[N]) {
+void setBonus(Cell grid[N][N]) {
 
-    strcpy(grid[1].bonus, "DW");
-    strcpy(grid[7].bonus, "TW");
-    strcpy(grid[10].bonus, "DL");
-    strcpy(grid[12].bonus, "TL");
+    strcpy(grid[0][1].bonus, "DW");
+    strcpy(grid[3][0].bonus, "TW");
+    strcpy(grid[2][2].bonus, "DL");
+    strcpy(grid[1][3].bonus, "TL");
 }
 
 void createFullGrid(char *nameFile) {
@@ -56,7 +64,7 @@ void createFullGrid(char *nameFile) {
 
     if (readFile != NULL) {
 
-        Cell grid[N];
+        Cell grid[N][N];
         i = 0;
 
         do {
@@ -112,32 +120,41 @@ int getScore(char c) {
     return score;
 }
 
-void toString(Cell grid[N]) {
+void toString(Cell grid[N][N]) {
 
-    int i;
+    int i, j;
 
     for (i = 0; i < N; i++) {
 
-        printf("%c - score : %d - bonus : %s\n", grid[i].letter, grid[i].score, grid[i].bonus);
+        for (j = 0; j < N; j++) {
+
+            printf("%c - score : %d - bonus : %s\n", grid[i][j].letter, grid[i][j].score, grid[i][j].bonus);
+        }
     }
 }
+
+
 /*
 int inGrid(Cell grid[], char word[]) {
 
 
     return 0;
 }
+*/
 
 int scoreWord(Trie *t, Cell grid[], char word[]) {
 
     if (searchWord(word)) {
 
-        for (i = 0; word[i] != '\0'; i++) {
+        for (i = 0; i < N; i++) {
+
+            for (j = 0; j < N; j++) {
 
 
+            }
         }
     }
 
     return 0;
 }
-*/
+

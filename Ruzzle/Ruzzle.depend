@@ -206,7 +206,7 @@
 	"Grid.h"
 	"interfaces.h"
 
-1447364345 source:c:\users\froomix\desktop\etude_cas\ruzzle\main.c
+1447950147 source:c:\users\froomix\desktop\etude_cas\ruzzle\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -214,26 +214,27 @@
 	"Grid.h"
 	"interfaces.h"
 
-1446743069 source:c:\users\froomix\desktop\etude_cas\ruzzle\trie.c
+1447950147 source:c:\users\froomix\desktop\etude_cas\ruzzle\trie.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"Trie.h"
 
-1446054442 c:\users\froomix\desktop\etude_cas\ruzzle\trie.h
+1447950147 c:\users\froomix\desktop\etude_cas\ruzzle\trie.h
 
-1447363894 source:c:\users\froomix\desktop\etude_cas\ruzzle\grid.c
+1448279609 source:c:\users\froomix\desktop\etude_cas\ruzzle\grid.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"Trie.h"
 	"Grid.h"
 
-1447363873 c:\users\froomix\desktop\etude_cas\ruzzle\grid.h
+1448279244 c:\users\froomix\desktop\etude_cas\ruzzle\grid.h
 
-1447361277 source:c:\users\froomix\desktop\etude_cas\ruzzle\interfaces.c
+1447950147 source:c:\users\froomix\desktop\etude_cas\ruzzle\interfaces.c
 	"interfaces.h"
 
-1447364309 c:\users\froomix\desktop\etude_cas\ruzzle\interfaces.h
+1447950147 c:\users\froomix\desktop\etude_cas\ruzzle\interfaces.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
