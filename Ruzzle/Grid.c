@@ -135,29 +135,35 @@ void toString(Cell grid[N][N]) {
     }
 }
 
-int searchWordGrid(Trie *t, Cell grid[N][N], char word[]) {
+int validateWord(Trie *t, Cell grid[N][N], char word[]) {
 
     int i, j;
+    int res = 0;
 
     if (searchWord(t, word)) {
 
+        res = searchWordGrid(grid, word);
 
+    }
 
+    return res;
+}
 
+int searchWordGrid(Cell grid[N][N], char word[]) {
+
+    int i, j;
+
+    for (i = 0; i < N; i++) {
+
+        for (j = 0; j < N; j++) {
+
+            if (word[0] == grid[i][j].letter && !grid[i][j].isVisited) {
+
+                // the first letter of the word is in the grid
+                grid[i][j].isVisited = 1;
+            }
+        }
     }
 
     return 0;
 }
-
-
-for (i = 0; i < N; i++) {
-
-            for (j = 0; j < N; j++) {
-
-                if (word[0] == grid[i][j].letter && !grid[i][j].isVisited) {
-
-                    // the first letter of the word is in the grid
-                    grid[i][j].isVisited = 1;
-                }
-            }
-        }
