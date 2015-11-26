@@ -17,11 +17,11 @@ typedef struct sTrie {
     Node *root;
 } Trie;
 
-void createTrie(Trie *);
+void createTrie(Trie *t);
 Node *createNode();
-void insertNode(Trie *, char *);
-int searchNode(Trie *, char *);
-int searchWord(Trie *, char *);
-void createFullTrie(char *, Trie *);
+void insertNode(Trie *t, char *);
+int searchNode(Trie *t, char *);
+int searchWordTrie(Trie *t, char *);
+void createFullTrie(char *, Trie *t);
 
 #endif // _TRIE_H

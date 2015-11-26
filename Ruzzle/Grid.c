@@ -135,33 +135,68 @@ void toString(Cell grid[N][N]) {
     }
 }
 
+int scoreTotalCell(Cell cell) {
+
+    if (strcmp(cell.bonus, "DL"))
+        return cell.score * 2;
+    if (strcmp(cell.bonus, "TL"))
+        return cell.score * 3;
+    return cell.score;
+}
+
+int bonusWord(Cell cell) {
+
+    if (strcmp(cell.bonus, "DW"))
+        return 2;
+    if (strcmp(cell.bonus, "TW"))
+        return 3;
+    return 1;
+}
+
 int validateWord(Trie *t, Cell grid[N][N], char word[]) {
 
     int i, j;
     int res = 0;
+    int indexWord = 0;
 
-    if (searchWord(t, word)) {
+    if (searchWordTrie(t, word)) {
 
-        res = searchWordGrid(grid, word);
+        for (i = 0; i < N; i++) {
 
+            for (j = 0; j < N; j++) {
+
+                if (word[indexWord] == grid[i][j].letter) {
+
+                    return searchWordGrid(grid, word, i, j, indexWord);
+                }
+            }
+        }
     }
 
     return res;
 }
 
-int searchWordGrid(Cell grid[N][N], char word[]) {
+int searchWordGrid(Cell grid[N][N], char word[], int i, int j, int indexWord) {
 
-    int i, j;
+    int scoreCell, bonus, x, y;
 
-    for (i = 0; i < N; i++) {
+    // Get bonus
+    scoreCell = scoreTotalCell(grid[i][i]);
+    bonus = bonusWord(grid[i][j]);
 
-        for (j = 0; j < N; j++) {
+    // Mark this cell so it can't be re-used
+    grid[i][j].isVisited = 1;
 
-            if (word[0] == grid[i][j].letter && !grid[i][j].isVisited) {
+    // Search the next letter in the word
+    indexWord++;
 
-                // the first letter of the word is in the grid
-                grid[i][j].isVisited = 1;
-            }
+    // Found the 8 neighbors
+    for (x = i - 1; x <= i + 1 && x < N; x++) {
+
+        for (y = j - 1; y <= j + 1 && y < N; y++) {
+
+            if ((x >= 0) && (y >= 0) && (!grid[x][y].isVisited) && (grid[x][y].letter == word[indexWord]))
+                searchWordGrid(grid, word, x, y, indexWord);
         }
     }
 

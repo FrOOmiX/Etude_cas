@@ -32,7 +32,9 @@ void createFullGrid(char *nameFile);
 int getScore(char c);
 void setBonus(Cell grid[N][N]);
 void toString(Cell grid[N][N]);
+int scoreTotalCell(Cell cell);
+int bonusWord(Cell cell);
 int validateWord(Trie *t, Cell grid[N][N], char word[]);
-int searchWordGrid(Cell grid[N][N], char word[]);
+int searchWordGrid(Cell grid[N][N], char word[], int x, int y, int indexWord);
 
 #endif // _GRID_H

@@ -70,7 +70,7 @@ int searchNode(Trie *t, char *string) {
     return (temp != 0 && temp->isEnd);                  // Temp and isEnd shoud be != 0
 }
 
-int searchWord(Trie *t, char *string) {
+int searchWordTrie(Trie *t, char *string) {
 
     int i = searchNode(t, string);
     int res = 0;
