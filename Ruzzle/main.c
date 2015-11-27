@@ -16,17 +16,20 @@ int main(int argc, char* argv[]) {
     freopen("CON", "w", stderr);
 
     Trie *t = (Trie*)malloc(sizeof(Trie));
+    Cell grid[N][N];
 
     // Create Trie with all words (and search a specific word)
-    //createFullTrie(LOCATION_DICO, t);
+    createFullTrie(LOCATION_DICO, t);
 
     // Search a word
-    //searchWord(t, "sers");
+    //searchWordTrie(t, "soir");
 
     // Create grid
-   // createFullGrid(LOCATION_GRIDVALIDATION);
+    createFullGrid(LOCATION_GRIDVALIDATION, grid);
 
-    mainDisplay();
+    validateWord(t, grid, "soir");
+
+    //mainDisplay();
 
     free(t->root);
     free(t);

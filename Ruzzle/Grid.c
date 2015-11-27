@@ -4,6 +4,9 @@
 #include "Trie.h"
 #include "Grid.h"
 
+int scoreCell = 0;
+int bonus = 1;
+
 void createGrid(Cell grid[N][N], char charFile[]) {
 
     int i, j;
@@ -53,7 +56,7 @@ void setBonus(Cell grid[N][N]) {
     strcpy(grid[1][3].bonus, "TL");
 }
 
-void createFullGrid(char *nameFile) {
+void createFullGrid(char *nameFile, Cell grid[N][N]) {
 
     FILE* readFile = NULL;
     int i;
@@ -66,7 +69,6 @@ void createFullGrid(char *nameFile) {
 
     if (readFile != NULL) {
 
-        Cell grid[N][N];
         i = 0;
 
         do {
@@ -137,18 +139,18 @@ void toString(Cell grid[N][N]) {
 
 int scoreTotalCell(Cell cell) {
 
-    if (strcmp(cell.bonus, "DL"))
+    if (strcmp(cell.bonus, "DL") == 0)
         return cell.score * 2;
-    if (strcmp(cell.bonus, "TL"))
+    if (strcmp(cell.bonus, "TL") == 0)
         return cell.score * 3;
     return cell.score;
 }
 
 int bonusWord(Cell cell) {
 
-    if (strcmp(cell.bonus, "DW"))
+    if (strcmp(cell.bonus, "DW") == 0)
         return 2;
-    if (strcmp(cell.bonus, "TW"))
+    if (strcmp(cell.bonus, "TW") == 0)
         return 3;
     return 1;
 }
@@ -178,11 +180,13 @@ int validateWord(Trie *t, Cell grid[N][N], char word[]) {
 
 int searchWordGrid(Cell grid[N][N], char word[], int i, int j, int indexWord) {
 
-    int scoreCell, bonus, x, y;
+    int x, y;
+    int lengthWord = strlen(word);
+    int res = 0;
 
     // Get bonus
-    scoreCell = scoreTotalCell(grid[i][i]);
-    bonus = bonusWord(grid[i][j]);
+    scoreCell += scoreTotalCell(grid[i][j]);
+    bonus *= bonusWord(grid[i][j]);
 
     // Mark this cell so it can't be re-used
     grid[i][j].isVisited = 1;
@@ -190,15 +194,24 @@ int searchWordGrid(Cell grid[N][N], char word[], int i, int j, int indexWord) {
     // Search the next letter in the word
     indexWord++;
 
-    // Found the 8 neighbors
-    for (x = i - 1; x <= i + 1 && x < N; x++) {
+    if (indexWord == lengthWord) {
 
-        for (y = j - 1; y <= j + 1 && y < N; y++) {
+        res = 1;
+    } else {
 
-            if ((x >= 0) && (y >= 0) && (!grid[x][y].isVisited) && (grid[x][y].letter == word[indexWord]))
-                searchWordGrid(grid, word, x, y, indexWord);
+        // Found the 8 neighbors
+        for (x = i - 1; x <= i + 1 && x < N; x++) {
+
+            for (y = j - 1; y <= j + 1 && y < N; y++) {
+
+                if ((x >= 0) && (y >= 0) && (!grid[x][y].isVisited) && (grid[x][y].letter == word[indexWord]))
+                    return searchWordGrid(grid, word, x, y, indexWord);
+            }
         }
     }
 
-    return 0;
+    // Re-initialize cell's state
+    grid[i][j].isVisited = 0;
+
+    return res;
 }

@@ -28,7 +28,7 @@ typedef struct sCell {
 void createGrid(Cell grid[N][N], char charFile[]);
 void initGrid(Cell grid[N][N]);
 Cell createCell(char c);
-void createFullGrid(char *nameFile);
+void createFullGrid(char *nameFile, Cell grid[N][N]);
 int getScore(char c);
 void setBonus(Cell grid[N][N]);
 void toString(Cell grid[N][N]);
