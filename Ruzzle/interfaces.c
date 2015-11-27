@@ -38,10 +38,16 @@ PrincipalWindow* principal_window_create()
 //function to catch the clic event on the principal screen
 int principal_window_load_window_grid(PrincipalWindow* game_menu, SDL_Event event)
 {
-    if ( event.type == SDL_MOUSEBUTTONDOWN)
+    int x, y;
+    if( event.button.button == SDL_BUTTON_LEFT )
     {
-        if( event.button.button == SDL_BUTTON_LEFT )
+        x = event.button.x;
+        y = event.button.y;
+
+        //Si la souris est dans le bouton
+        if( ( x > game_menu->gameStartPosition.x ) && ( x < game_menu->gameStartPosition.x + game_menu->gameStartPosition.w ) && ( y > game_menu->gameStartPosition.y ) && ( y < game_menu->gameStartPosition.y + game_menu->gameStartPosition.h ) )
         {
+            //Mise à jour du sprite du bouton
             return 1;
         }
     }
@@ -124,45 +130,74 @@ GridWindow* grid_window_create()
     grid->clip[ 4 ].w = SHEET_WIDTH/2;
     grid->clip[ 4 ].h = SHEET_HEIGHT/5;
 
+
+    //orange boxes
+    grid->clipClic[ 0 ].x = SHEET_WIDTH/2;
+    grid->clipClic[ 0 ].y = 0;
+    grid->clipClic[ 0 ].w = SHEET_WIDTH;
+    grid->clipClic[ 0 ].h = SHEET_HEIGHT/5;
+
+    grid->clipClic[ 1 ].x = SHEET_WIDTH/2;
+    grid->clipClic[ 1 ].y = SHEET_HEIGHT/5;
+    grid->clipClic[ 1 ].w = SHEET_WIDTH;
+    grid->clipClic[ 1 ].h = SHEET_HEIGHT/5;
+
+    grid->clipClic[ 2 ].x = SHEET_WIDTH/2;
+    grid->clipClic[ 2 ].y = (SHEET_HEIGHT/5)*2;
+    grid->clipClic[ 2 ].w = SHEET_WIDTH;
+    grid->clipClic[ 2 ].h = SHEET_HEIGHT/5;
+
+    grid->clipClic[ 3 ].x = SHEET_WIDTH/2;
+    grid->clipClic[ 3 ].y = (SHEET_HEIGHT/5)*3;
+    grid->clipClic[ 3 ].w = SHEET_WIDTH;
+    grid->clipClic[ 3 ].h = SHEET_HEIGHT/5;
+
+    grid->clipClic[ 4 ].x = SHEET_WIDTH/2;
+    grid->clipClic[ 4 ].y = (SHEET_HEIGHT/5)*4;
+    grid->clipClic[ 4 ].w = SHEET_WIDTH;
+    grid->clipClic[ 4 ].h = SHEET_HEIGHT/5;
+
     return  grid;
 }
 
 //to draw the boxes imgs
-void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SDL_Rect* clip )
+void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SDL_Rect* clip, GridWindow* grid )
 {
 
-    SDL_Rect pos;
 
-    pos.x = x;
-    pos.y = y;
+    grid->pos.x = x;
+    grid->pos.y = y;
 
     //On blitte la surface
-    SDL_BlitSurface( src, clip, dest, &pos );
+    SDL_BlitSurface( src, clip, dest, &(grid->pos) );
 }
 
 void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen){
 
     char const *text = "./res/fonts/helvetica.ttf";
     FILE* readFile= NULL;
-    int i,j,k,s;
+    unsigned int i,j,k,s;
     char *str = (char*)malloc(26);
-    char c;
+    char buffer[2];
+    char c='\0';
     readFile = fopen(nameFile,"r");
     j=-25;
-    k=185;
+    k=190;
 
     grid->fontLetter = TTF_OpenFont(text,40);
     SDL_Color textColor = {0,0,0};
+    grid->letterPosition.y = k;
+    buffer[1]='\0';
 
     if(readFile != NULL ){
-                grid->letterPosition.y = k;
                 for (i = 0; i < 4; i++){
                          str =fgets(str, 26, readFile);
                     for (s = 0; s < 4; s++){
-                        if(c !='\0'){
+                        if(c !='\n'){
                                  c = str[s];
                                  c = toupper(c);
-                            grid->letter = TTF_RenderText_Blended(grid->fontLetter,&c,textColor);
+                                 buffer[0]=c;
+                            grid->letter = TTF_RenderText_Blended(grid->fontLetter,&buffer[0],textColor);
                             grid->letterPosition.x += 100;
                             SDL_BlitSurface(grid->letter,NULL,screen,&(grid->letterPosition));
                         }
@@ -178,8 +213,9 @@ void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen){
 
 }
 
+
 //to draw all elements on the play scren (with grid)
-void grid_window_draw(GridWindow* grid, SDL_Surface* screen)
+void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
 {
 
     SDL_BlitSurface(grid->background,NULL,screen,&(grid->backgroundPosition));
@@ -187,29 +223,47 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen)
     SDL_BlitSurface(grid->trophy,NULL,screen,&(grid->trophyPosition));
 
 
-    apply_surface( 40, 150, grid->faces, screen, &(grid->clip[ 0 ]) );
-    apply_surface( 40, 250, grid->faces, screen, &(grid->clip[ 0 ]) );
-    apply_surface( 40, 350, grid->faces, screen, &(grid->clip[ 0 ]) );
-    apply_surface( 40, 450, grid->faces, screen, &(grid->clip[ 4 ]) );
+    apply_surface( 40, 150, grid->faces, screen, &(grid->clip[ 0 ]),grid );
+    apply_surface( 40, 250, grid->faces, screen, &(grid->clip[ 0 ]),grid );
+    apply_surface( 40, 350, grid->faces, screen, &(grid->clip[ 0 ]),grid );
+    apply_surface( 40, 450, grid->faces, screen, &(grid->clip[ 4 ]),grid );
 
-    apply_surface( 140, 150, grid->faces, screen, &(grid->clip[ 2 ]) );
-    apply_surface( 140, 250, grid->faces, screen, &(grid->clip[ 0 ]) );
-    apply_surface( 140, 350, grid->faces, screen, &(grid->clip[ 0 ]) );
-    apply_surface( 140, 450, grid->faces, screen, &(grid->clip[ 0 ]) );
+    apply_surface( 140, 150, grid->faces, screen, &(grid->clip[ 0 ]),grid );
+    apply_surface( 140, 250, grid->faces, screen, &(grid->clip[ 2 ]),grid );
+    apply_surface( 140, 350, grid->faces, screen, &(grid->clip[ 0 ]),grid );
+    apply_surface( 140, 450, grid->faces, screen, &(grid->clip[ 0 ]),grid );
 
-    apply_surface( 240, 150, grid->faces, screen, &(grid->clip[ 0 ]) );
-    apply_surface( 240, 250, grid->faces, screen, &(grid->clip[ 0 ]) );
-    apply_surface( 240, 350, grid->faces, screen, &(grid->clip[ 3 ] ));
-    apply_surface( 240, 450, grid->faces, screen, &(grid->clip[ 0 ]) );
+    apply_surface( 240, 150, grid->faces, screen, &(grid->clip[ 0 ]),grid );
+    apply_surface( 240, 250, grid->faces, screen, &(grid->clip[ 0 ]),grid );
+    apply_surface( 240, 350, grid->faces, screen, &(grid->clip[ 3 ]),grid);
+    apply_surface( 240, 450, grid->faces, screen, &(grid->clip[ 0 ]),grid );
 
-    apply_surface( 340, 150, grid->faces, screen, &(grid->clip[ 0 ]) );
-    apply_surface( 340, 250, grid->faces, screen, &(grid->clip[ 1 ]) );
-    apply_surface( 340, 350, grid->faces, screen, &(grid->clip[ 0 ]) );
-    apply_surface( 340, 450, grid->faces, screen, &(grid->clip[ 0 ]) );
+    apply_surface( 340, 150, grid->faces, screen, &(grid->clip[ 0 ]),grid );
+    apply_surface( 340, 250, grid->faces, screen, &(grid->clip[ 1 ]),grid );
+    apply_surface( 340, 350, grid->faces, screen, &(grid->clip[ 0 ]),grid );
+    apply_surface( 340, 450, grid->faces, screen, &(grid->clip[ 0 ]),grid );
 
+    grid_window_draw_on_clic(grid, screen, event);
     letter_display(LOCATION_GRID, grid, screen);
 
 }
+void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
+{
+    int x = 0;
+    int y = 0;
+   if( event.button.button == SDL_BUTTON_LEFT )
+    {
+        x = event.button.x;
+        y = event.button.y;
+
+        if( ( x > grid->pos.x) && ( x < grid->pos.x + grid->pos.w) && ( y > grid->pos.y ) && ( y < grid->pos.y + grid->pos.h ))
+        {
+            grid->clip[0] = grid->clipClic[0];
+
+       }
+    }
+}
+
 
 //destroy elements -> free memory
 void grid_window_destroy(GridWindow* grid)
@@ -218,6 +272,7 @@ void grid_window_destroy(GridWindow* grid)
     SDL_FreeSurface(grid->trophy);
     SDL_FreeSurface(grid->faces);
     SDL_FreeSurface(grid->title);
+    SDL_FreeSurface(grid->letter);
     free(grid);
 }
 
@@ -292,8 +347,7 @@ int mainDisplay()
             }
             break;
         case 1:
-            grid_window_draw(grid,screen);
-
+            grid_window_draw(grid,screen, event);
 
             break;
 
@@ -314,4 +368,3 @@ int mainDisplay()
     close();
     return 0;
 }
-
