@@ -107,7 +107,7 @@ int getScore(char c) {
         {'e', 1}, {'f', 3}, {'g', 3}, {'h', 3},
         {'i', 1}, {'j', 10}, {'k', 12}, {'l', 2},
         {'m', 2}, {'n', 1}, {'o', 2}, {'p', 2},
-        {'q', 6}, {'r', 1}, {'s', 1}, {'t', 1},
+        {'q', 6}, {'r', 1}, {'s', 10}, {'t', 1},
         {'u', 2}, {'v', 4}, {'w', 15}, {'x', 10},
         {'y', 10}, {'z', 4}
     };
@@ -184,20 +184,20 @@ int searchWordGrid(Cell grid[N][N], char word[], int i, int j, int indexWord) {
     int lengthWord = strlen(word);
     int res = 0;
 
-    // Get bonus
-    scoreCell += scoreTotalCell(grid[i][j]);
-    bonus *= bonusWord(grid[i][j]);
-
-    // Mark this cell so it can't be re-used
-    grid[i][j].isVisited = 1;
-
-    // Search the next letter in the word
+    // Search the next index of the letter in the word
     indexWord++;
 
-    if (indexWord == lengthWord) {
+    if (indexWord >= lengthWord) {
 
         res = 1;
     } else {
+
+        // Get bonus
+        scoreCell += scoreTotalCell(grid[i][j]);
+        bonus *= bonusWord(grid[i][j]);
+
+        // Mark this cell so it can't be re-used
+        grid[i][j].isVisited = 1;
 
         // Found the 8 neighbors
         for (x = i - 1; x <= i + 1 && x < N; x++) {
