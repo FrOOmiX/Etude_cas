@@ -269,94 +269,25 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
 
 void onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB){
 
-//First row
-if( (x > 40) && (x < 40+ grid->pos.w) && (y<150) && (y < 150+ grid->pos.h)){
-    *pointeurSurA=40;
-    *pointeurSurB=150;
-    /* Cell grid[1][1]*/
-}
-if( (x > 40) && (x < 40+ grid->pos.w) && (y<250) && (y < 250+ grid->pos.h)){
-    *pointeurSurA=40;
-    *pointeurSurB=250;
-    /* Cell grid[1][1]*/
-}
-if( (x > 40) && (x < 40+ grid->pos.w) && (y<350) && (y < 350+ grid->pos.h)){
-    *pointeurSurA=40;
-    *pointeurSurB=350;
-    /* Cell grid[1][1]*/
-}
-if( (x > 40) && (x < 40+ grid->pos.w) && (y<450) && (y < 450+ grid->pos.h)){
-    *pointeurSurA=40;
-    *pointeurSurB=450;
-    /* Cell grid[1][1]*/
-}
 
-//Seconde row
-if( (x > 140) && (x < 140+ grid->pos.w) && (y<150) && (y < 150+ grid->pos.h)){
-    *pointeurSurA=140;
-    *pointeurSurB=150;
-    /* Cell grid[1][1]*/
-}
-if( (x > 140) && (x < 140+ grid->pos.w) && (y<250) && (y < 250+ grid->pos.h)){
-    *pointeurSurA=140;
-    *pointeurSurB=250;
-    /* Cell grid[1][1]*/
-}
-if( (x > 140) && (x < 140+ grid->pos.w) && (y<350) && (y < 350+ grid->pos.h)){
-    *pointeurSurA=140;
-    *pointeurSurB=350;
-    /* Cell grid[1][1]*/
-}
-if( (x > 140) && (x < 140+ grid->pos.w) && (y<450) && (y < 450+ grid->pos.h)){
-    *pointeurSurA=140;
-    *pointeurSurB=450;
-    /* Cell grid[1][1]*/
-}
+//TEST AVEC DOUBLE BOUCLE
+int i,s,l,c;
+l=40; //l comme ligne
 
-//Third row
-if( (x > 240) && (x < 240+ grid->pos.w) && (y<150) && (y < 150+ grid->pos.h)){
-    *pointeurSurA=240;
-    *pointeurSurB=150;
-    /* Cell grid[1][1]*/
-}
-if( (x > 240) && (x < 240+ grid->pos.w) && (y<250) && (y < 250+ grid->pos.h)){
-    *pointeurSurA=240;
-    *pointeurSurB=250;
-    /* Cell grid[1][1]*/
-}
-if( (x > 240) && (x < 240+ grid->pos.w) && (y<350) && (y < 350+ grid->pos.h)){
-    *pointeurSurA=240;
-    *pointeurSurB=350;
-    /* Cell grid[1][1]*/
-}
-if( (x > 240) && (x < 240+ grid->pos.w) && (y<450) && (y < 450+ grid->pos.h)){
-    *pointeurSurA=240;
-    *pointeurSurB=450;
-    /* Cell grid[1][1]*/
-}
-//LpointeurSurAst row
-if( (x > 340) && (x < 340+ grid->pos.w) && (y<150) && (y < 150+ grid->pos.h)){
-    *pointeurSurA=340;
-    *pointeurSurB=150;
-    /* Cell grid[1][1]*/
-}
-if( (x > 340) && (x < 340+ grid->pos.w) && (y<250) && (y < 250+ grid->pos.h)){
-    *pointeurSurA=340;
-    *pointeurSurB=250;
-    /* Cell grid[1][1]*/
-}
-if( (x > 340) && (x < 340+ grid->pos.w) && (y<350) && (y < 350+ grid->pos.h)){
-    *pointeurSurA=340;
-    *pointeurSurB=350;
-    /* Cell grid[1][1]*/
-}
-if( (x > 340) && (x < 340+ grid->pos.w) && (y<450) && (y < 450+ grid->pos.h)){
-    *pointeurSurA=340;
-    *pointeurSurB=450;
-    /* Cell grid[1][1]*/
-}
+    for (i = 0; i < 4; i++){
+           c=150;//c comme colones
+                for (s = 0; s < 4; s++){
+                    if( (x > l) && (x < l+ grid->pos.w) && (y<c) && (y < c+ grid->pos.h)){
+                        *pointeurSurA=l;
+                        *pointeurSurB=c;
+                        // Cell grid[i][s]
 
+                    }
+                c += 100;
+                  }
+             l +=100;
 
+    }
 }
 
 
