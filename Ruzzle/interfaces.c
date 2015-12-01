@@ -163,8 +163,6 @@ GridWindow* grid_window_create()
 //to draw the boxes imgs
 void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SDL_Rect* clip, GridWindow* grid )
 {
-
-
     grid->pos.x = x;
     grid->pos.y = y;
 
@@ -247,22 +245,120 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
     letter_display(LOCATION_GRID, grid, screen);
 
 }
+
+
+
+
 void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
 {
-    int x = 0;
-    int y = 0;
-   if( event.button.button == SDL_BUTTON_LEFT )
-    {
-        x = event.button.x;
-        y = event.button.y;
+    int a;
+    int b;
+    int *pointeurSurA = &a;
+    int *pointeurSurB = &b;
 
-        if( ( x > grid->pos.x) && ( x < grid->pos.x + grid->pos.w) && ( y > grid->pos.y ) && ( y < grid->pos.y + grid->pos.h ))
+       if( event.button.button == SDL_BUTTON_LEFT )
         {
-            grid->clip[0] = grid->clipClic[0];
+            onClic(grid,event.button.x,event.button.y,pointeurSurA,pointeurSurB);
 
-       }
-    }
+            apply_surface( *pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[ 0 ]),grid );
+
+
+        }
+
 }
+
+void onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB){
+
+//First row
+if( (x > 40) && (x < 40+ grid->pos.w) && (y<150) && (y < 150+ grid->pos.h)){
+    *pointeurSurA=40;
+    *pointeurSurB=150;
+    /* Cell grid[1][1]*/
+}
+if( (x > 40) && (x < 40+ grid->pos.w) && (y<250) && (y < 250+ grid->pos.h)){
+    *pointeurSurA=40;
+    *pointeurSurB=250;
+    /* Cell grid[1][1]*/
+}
+if( (x > 40) && (x < 40+ grid->pos.w) && (y<350) && (y < 350+ grid->pos.h)){
+    *pointeurSurA=40;
+    *pointeurSurB=350;
+    /* Cell grid[1][1]*/
+}
+if( (x > 40) && (x < 40+ grid->pos.w) && (y<450) && (y < 450+ grid->pos.h)){
+    *pointeurSurA=40;
+    *pointeurSurB=450;
+    /* Cell grid[1][1]*/
+}
+
+//Seconde row
+if( (x > 140) && (x < 140+ grid->pos.w) && (y<150) && (y < 150+ grid->pos.h)){
+    *pointeurSurA=140;
+    *pointeurSurB=150;
+    /* Cell grid[1][1]*/
+}
+if( (x > 140) && (x < 140+ grid->pos.w) && (y<250) && (y < 250+ grid->pos.h)){
+    *pointeurSurA=140;
+    *pointeurSurB=250;
+    /* Cell grid[1][1]*/
+}
+if( (x > 140) && (x < 140+ grid->pos.w) && (y<350) && (y < 350+ grid->pos.h)){
+    *pointeurSurA=140;
+    *pointeurSurB=350;
+    /* Cell grid[1][1]*/
+}
+if( (x > 140) && (x < 140+ grid->pos.w) && (y<450) && (y < 450+ grid->pos.h)){
+    *pointeurSurA=140;
+    *pointeurSurB=450;
+    /* Cell grid[1][1]*/
+}
+
+//Third row
+if( (x > 240) && (x < 240+ grid->pos.w) && (y<150) && (y < 150+ grid->pos.h)){
+    *pointeurSurA=240;
+    *pointeurSurB=150;
+    /* Cell grid[1][1]*/
+}
+if( (x > 240) && (x < 240+ grid->pos.w) && (y<250) && (y < 250+ grid->pos.h)){
+    *pointeurSurA=240;
+    *pointeurSurB=250;
+    /* Cell grid[1][1]*/
+}
+if( (x > 240) && (x < 240+ grid->pos.w) && (y<350) && (y < 350+ grid->pos.h)){
+    *pointeurSurA=240;
+    *pointeurSurB=350;
+    /* Cell grid[1][1]*/
+}
+if( (x > 240) && (x < 240+ grid->pos.w) && (y<450) && (y < 450+ grid->pos.h)){
+    *pointeurSurA=240;
+    *pointeurSurB=450;
+    /* Cell grid[1][1]*/
+}
+//LpointeurSurAst row
+if( (x > 340) && (x < 340+ grid->pos.w) && (y<150) && (y < 150+ grid->pos.h)){
+    *pointeurSurA=340;
+    *pointeurSurB=150;
+    /* Cell grid[1][1]*/
+}
+if( (x > 340) && (x < 340+ grid->pos.w) && (y<250) && (y < 250+ grid->pos.h)){
+    *pointeurSurA=340;
+    *pointeurSurB=250;
+    /* Cell grid[1][1]*/
+}
+if( (x > 340) && (x < 340+ grid->pos.w) && (y<350) && (y < 350+ grid->pos.h)){
+    *pointeurSurA=340;
+    *pointeurSurB=350;
+    /* Cell grid[1][1]*/
+}
+if( (x > 340) && (x < 340+ grid->pos.w) && (y<450) && (y < 450+ grid->pos.h)){
+    *pointeurSurA=340;
+    *pointeurSurB=450;
+    /* Cell grid[1][1]*/
+}
+
+
+}
+
 
 
 //destroy elements -> free memory
@@ -354,8 +450,6 @@ int mainDisplay()
         }
 
         SDL_Flip(screen);
-
-
         SDL_PollEvent(&event);
 
         //to close application on cross clic
