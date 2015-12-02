@@ -219,30 +219,25 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
     SDL_BlitSurface(grid->background,NULL,screen,&(grid->backgroundPosition));
     SDL_BlitSurface(grid->title,NULL,screen,&(grid->logoRuzzlePosition));
     SDL_BlitSurface(grid->trophy,NULL,screen,&(grid->trophyPosition));
+    int i,s,l,c;
+    l=40; //l comme ligne
 
-
-    apply_surface( 40, 150, grid->faces, screen, &(grid->clip[ 0 ]),grid );
-    apply_surface( 40, 250, grid->faces, screen, &(grid->clip[ 0 ]),grid );
-    apply_surface( 40, 350, grid->faces, screen, &(grid->clip[ 0 ]),grid );
-    apply_surface( 40, 450, grid->faces, screen, &(grid->clip[ 4 ]),grid );
-
-    apply_surface( 140, 150, grid->faces, screen, &(grid->clip[ 0 ]),grid );
+        for (i = 0; i < 4; i++){
+                c=150;//c comme colonne
+                        for (s = 0; s < 4; s++){
+                            apply_surface( l, c, grid->faces, screen, &(grid->clip[ 0 ]),grid );
+                            c += 100;
+                        }
+                        l +=100;
+        }
+    //Applications des bonus
+    apply_surface( 40,  450, grid->faces, screen, &(grid->clip[ 4 ]),grid );
     apply_surface( 140, 250, grid->faces, screen, &(grid->clip[ 2 ]),grid );
-    apply_surface( 140, 350, grid->faces, screen, &(grid->clip[ 0 ]),grid );
-    apply_surface( 140, 450, grid->faces, screen, &(grid->clip[ 0 ]),grid );
-
-    apply_surface( 240, 150, grid->faces, screen, &(grid->clip[ 0 ]),grid );
-    apply_surface( 240, 250, grid->faces, screen, &(grid->clip[ 0 ]),grid );
-    apply_surface( 240, 350, grid->faces, screen, &(grid->clip[ 3 ]),grid);
-    apply_surface( 240, 450, grid->faces, screen, &(grid->clip[ 0 ]),grid );
-
-    apply_surface( 340, 150, grid->faces, screen, &(grid->clip[ 0 ]),grid );
+    apply_surface( 240, 350, grid->faces, screen, &(grid->clip[ 3 ]),grid );
     apply_surface( 340, 250, grid->faces, screen, &(grid->clip[ 1 ]),grid );
-    apply_surface( 340, 350, grid->faces, screen, &(grid->clip[ 0 ]),grid );
-    apply_surface( 340, 450, grid->faces, screen, &(grid->clip[ 0 ]),grid );
+
 
     grid_window_draw_on_clic(grid, screen, event);
-    letter_display(LOCATION_GRID, grid, screen);
 
 }
 
@@ -259,9 +254,7 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
        if( event.button.button == SDL_BUTTON_LEFT )
         {
             onClic(grid,event.button.x,event.button.y,pointeurSurA,pointeurSurB);
-
             apply_surface( *pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[ 0 ]),grid );
-
 
         }
 
@@ -275,19 +268,20 @@ int i,s,l,c;
 l=40; //l comme ligne
 
     for (i = 0; i < 4; i++){
-           c=150;//c comme colones
-                for (s = 0; s < 4; s++){
-                    if( (x > l) && (x < l+ grid->pos.w) && (y<c) && (y < c+ grid->pos.h)){
-                        *pointeurSurA=l;
-                        *pointeurSurB=c;
-                        // Cell grid[i][s]
-
+            c=150;//c comme colones
+                    for (s = 0; s < 4; s++){
+                        if( (x > l) && (x < l+ grid->pos.w) && (y > c) && (y < c+ grid->pos.h)){
+                            *pointeurSurA=l;
+                            *pointeurSurB=c;
+                            // Cell grid[i][s]
+                            break;
+                        }
+                        c += 100;
                     }
-                c += 100;
-                  }
-             l +=100;
 
-    }
+                    l +=100;
+
+                }
 }
 
 
@@ -375,7 +369,7 @@ int mainDisplay()
             break;
         case 1:
             grid_window_draw(grid,screen, event);
-
+            letter_display(LOCATION_GRID, grid, screen);
             break;
 
         }
