@@ -1,6 +1,10 @@
 #ifndef _TRIE_H
 #define _TRIE_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #define ALPHABET 26
 
 // struct for a node in the trie

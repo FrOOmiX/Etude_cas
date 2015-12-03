@@ -18,16 +18,15 @@ int main(int argc, char* argv[]) {
     Trie *t = (Trie*)malloc(sizeof(Trie));
     Cell grid[N][N];
 
-    // Create Trie with all words (and search a specific word)
+    // Create Trie with words from file
     createFullTrie(LOCATION_DICO, t);
 
-    // Search a word
-    //searchWordTrie(t, "soir");
-
     // Create grid
-    createFullGrid(LOCATION_GRIDVALIDATION, grid);
+    createFullGrid(LOCATION_GRID, grid);
 
-    validateWord(t, grid, "soir");
+    // Validate or not the word in the grid
+    int result = scoreWord(t, grid, "vecurent", 2, 0);
+    printf("\nScore : %d", result);
 
     //mainDisplay();
 

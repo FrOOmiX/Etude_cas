@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "Trie.h"
 #include "Grid.h"
-
-int scoreCell = 0;
-int bonus = 1;
 
 void createGrid(Cell grid[N][N], char charFile[]) {
 
@@ -41,7 +34,7 @@ Cell createCell(char c) {
 
     Cell cell;
     cell.letter = c;
-    cell.score = getScore(c);
+    cell.score = scoreCell(c);
     cell.isVisited = 0;
     strcpy(cell.bonus, " ");
 
@@ -51,9 +44,11 @@ Cell createCell(char c) {
 void setBonus(Cell grid[N][N]) {
 
     strcpy(grid[0][1].bonus, "DW");
-    strcpy(grid[3][0].bonus, "TW");
-    strcpy(grid[2][2].bonus, "DL");
-    strcpy(grid[1][3].bonus, "TL");
+    strcpy(grid[0][3].bonus, "DW");
+    strcpy(grid[3][2].bonus, "TW");
+    strcpy(grid[3][1].bonus, "DL");
+    strcpy(grid[0][2].bonus, "TL");
+    strcpy(grid[2][2].bonus, "TL");
 }
 
 void createFullGrid(char *nameFile, Cell grid[N][N]) {
@@ -98,18 +93,18 @@ void createFullGrid(char *nameFile, Cell grid[N][N]) {
     }
 }
 
-int getScore(char c) {
+int scoreCell(char c) {
 
     int i, score;
     Cell boxScore[26] = {
 
-        {'a', 1}, {'b', 3}, {'c', 2}, {'d', 2},
-        {'e', 1}, {'f', 3}, {'g', 3}, {'h', 3},
-        {'i', 1}, {'j', 10}, {'k', 12}, {'l', 2},
-        {'m', 2}, {'n', 1}, {'o', 2}, {'p', 2},
-        {'q', 6}, {'r', 1}, {'s', 10}, {'t', 1},
-        {'u', 2}, {'v', 4}, {'w', 15}, {'x', 10},
-        {'y', 10}, {'z', 4}
+        {'a', 1}, {'b', 3}, {'c', 3}, {'d', 2},
+        {'e', 1}, {'f', 4}, {'g', 2}, {'h', 4},
+        {'i', 1}, {'j', 8}, {'k', 10}, {'l', 1},
+        {'m', 2}, {'n', 1}, {'o', 1}, {'p', 3},
+        {'q', 8}, {'r', 1}, {'s', 1}, {'t', 1},
+        {'u', 1}, {'v', 4}, {'w', 10}, {'x', 10},
+        {'y', 10}, {'z', 10}
     };
 
     for (i = 0; i < sizeof(boxScore); i++) {
@@ -137,7 +132,7 @@ void toString(Cell grid[N][N]) {
     }
 }
 
-int scoreTotalCell(Cell cell) {
+int bonusCell(Cell cell) {
 
     if (strcmp(cell.bonus, "DL") == 0)
         return cell.score * 2;
@@ -155,30 +150,77 @@ int bonusWord(Cell cell) {
     return 1;
 }
 
-int validateWord(Trie *t, Cell grid[N][N], char word[]) {
+int bonusLength(int length) {
 
-    int i, j;
-    int res = 0;
+    int bonus = 0;
+
+    switch (length) {
+
+        case 5:
+            bonus = 5;
+            break;
+        case 6:
+            bonus = 10;
+            break;
+        case 7:
+            bonus = 15;
+            break;
+        case 8:
+            bonus = 20;
+            break;
+        case 9:
+            bonus = 25;
+            break;
+        case 10:
+            bonus = 30;
+            break;
+        case 11:
+            bonus = 35;
+            break;
+        case 12:
+            bonus = 40;
+            break;
+        case 13:
+            bonus = 45;
+            break;
+        case 14:
+            bonus = 50;
+            break;
+        case 15:
+            bonus = 55;
+            break;
+        case 16:
+            bonus = 60;
+            break;
+        default:
+            bonus = 0;
+            break;
+    }
+
+    return bonus;
+}
+
+int scoreWord(Trie *t, Cell grid[N][N], char word[], int i, int j) {
+
     int indexWord = 0;
+    int bCell = 0;
+    int bWord = 1;
+    int scoreWord = 0;
+    int *pScoreWord = &scoreWord;
 
     if (searchWordTrie(t, word)) {
 
-        for (i = 0; i < N; i++) {
+        // Word is valid
+        if (word[indexWord] == grid[i][j].letter) {
 
-            for (j = 0; j < N; j++) {
-
-                if (word[indexWord] == grid[i][j].letter) {
-
-                    return searchWordGrid(grid, word, i, j, indexWord);
-                }
-            }
+            searchWordGrid(grid, word, i, j, indexWord, bCell, bWord, pScoreWord);
         }
     }
 
-    return res;
+    return *pScoreWord;
 }
 
-int searchWordGrid(Cell grid[N][N], char word[], int i, int j, int indexWord) {
+int searchWordGrid(Cell grid[N][N], char word[], int i, int j, int indexWord, int bCell, int bWord, int *pScoreWord) {
 
     int x, y;
     int lengthWord = strlen(word);
@@ -187,31 +229,33 @@ int searchWordGrid(Cell grid[N][N], char word[], int i, int j, int indexWord) {
     // Search the next index of the letter in the word
     indexWord++;
 
-    if (indexWord >= lengthWord) {
+    // Get cell's score, bonus and length's bonus
+    bCell += bonusCell(grid[i][j]);
+    bWord *= bonusWord(grid[i][j]);
+    int bLength = bonusLength(lengthWord);
 
+    // Mark this cell so it can't be re-used
+    grid[i][j].isVisited = 1;
+
+    if (indexWord == lengthWord) {
+
+        // We reached the end of the word
+        *pScoreWord = bCell * bWord + bLength;
         res = 1;
     } else {
-
-        // Get bonus
-        scoreCell += scoreTotalCell(grid[i][j]);
-        bonus *= bonusWord(grid[i][j]);
-
-        // Mark this cell so it can't be re-used
-        grid[i][j].isVisited = 1;
 
         // Found the 8 neighbors
         for (x = i - 1; x <= i + 1 && x < N; x++) {
 
             for (y = j - 1; y <= j + 1 && y < N; y++) {
 
-                if ((x >= 0) && (y >= 0) && (!grid[x][y].isVisited) && (grid[x][y].letter == word[indexWord]))
-                    return searchWordGrid(grid, word, x, y, indexWord);
+                if ((x >= 0) && (y >= 0) && (!grid[x][y].isVisited) && (grid[x][y].letter == word[indexWord])) {
+
+                    return searchWordGrid(grid, word, x, y, indexWord, bCell, bWord, pScoreWord);
+                }
             }
         }
     }
-
-    // Re-initialize cell's state
-    grid[i][j].isVisited = 0;
 
     return res;
 }
