@@ -237,7 +237,6 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
     apply_surface( 340, 250, grid->faces, screen, &(grid->clip[ 1 ]),grid );
 
 
-    grid_window_draw_on_clic(grid, screen, event);
 
 }
 
@@ -251,13 +250,28 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
     int *pointeurSurA = &a;
     int *pointeurSurB = &b;
 
-       if( event.button.button == SDL_BUTTON_LEFT )
+
+
+
+    switch(event.type)
         {
-            onClic(grid,event.button.x,event.button.y,pointeurSurA,pointeurSurB);
-            apply_surface( *pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[ 0 ]),grid );
 
-        }
 
+             case SDL_MOUSEBUTTONUP:{
+                    if( event.button.button == SDL_BUTTON_LEFT ){
+                    onClic(grid,event.button.x,event.button.y,pointeurSurA,pointeurSurB);
+                    apply_surface( *pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[ 0 ]),grid );
+
+
+                 }
+                else if(event.button.button == SDL_BUTTON_RIGHT) {
+                    printf("clic droit");
+
+                }
+
+             }
+
+         }
 }
 
 void onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB){
@@ -274,6 +288,8 @@ l=40; //l comme ligne
                             *pointeurSurA=l;
                             *pointeurSurB=c;
                             // Cell grid[i][s]
+                            printf("%d\n", i);
+                            printf("%d\n", s);
                             break;
                         }
                         c += 100;
@@ -281,7 +297,7 @@ l=40; //l comme ligne
 
                     l +=100;
 
-                }
+    }
 }
 
 
@@ -369,6 +385,9 @@ int mainDisplay()
             break;
         case 1:
             grid_window_draw(grid,screen, event);
+            letter_display(LOCATION_GRID, grid, screen);
+            grid_window_draw_on_clic(grid, screen, event);
+
             letter_display(LOCATION_GRID, grid, screen);
             break;
 
