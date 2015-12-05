@@ -264,6 +264,7 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
                     else if(event.button.button == SDL_BUTTON_RIGHT) {
 
                         printf("\nclic droit\n");
+
                     }
             }
         }
@@ -274,7 +275,9 @@ void onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB
 
 
 //TEST AVEC DOUBLE BOUCLE
-int i,s,l,c;
+int coord[33];
+int i,s,l,c,index;
+index =0;
 l=40; //l comme ligne
 
     for (i = 0; i < 4; i++){
@@ -284,8 +287,14 @@ l=40; //l comme ligne
                             *pointeurSurA=l;
                             *pointeurSurB=c;
                             // Cell grid[i][s]
-                            printf("%d\n", i);
-                            printf("%d\n", s);
+                            //printf("%d\n", i);
+                            //printf("%d\n", s);
+                            coord[index]=i;
+                            printf("x=%d", coord[index]);
+                            index++;
+                            coord[index]=s;
+                            printf("y=%d", coord[index]);
+
                             break;
                         }
                         c += 100;
