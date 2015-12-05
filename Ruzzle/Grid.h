@@ -45,7 +45,7 @@ void toString(Cell grid[N][N]);
 int bonusCell(Cell cell);
 int bonusWord(Cell cell);
 int bonusLength(int length);
-int scoreWord(Trie *t, Cell grid[N][N], char word[], int i, int j);
+int scoreWord(Trie *t, Cell grid[N][N], int coord[], int i, int j);
 int searchWordGrid(Cell grid[N][N], char word[], int x, int y, int indexWord, int bCell, int bWord, int *pScoreWord);
 
 #endif // _GRID_H

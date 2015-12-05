@@ -200,22 +200,17 @@ int bonusLength(int length) {
     return bonus;
 }
 
-int scoreWord(Trie *t, Cell grid[N][N], char word[], int i, int j) {
+int scoreWord(Trie *t, Cell grid[N][N], int coord[], int i, int j) {
 
     int indexWord = 0;
     int bCell = 0;
     int bWord = 1;
     int scoreWord = 0;
+    char word[256];
     int *pScoreWord = &scoreWord;
 
-    if (searchWordTrie(t, word)) {
-
-        // Word is valid
-        if (word[indexWord] == grid[i][j].letter) {
-
-            searchWordGrid(grid, word, i, j, indexWord, bCell, bWord, pScoreWord);
-        }
-    }
+        // TODO : Read coord and find the correct word
+        searchWordGrid(grid, word, i, j, indexWord, bCell, bWord, pScoreWord);
 
     return *pScoreWord;
 }
