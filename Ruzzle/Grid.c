@@ -200,13 +200,15 @@ int bonusLength(int length) {
     return bonus;
 }
 
-int scoreWord(Trie *t, Cell grid[N][N], int coord[], int i, int j) {
+int scoreWord(Trie *t, Cell grid[N][N], int coord[]) {
 
     int indexWord = 0;
     int bCell = 0;
     int bWord = 1;
     int scoreWord = 0;
     char word[256];
+    int i = 0;
+    int j = 0;
     int *pScoreWord = &scoreWord;
 
         // TODO : Read coord and find the correct word

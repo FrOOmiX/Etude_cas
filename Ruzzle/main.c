@@ -25,8 +25,10 @@ int main(int argc, char* argv[]) {
     createFullGrid(LOCATION_GRID, grid);
 
     // Validate or not the word in the grid
-    int result = scoreWord(t, grid, "vecurent", 2, 0);
+    /*
+    int result = scoreWord(t, grid, "vecurent");
     printf("\nScore : %d", result);
+    */
 
     //mainDisplay();
 
