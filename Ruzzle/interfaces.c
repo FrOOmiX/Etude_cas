@@ -70,11 +70,23 @@ void principal_window_destroy(PrincipalWindow* menu)
     SDL_FreeSurface(menu->gameStart);
     free(menu);
 }
-Uint32 _test(Uint32 interval, void* arg){
-    printf("test");
+
+/*For game screen with the grid */
+
+
+
+Uint32 _test(Uint32 interval, void* gv){
+    GridWindow* p = gv;
+
+    p->secondsLeft--;
+/*    char buf[];
+    p->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
+    sprintf(txt, "%d", p->secondsLeft);
+  p->timer = TTF_RenderText_Blended(p->fontTimer,txt,p->fontColor);
+   SDL_FreeSurface(p->timer);*/
+    printf("%d", p->secondsLeft);
     return interval;
 }
-/*For game screen with the grid */
 
 GridWindow* grid_window_create()
 {
@@ -87,13 +99,15 @@ GridWindow* grid_window_create()
     char const *backgroundIMG = "./res/gfx/background.png";
     char const *trophyIMG = "./res/gfx/trophy_decoration.png";
 
+
+
     //Background
     grid->background = IMG_Load(backgroundIMG);
 
     grid->backgroundPosition.x = 0;
     grid->backgroundPosition.y = 0;
 
-    //for title logo
+ ///for title logo
     grid->title = IMG_Load(titleIMG);
 
     grid->logoRuzzlePosition.x = 150;
@@ -159,7 +173,16 @@ GridWindow* grid_window_create()
     grid->clipClic[ 4 ].y = (SHEET_HEIGHT/5)*4;
     grid->clipClic[ 4 ].w = SHEET_WIDTH;
     grid->clipClic[ 4 ].h = SHEET_HEIGHT/5;
-    SDL_AddTimer(1000,_test,NULL);
+
+    grid->secondsLeft = 5;
+
+    grid->timerID = SDL_AddTimer(1000,_test,grid);
+   /* grid->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
+
+grid->fontColor.r = 255; grid->fontColor.g = 255; grid->fontColor.b = 255;
+grid->timer = TTF_RenderText_Blended(grid->fontTimer,"90",grid->fontColor);
+ grid->timerPosition.x = 10;
+ grid->timerPosition.y = 15;*/
     return  grid;
 }
 
@@ -219,8 +242,10 @@ void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen){
 void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
 {
 
+//SDL_BlitSurface(grid->timer,NULL,screen,&(grid->timerPosition));
+
     SDL_BlitSurface(grid->background,NULL,screen,&(grid->backgroundPosition));
-    SDL_BlitSurface(grid->title,NULL,screen,&(grid->logoRuzzlePosition));
+ //  SDL_BlitSurface(grid->title,NULL,screen,&(grid->logoRuzzlePosition));
     SDL_BlitSurface(grid->trophy,NULL,screen,&(grid->trophyPosition));
     int i,s,l,c;
     l=40; //l comme ligne
@@ -252,27 +277,31 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
     int b;
     int *pointeurSurA = &a;
     int *pointeurSurB = &b;
-    int continu = 1;
+   int go = 1;
 
-   // while(continu){
-        SDL_WaitEvent(&event);//permet que quand on reste sur la case, ne pas faie l'evenement du clic 30 000 fois
+    while(go == 1){
+
+        SDL_PollEvent(&event);//permet que quand on reste sur la case, ne pas faie l'evenement du clic 30 000 fois
         switch(event.type){
             case SDL_MOUSEBUTTONUP:{
                     if( event.button.button == SDL_BUTTON_LEFT ){
                         onClic(grid,event.button.x,event.button.y,pointeurSurA,pointeurSurB);
                         apply_surface( *pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[ 0 ]),grid );
-
+                        go = 0;
 
                     }
                     else if(event.button.button == SDL_BUTTON_RIGHT) {
 
                         printf("\nclic droit\n");
 
+
                     }
             }
-       }
 
-  //  }
+        }go = 0;
+
+    }
+
 }
 
 void onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB){
@@ -309,7 +338,13 @@ l=40; //l comme ligne
     }
 }
 
-
+int grind_window_update(GridWindow *grid){
+    if(grid->secondsLeft <= 0){
+            SDL_RemoveTimer(grid->timerID);
+            return 1;
+    }
+    return 0;
+}
 
 //destroy elements -> free memory
 void grid_window_destroy(GridWindow* grid)
@@ -334,7 +369,7 @@ void close()
 //to init SDL
 int init()
 {
-    if ( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER ) == -1 )
+    if ( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) == -1 )
     {
         fprintf(stderr,"SDL init failed\n");
         return -1;
@@ -376,12 +411,10 @@ int mainDisplay()
     GridWindow *grid = NULL;
     SDL_Event event;
 
-
-
     // Boucle principale
     while ( continu )
     {
-        SDL_PollEvent(&event);
+        SDL_WaitEvent(&event);
         switch( state)
         {
         case 0:
@@ -397,23 +430,31 @@ int mainDisplay()
 
             grid_window_draw(grid,screen, event);
             letter_display(LOCATION_GRID, grid, screen);
+
+
+
             grid_window_draw_on_clic(grid, screen, event);
 
             letter_display(LOCATION_GRID, grid, screen);
+            if(grind_window_update(grid) != 0){
+                grid_window_destroy(grid);
+                principal = principal_window_create();
+                state = 0;
+            }
 
 
         }
-
-
-        SDL_Flip(screen);
-
-
-        //to close application on cross clic
+ //to close application on cross clic
         if( event.type == SDL_QUIT )
         {
             //leave the principal loop
             continu = 0;
         }
+
+        SDL_Flip(screen);
+
+
+
     }
     close();
     return 0;
