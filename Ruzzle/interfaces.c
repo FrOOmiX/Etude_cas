@@ -366,9 +366,11 @@ int mainDisplay()
 {
     const unsigned int SCREEN_WIDTH = 480;
     const unsigned int SCREEN_HEIGHT = 800;
-    
+
     int cpt=0;
     TTF_Init();
+    Trie *t = (Trie*)malloc(sizeof(Trie));
+    Cell gride[N][N];
 
     SDL_Surface* screen = NULL; // screen principal
     char continu = 1;
@@ -413,7 +415,7 @@ int mainDisplay()
         case 1:
             grid_window_draw(grid,screen, event);
             letter_display(LOCATION_GRID, grid, screen);
-            grid_window_draw_on_clic(grid, screen, event);
+            grid_window_draw_on_clic(grid, screen, event, t, gride, cpt);
             letter_display(LOCATION_GRID, grid, screen);
 
             if(grid_window_update(grid) != 0){
