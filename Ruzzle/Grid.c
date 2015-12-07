@@ -200,19 +200,44 @@ int bonusLength(int length) {
     return bonus;
 }
 
-int scoreWord(Trie *t, Cell grid[N][N], int coord[]) {
+char *getWordFromCoord(Cell grid[N][N], int coord[17][2]) {
 
-    int indexWord = 0;
-    int bCell = 0;
+    int i, j, x, y;
+    char *word = malloc(16 * sizeof(char));
+
+    for (i = 0; i < 17; i++) {
+
+        for (j = 0; j < 1; j++) {
+
+            if (x == -1) {
+
+                return word;
+            } else {
+
+                x = coord[i][j];
+                y = coord[i][j+1];
+                word[i] = grid[x][y].letter;
+            }
+        }
+    }
+
+    return word;
+}
+
+int scoreWord(Trie *t, Cell grid[N][N], int coord[17][2]) {
+
+    int indexWord = 0, i = 0, j = 0, bCell = 0, scoreWord = 0;
     int bWord = 1;
-    int scoreWord = 0;
-    char word[256];
-    int i = 0;
-    int j = 0;
     int *pScoreWord = &scoreWord;
+    char *word = getWordFromCoord(grid, coord);
+    int lengthWord = strlen(word);
 
-        // TODO : Read coord and find the correct word
-        searchWordGrid(grid, word, i, j, indexWord, bCell, bWord, pScoreWord);
+    if (searchWordTrie(t, word)) {
+
+        searchWordGridTEST(grid, coord, pScoreWord, lengthWord);
+    }
+
+    free(word);
 
     return *pScoreWord;
 }
@@ -255,4 +280,30 @@ int searchWordGrid(Cell grid[N][N], char word[], int i, int j, int indexWord, in
     }
 
     return res;
+}
+
+int searchWordGridTEST(Cell grid[N][N], int coord[17][2], int *pScoreWord, int lengthWord) {
+
+    int bCell = 0, bWord = 1, x = 0, y = 0, i, j;
+    int bLength = bonusLength(lengthWord);
+
+    for (i = 0; i < 17; i++) {
+
+        for (j = 0; j < 1; j++) {
+
+            if (x == -1) {
+
+                return *pScoreWord = bCell * bWord + bLength;
+
+            } else {
+
+                x = coord[i][j];
+                y = coord[i][j+1];
+                bCell += bonusCell(grid[x][y]);
+                bWord *= bonusWord(grid[x][y]);
+            }
+        }
+    }
+
+    return 0;
 }
