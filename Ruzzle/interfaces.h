@@ -1,11 +1,12 @@
 #ifndef _INTERFACES_H
 #define _INTERFACES_H
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_ttf.h>
-//#include "Grid.h"
-
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+#include "Grid.h"
+#include "Grid.h"
+#include "Trie.h"
 //Struct for principal screen
 typedef struct{
     SDL_Surface *title, *background, *gameStart;
@@ -18,6 +19,7 @@ typedef struct{
     SDL_Color fontColor;
     SDL_TimerID timerID;
     unsigned int secondsLeft;
+    int coord[17][2];
     SDL_Surface *title, *background, *faces, *trophy, *letter, *timer;
     SDL_Rect logoRuzzlePosition, backgroundPosition, trophyPosition, clip[5], clipClic[5], letterPosition, pos, timerPosition;
     TTF_Font *fontLetter, *fontTimer;
@@ -42,8 +44,8 @@ extern void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
 extern void grid_window_destroy(GridWindow* grid);
 extern void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SDL_Rect* clip, GridWindow* grid);
 extern void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen);
-extern void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event);
-extern void onClic(GridWindow* grid,int x,int y, int *pointeurSurA, int *pointeurSurB);
+extern void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event,Trie *t,Cell gride[N][N], int cpt);
+extern void onClic(GridWindow* grid,int x,int y, int *pointeurSurA, int *pointeurSurB,int *pointeurSurR,int *pointeurSurC, int tab[17][2]);
 extern Uint32 timer(Uint32 interval, void* grid);
 extern int grid_window_update(GridWindow *grid);
 
