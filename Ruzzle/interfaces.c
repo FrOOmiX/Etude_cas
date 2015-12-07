@@ -250,10 +250,12 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
                         l +=100;
         }
     //Applications des bonus
-    apply_surface( 40,  450, grid->faces, screen, &(grid->clip[ 4 ]),grid );
-    apply_surface( 140, 250, grid->faces, screen, &(grid->clip[ 2 ]),grid );
-    apply_surface( 240, 350, grid->faces, screen, &(grid->clip[ 3 ]),grid );
-    apply_surface( 340, 250, grid->faces, screen, &(grid->clip[ 1 ]),grid );
+    apply_surface( 240, 450, grid->faces, screen, &(grid->clip[ 4 ]),grid );
+    apply_surface( 140, 150, grid->faces, screen, &(grid->clip[ 2 ]),grid );
+    apply_surface( 340, 150, grid->faces, screen, &(grid->clip[ 2 ]),grid );
+    apply_surface( 140, 450, grid->faces, screen, &(grid->clip[ 3 ]),grid );
+    apply_surface( 240, 150, grid->faces, screen, &(grid->clip[ 1 ]),grid );
+    apply_surface( 240, 350, grid->faces, screen, &(grid->clip[ 1 ]),grid );
 }
 
 
