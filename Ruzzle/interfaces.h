@@ -17,7 +17,7 @@ typedef struct{
 typedef struct{
     SDL_Color fontColor;
     SDL_TimerID timerID;
-    int secondsLeft;
+    unsigned int secondsLeft;
     SDL_Surface *title, *background, *faces, *trophy, *letter, *timer;
     SDL_Rect logoRuzzlePosition, backgroundPosition, trophyPosition, clip[5], clipClic[5], letterPosition, pos, timerPosition;
     TTF_Font *fontLetter, *fontTimer;
@@ -37,7 +37,8 @@ extern void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SD
 extern void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen);
 extern void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event);
 extern void onClic(GridWindow* grid,int x,int y, int *pointeurSurA, int *pointeurSurB);
-extern void timerDisplay(GridWindow* grid, SDL_Surface* screen, SDL_Event event);
+extern Uint32 timer(Uint32 interval, void* grid);
+extern int grid_window_update(GridWindow *grid);
 //Function for init and close SDL
 extern void close();
 extern int init();
