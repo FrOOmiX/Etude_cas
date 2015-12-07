@@ -72,19 +72,15 @@ void principal_window_destroy(PrincipalWindow* menu)
 }
 
 /*For game screen with the grid */
-
-
-
-Uint32 _test(Uint32 interval, void* gv){
-    GridWindow* p = gv;
-
-    p->secondsLeft--;
-/*    char buf[];
-    p->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
-    sprintf(txt, "%d", p->secondsLeft);
-  p->timer = TTF_RenderText_Blended(p->fontTimer,txt,p->fontColor);
-   SDL_FreeSurface(p->timer);*/
-    printf("%d", p->secondsLeft);
+Uint32 timer(Uint32 interval, void* grid){
+    GridWindow* g = grid;
+    g->secondsLeft--;
+ /*  char* buf = malloc(sizeof(char*));
+   sprintf(buf, "%d", g->secondsLeft);
+    g->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
+    SDL_FreeSurface(g->timer);
+    g->timer = TTF_RenderText_Solid(g->fontTimer,buf,g->fontColor);*/
+    printf("%d", g->secondsLeft);
     return interval;
 }
 
@@ -99,15 +95,13 @@ GridWindow* grid_window_create()
     char const *backgroundIMG = "./res/gfx/background.png";
     char const *trophyIMG = "./res/gfx/trophy_decoration.png";
 
-
-
     //Background
     grid->background = IMG_Load(backgroundIMG);
 
     grid->backgroundPosition.x = 0;
     grid->backgroundPosition.y = 0;
 
- ///for title logo
+    //for title logo
     grid->title = IMG_Load(titleIMG);
 
     grid->logoRuzzlePosition.x = 150;
@@ -174,15 +168,15 @@ GridWindow* grid_window_create()
     grid->clipClic[ 4 ].w = SHEET_WIDTH;
     grid->clipClic[ 4 ].h = SHEET_HEIGHT/5;
 
-    grid->secondsLeft = 5;
+    //timer
+    grid->secondsLeft = 20;
+    grid->timerID = SDL_AddTimer(1000,timer,grid);
+    grid->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
+    grid->fontColor.r = 255; grid->fontColor.g = 255; grid->fontColor.b = 255;
+    grid->timer = TTF_RenderText_Blended(grid->fontTimer,"20",grid->fontColor);
+    grid->timerPosition.x = 10;
+    grid->timerPosition.y = 15;
 
-    grid->timerID = SDL_AddTimer(1000,_test,grid);
-   /* grid->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
-
-grid->fontColor.r = 255; grid->fontColor.g = 255; grid->fontColor.b = 255;
-grid->timer = TTF_RenderText_Blended(grid->fontTimer,"90",grid->fontColor);
- grid->timerPosition.x = 10;
- grid->timerPosition.y = 15;*/
     return  grid;
 }
 
@@ -241,11 +235,8 @@ void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen){
 //to draw all elements on the play scren (with grid)
 void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
 {
-
-//SDL_BlitSurface(grid->timer,NULL,screen,&(grid->timerPosition));
-
     SDL_BlitSurface(grid->background,NULL,screen,&(grid->backgroundPosition));
- //  SDL_BlitSurface(grid->title,NULL,screen,&(grid->logoRuzzlePosition));
+    SDL_BlitSurface(grid->timer,NULL,screen,&(grid->timerPosition));
     SDL_BlitSurface(grid->trophy,NULL,screen,&(grid->trophyPosition));
     int i,s,l,c;
     l=40; //l comme ligne
@@ -263,49 +254,31 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
     apply_surface( 140, 250, grid->faces, screen, &(grid->clip[ 2 ]),grid );
     apply_surface( 240, 350, grid->faces, screen, &(grid->clip[ 3 ]),grid );
     apply_surface( 340, 250, grid->faces, screen, &(grid->clip[ 1 ]),grid );
-
-
-
 }
 
 
-
-
-void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
-{
+void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event){
     int a;
     int b;
     int *pointeurSurA = &a;
     int *pointeurSurB = &b;
-   int go = 1;
 
-    while(go == 1){
-
-        SDL_PollEvent(&event);//permet que quand on reste sur la case, ne pas faie l'evenement du clic 30 000 fois
+        SDL_PollEvent(&event);
         switch(event.type){
             case SDL_MOUSEBUTTONUP:{
+
                     if( event.button.button == SDL_BUTTON_LEFT ){
                         onClic(grid,event.button.x,event.button.y,pointeurSurA,pointeurSurB);
                         apply_surface( *pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[ 0 ]),grid );
-                        go = 0;
-
                     }
                     else if(event.button.button == SDL_BUTTON_RIGHT) {
-
                         printf("\nclic droit\n");
-
-
                     }
             }
-
-        }go = 0;
-
-    }
-
+        }
 }
 
 void onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB){
-
 
 //TEST AVEC DOUBLE BOUCLE
 int coord[33];
@@ -334,11 +307,10 @@ l=40; //l comme ligne
                     }
 
                     l +=100;
-
     }
 }
 
-int grind_window_update(GridWindow *grid){
+int grid_window_update(GridWindow *grid){
     if(grid->secondsLeft <= 0){
             SDL_RemoveTimer(grid->timerID);
             return 1;
@@ -406,7 +378,6 @@ int mainDisplay()
         return -2;
     }
 
-
     PrincipalWindow* principal = principal_window_create();
     GridWindow *grid = NULL;
     SDL_Event event;
@@ -414,7 +385,7 @@ int mainDisplay()
     // Boucle principale
     while ( continu )
     {
-        SDL_WaitEvent(&event);
+
         switch( state)
         {
         case 0:
@@ -427,34 +398,25 @@ int mainDisplay()
             }
             break;
         case 1:
-
             grid_window_draw(grid,screen, event);
             letter_display(LOCATION_GRID, grid, screen);
-
-
-
             grid_window_draw_on_clic(grid, screen, event);
-
             letter_display(LOCATION_GRID, grid, screen);
-            if(grind_window_update(grid) != 0){
+
+            if(grid_window_update(grid) != 0){
                 grid_window_destroy(grid);
                 principal = principal_window_create();
                 state = 0;
             }
-
-
         }
- //to close application on cross clic
+        //to close application on cross clic
         if( event.type == SDL_QUIT )
         {
             //leave the principal loop
             continu = 0;
         }
-
+         SDL_PollEvent(&event);
         SDL_Flip(screen);
-
-
-
     }
     close();
     return 0;
