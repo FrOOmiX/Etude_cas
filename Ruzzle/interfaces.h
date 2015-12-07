@@ -36,7 +36,7 @@ extern void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
 extern void grid_window_destroy(GridWindow* grid);
 extern void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SDL_Rect* clip, GridWindow* grid);
 extern void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen);
-extern void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event);
+extern void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event,int cpt);
 extern void onClic(GridWindow* grid,int x,int y, int *pointeurSurA, int *pointeurSurB);
 extern Uint32 timer(Uint32 interval, void* grid);
 extern int grid_window_update(GridWindow *grid);
