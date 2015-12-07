@@ -70,7 +70,10 @@ void principal_window_destroy(PrincipalWindow* menu)
     SDL_FreeSurface(menu->gameStart);
     free(menu);
 }
-
+Uint32 _test(Uint32 interval, void* arg){
+    printf("test");
+    return interval;
+}
 /*For game screen with the grid */
 
 GridWindow* grid_window_create()
@@ -156,7 +159,7 @@ GridWindow* grid_window_create()
     grid->clipClic[ 4 ].y = (SHEET_HEIGHT/5)*4;
     grid->clipClic[ 4 ].w = SHEET_WIDTH;
     grid->clipClic[ 4 ].h = SHEET_HEIGHT/5;
-
+    SDL_AddTimer(1000,_test,NULL);
     return  grid;
 }
 
@@ -251,14 +254,14 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
     int *pointeurSurB = &b;
     int continu = 1;
 
-    while(continu){
+   // while(continu){
         SDL_WaitEvent(&event);//permet que quand on reste sur la case, ne pas faie l'evenement du clic 30 000 fois
         switch(event.type){
             case SDL_MOUSEBUTTONUP:{
                     if( event.button.button == SDL_BUTTON_LEFT ){
                         onClic(grid,event.button.x,event.button.y,pointeurSurA,pointeurSurB);
                         apply_surface( *pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[ 0 ]),grid );
-                        continu =  0;
+
 
                     }
                     else if(event.button.button == SDL_BUTTON_RIGHT) {
@@ -267,8 +270,9 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
 
                     }
             }
-        }
-    }
+       }
+
+  //  }
 }
 
 void onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB){
@@ -377,6 +381,7 @@ int mainDisplay()
     // Boucle principale
     while ( continu )
     {
+        SDL_PollEvent(&event);
         switch( state)
         {
         case 0:
@@ -395,13 +400,13 @@ int mainDisplay()
             grid_window_draw_on_clic(grid, screen, event);
 
             letter_display(LOCATION_GRID, grid, screen);
-            break;
+
 
         }
 
 
         SDL_Flip(screen);
-        SDL_PollEvent(&event);
+
 
         //to close application on cross clic
         if( event.type == SDL_QUIT )
