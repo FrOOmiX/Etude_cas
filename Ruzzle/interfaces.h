@@ -18,6 +18,7 @@ typedef struct{
     SDL_Color fontColor;
     SDL_TimerID timerID;
     unsigned int secondsLeft;
+    int coord[17][2];
     SDL_Surface *title, *background, *faces, *trophy, *letter, *timer;
     SDL_Rect logoRuzzlePosition, backgroundPosition, trophyPosition, clip[5], clipClic[5], letterPosition, pos, timerPosition;
     TTF_Font *fontLetter, *fontTimer;
