@@ -257,33 +257,48 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
 }
 
 
-void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event){
+void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event,Trie *t,Cell gride[N][N], int cpt)
+{
+    int j=0;
     int a;
     int b;
     int *pointeurSurA = &a;
     int *pointeurSurB = &b;
+    int r;
+    int c;
+    int *pointeurSurR = &r;
+    int *pointeurSurC = &c;
 
-        SDL_PollEvent(&event);
+        SDL_PollEvent(&event);//permet que quand on reste sur la case, ne pas faie l'evenement du clic 30 000 fois
         switch(event.type){
             case SDL_MOUSEBUTTONUP:{
-
                     if( event.button.button == SDL_BUTTON_LEFT ){
-                        onClic(grid,event.button.x,event.button.y,pointeurSurA,pointeurSurB);
+                        j=0;
+                        onClic(grid,event.button.x,event.button.y,pointeurSurA,pointeurSurB,pointeurSurR,pointeurSurC, grid->coord);
                         apply_surface( *pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[ 0 ]),grid );
+                        grid->coord[cpt][j] = r;
+                        printf("%d", grid->coord[cpt][j]); //affichage de X
+                        j++;
+                        grid->coord[cpt][j] = c;
+                        printf("%d\n", grid->coord[cpt][j]); // affichage de Y
                     }
                     else if(event.button.button == SDL_BUTTON_RIGHT) {
-                        printf("\nclic droit\n");
+                                grid->coord[cpt+1][j] = -1;
+                                //scoreWord(t,gride[&a][&b],tab);
+                                cpt=0;
+
                     }
+            break;
             }
-        }
+       }
 }
 
-void onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB){
+void onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB,int *pointeurSurR,int *pointeurSurC,int coord[17][2]){
+
 
 //TEST AVEC DOUBLE BOUCLE
-int coord[33];
-int i,s,l,c,index;
-index =0;
+
+int i,s,l,c;
 l=40; //l comme ligne
 
     for (i = 0; i < 4; i++){
@@ -292,14 +307,9 @@ l=40; //l comme ligne
                         if( (x > l) && (x < l+ grid->pos.w) && (y > c) && (y < c+ grid->pos.h)){
                             *pointeurSurA=l;
                             *pointeurSurB=c;
-                            // Cell grid[i][s]
-                            //printf("%d\n", i);
-                            //printf("%d\n", s);
-                            coord[index]=i;
-                            printf("x=%d", coord[index]);
-                            index++;
-                            coord[index]=s;
-                            printf("y=%d", coord[index]);
+                            *pointeurSurR=i;
+                            *pointeurSurC=s;
+                             //affichage de Y
 
                             break;
                         }
@@ -307,8 +317,10 @@ l=40; //l comme ligne
                     }
 
                     l +=100;
+
     }
 }
+
 
 int grid_window_update(GridWindow *grid){
     if(grid->secondsLeft <= 0){
@@ -354,7 +366,8 @@ int mainDisplay()
 {
     const unsigned int SCREEN_WIDTH = 480;
     const unsigned int SCREEN_HEIGHT = 800;
-
+    
+    int cpt=0;
     TTF_Init();
 
     SDL_Surface* screen = NULL; // screen principal
