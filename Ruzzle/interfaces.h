@@ -1,10 +1,10 @@
 #ifndef _INTERFACES_H
 #define _INTERFACES_H
 
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
-#include "Grid.h"
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
+//#include "Grid.h"
 
 //Struct for principal screen
 typedef struct{
@@ -15,9 +15,12 @@ typedef struct{
 
 //Struct for screen with the play grid
 typedef struct{
-    SDL_Surface *title, *background, *faces, *trophy, *letter;
-    SDL_Rect logoRuzzlePosition, backgroundPosition, trophyPosition, clip[5], clipClic[5], letterPosition, pos;
-    TTF_Font *fontLetter;
+    SDL_Color fontColor;
+    SDL_TimerID timerID;
+    int secondsLeft;
+    SDL_Surface *title, *background, *faces, *trophy, *letter, *timer;
+    SDL_Rect logoRuzzlePosition, backgroundPosition, trophyPosition, clip[5], clipClic[5], letterPosition, pos, timerPosition;
+    TTF_Font *fontLetter, *fontTimer;
 }GridWindow;
 
 //functions usefull for PrincipalWindow
@@ -34,7 +37,7 @@ extern void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SD
 extern void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen);
 extern void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event);
 extern void onClic(GridWindow* grid,int x,int y, int *pointeurSurA, int *pointeurSurB);
-
+extern void timerDisplay(GridWindow* grid, SDL_Surface* screen, SDL_Event event);
 //Function for init and close SDL
 extern void close();
 extern int init();
