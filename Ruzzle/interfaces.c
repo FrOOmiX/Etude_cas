@@ -341,6 +341,76 @@ void grid_window_destroy(GridWindow* grid)
     free(grid);
 }
 
+//functions for ScoreWindow
+ScoreWindow* score_window_create()
+{
+    ScoreWindow* score = (ScoreWindow*)malloc(sizeof(ScoreWindow*));
+
+    char const *logoRuzzle = "./res/gfx/game_over_logo.png";
+    char const *backgroundIMG = "./res/gfx/background.png";
+    char const *text = "./res/fonts/edgothic.ttf";
+
+    //Background
+    score->background = IMG_Load(backgroundIMG);
+
+    score->backgroundPosition.x = 0;
+    score->backgroundPosition.y = 0;
+
+    score->replayPosition.x = 185 ;
+    score->replayPosition.y = 400 ;
+
+    //for title logo
+    score->title = IMG_Load(logoRuzzle);
+
+    score->logoRuzzlePosition.x = 150;
+    score->logoRuzzlePosition.y = 50;
+
+    //To play new game
+    score->font = TTF_OpenFont(text, 40);
+    SDL_Color textColor = {255,255,255};
+    score->replay = TTF_RenderText_Solid(score->font,"REJOUER",textColor);
+    score->replayPosition.x = 185;
+    score->replayPosition.y = 500;
+
+    return  score;
+}
+
+//function to catch the clic event on the principal screen
+int score_window_load(ScoreWindow* score_menu, SDL_Event event)
+{
+    int x, y;
+    if( event.button.button == SDL_BUTTON_LEFT )
+    {
+        x = event.button.x;
+        y = event.button.y;
+
+        //Si la souris est dans le bouton
+        if( ( x > score_menu->replayPosition.x ) && ( x < score_menu->replayPosition.x + score_menu->replayPosition.w ) &&
+           ( y > score_menu->replayPosition.y ) &&( y < score_menu->replayPosition.y + score_menu->replayPosition.h ) )
+        {
+            //Mise à jour du sprite du bouton
+            return 1;
+        }
+    }
+    return 0;
+}
+
+//function to draw elements on the screen
+void score_window_draw(ScoreWindow* score,SDL_Surface* screen)
+{
+    SDL_BlitSurface(score->background,NULL,screen,&(score->backgroundPosition));
+    SDL_BlitSurface(score->title,NULL,screen,&(score->logoRuzzlePosition));
+    SDL_BlitSurface(score->replay,NULL,screen,&(score->replayPosition));
+}
+
+//destroy elements -> free memory
+void score_window_destroy(ScoreWindow* score)
+{
+    SDL_FreeSurface(score->title);
+    SDL_FreeSurface(score->background);
+    SDL_FreeSurface(score->replay);
+    free(score);
+}
 
 //to SDL
 void close()
@@ -395,6 +465,7 @@ int mainDisplay()
 
     PrincipalWindow* principal = principal_window_create();
     GridWindow *grid = NULL;
+    ScoreWindow *score = NULL;
     SDL_Event event;
 
     // Boucle principale
@@ -420,9 +491,18 @@ int mainDisplay()
 
             if(grid_window_update(grid) != 0){
                 grid_window_destroy(grid);
+                score = score_window_create();
+                state = 2;
+            }
+            break;
+        case 2:
+            score_window_draw(score, screen);
+            if(score_window_load(score, event) != 0){
+                score_window_destroy(score);
                 principal = principal_window_create();
                 state = 0;
             }
+            break;
         }
         //to close application on cross clic
         if( event.type == SDL_QUIT )
@@ -430,7 +510,7 @@ int mainDisplay()
             //leave the principal loop
             continu = 0;
         }
-         SDL_PollEvent(&event);
+        SDL_PollEvent(&event);
         SDL_Flip(screen);
     }
     close();
