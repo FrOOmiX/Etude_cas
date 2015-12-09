@@ -39,6 +39,7 @@ PrincipalWindow* principal_window_create()
 int principal_window_load_window_grid(PrincipalWindow* game_menu, SDL_Event event)
 {
     int x, y;
+    SDL_PollEvent(&event);
     if( event.button.button == SDL_BUTTON_LEFT )
     {
         x = event.button.x;
@@ -386,6 +387,7 @@ ScoreWindow* score_window_create()
 int score_window_load(ScoreWindow* score_menu, SDL_Event event)
 {
     int x, y;
+    SDL_PollEvent(&event);
     if( event.button.button == SDL_BUTTON_LEFT )
     {
         x = event.button.x;
