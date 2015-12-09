@@ -226,15 +226,14 @@ char *getWordFromCoord(Cell grid[N][N], int coord[17][2]) {
 
 int scoreWord(Trie *t, Cell grid[N][N], int coord[17][2]) {
 
-    int indexWord = 0, i = 0, j = 0, bCell = 0, scoreWord = 0;
-    int bWord = 1;
+    int scoreWord = 0;
     int *pScoreWord = &scoreWord;
     char *word = getWordFromCoord(grid, coord);
     int lengthWord = strlen(word);
 
     if (searchWordTrie(t, word)) {
 
-        searchWordGridTEST(grid, coord, pScoreWord, lengthWord);
+        searchWordGrid(grid, coord, pScoreWord, lengthWord);
     }
 
     free(word);
@@ -242,47 +241,7 @@ int scoreWord(Trie *t, Cell grid[N][N], int coord[17][2]) {
     return *pScoreWord;
 }
 
-int searchWordGrid(Cell grid[N][N], char word[], int i, int j, int indexWord, int bCell, int bWord, int *pScoreWord) {
-
-    int x, y;
-    int lengthWord = strlen(word);
-    int res = 0;
-
-    // Search the next index of the letter in the word
-    indexWord++;
-
-    // Get cell's score, bonus and length's bonus
-    bCell += bonusCell(grid[i][j]);
-    bWord *= bonusWord(grid[i][j]);
-    int bLength = bonusLength(lengthWord);
-
-    // Mark this cell so it can't be re-used
-    grid[i][j].isVisited = 1;
-
-    if (indexWord == lengthWord) {
-
-        // We reached the end of the word
-        *pScoreWord = bCell * bWord + bLength;
-        res = 1;
-    } else {
-
-        // Found the 8 neighbors
-        for (x = i - 1; x <= i + 1 && x < N; x++) {
-
-            for (y = j - 1; y <= j + 1 && y < N; y++) {
-
-                if ((x >= 0) && (y >= 0) && (!grid[x][y].isVisited) && (grid[x][y].letter == word[indexWord])) {
-
-                    return searchWordGrid(grid, word, x, y, indexWord, bCell, bWord, pScoreWord);
-                }
-            }
-        }
-    }
-
-    return res;
-}
-
-int searchWordGridTEST(Cell grid[N][N], int coord[17][2], int *pScoreWord, int lengthWord) {
+int searchWordGrid(Cell grid[N][N], int coord[17][2], int *pScoreWord, int lengthWord) {
 
     int bCell = 0, bWord = 1, x = 0, y = 0, i, j;
     int bLength = bonusLength(lengthWord);
