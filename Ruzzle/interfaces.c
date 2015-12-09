@@ -276,14 +276,15 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
             case SDL_MOUSEBUTTONUP:{
                     if( event.button.button == SDL_BUTTON_LEFT ){
                         j=0;
-                        onClic(grid,event.button.x,event.button.y,pointeurSurA,pointeurSurB,pointeurSurR,pointeurSurC, grid->coord);
-                        apply_surface( *pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[ 0 ]),grid );
-                        grid->coord[cpt][j] = r;
-                        printf("%d", grid->coord[cpt][j]); //affichage de X
-                        j++;
-                        grid->coord[cpt][j] = c;
-                        printf("%d\n", grid->coord[cpt][j]); // affichage de Y
-                        letter_display(LOCATION_GRID, grid, screen);
+                        if(onClic(grid,event.button.x,event.button.y,pointeurSurA,pointeurSurB,pointeurSurR,pointeurSurC, grid->coord) ==1){
+                            apply_surface( *pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[ 0 ]),grid );
+                            grid->coord[cpt][j] = r;
+                            printf("%d", grid->coord[cpt][j]); //affichage de X
+                            j++;
+                            grid->coord[cpt][j] = c;
+                            printf("%d\n", grid->coord[cpt][j]); // affichage de Y
+                            letter_display(LOCATION_GRID, grid, screen);
+                        }
                     }
                     else if(event.button.button == SDL_BUTTON_RIGHT) {
                                 grid->coord[cpt+1][j] = -1;
@@ -298,9 +299,9 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
        }
 }
 
-void onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB,int *pointeurSurR,int *pointeurSurC,int coord[17][2]){
+int onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB,int *pointeurSurR,int *pointeurSurC,int coord[17][2]){
 
-
+int retour = 0;
 //TEST AVEC DOUBLE BOUCLE
 
 int i,s,l,c;
@@ -316,7 +317,7 @@ l=40; //l comme ligne
                             *pointeurSurC=s;
                              //affichage de Y
 
-                            break;
+                            retour = 1;
                         }
                         c += 100;
                     }
@@ -324,6 +325,7 @@ l=40; //l comme ligne
                     l +=100;
 
     }
+    return retour;
 }
 
 
