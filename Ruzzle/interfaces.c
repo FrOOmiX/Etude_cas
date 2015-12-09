@@ -279,10 +279,10 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
                         j=0;
                         if(onClic(grid,event.button.x,event.button.y,pointeurSurA,pointeurSurB,pointeurSurR,pointeurSurC, grid->coord) ==1){
                             apply_surface( *pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[ 0 ]),grid );
-                            grid->coord[cpt][j] = r;
+                            grid->coord[cpt][j] = c;
                             printf("%d", grid->coord[cpt][j]); //affichage de X
                             j++;
-                            grid->coord[cpt][j] = c;
+                            grid->coord[cpt][j] = r;
                             printf("%d\n", grid->coord[cpt][j]); // affichage de Y
                             letter_display(LOCATION_GRID, grid, screen);
                         }
