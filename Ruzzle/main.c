@@ -15,24 +15,24 @@ int main(int argc, char* argv[]) {
     freopen("CON", "r", stdin);
     freopen("CON", "w", stderr);
 
-    Trie *t = (Trie*)malloc(sizeof(Trie));
-    Cell grid[N][N];
+    //Trie *t = (Trie*)malloc(sizeof(Trie));
+   // Cell grid[N][N];
 
     // Create Trie with words from file
-    createFullTrie(LOCATION_DICO, t);
+   // createFullTrie(LOCATION_DICO, t);
 
     // Create grid
-    createFullGrid(LOCATION_GRID, grid);
+   // createFullGrid(LOCATION_GRID, grid);
 
     // Validate or not the word in the grid
-    int coord[17][2] = {{2, 0}, {2, 1}, {2, 2}, {2, 3}, {1, 2}, {0, 1}, {1, 1}, {0, 2}, {-1, 0}};
-    int result = scoreWord(t, grid, coord);
-    printf("\nScore : %d", result);
+   // int coord[17][2] = {{2, 0}, {2, 1}, {2, 2}, {2, 3}, {1, 2}, {0, 1}, {1, 1}, {0, 2}, {-1, 0}};
+   // int result = scoreWord(t, grid, coord);
+   // printf("\nScore : %d", result);
 
-    //mainDisplay();
+    mainDisplay();
 
-    free(t->root);
-    free(t);
+    //free(t->root);
+    //free(t);
 
     return 0;
 }

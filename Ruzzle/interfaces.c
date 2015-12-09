@@ -80,7 +80,7 @@ Uint32 timer(Uint32 interval, void* grid){
     g->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
     SDL_FreeSurface(g->timer);
     g->timer = TTF_RenderText_Solid(g->fontTimer,buf,g->fontColor);*/
-    printf("%d", g->secondsLeft);
+   // printf("%d", g->secondsLeft);
     return interval;
 }
 
@@ -169,7 +169,7 @@ GridWindow* grid_window_create()
     grid->clipClic[ 4 ].h = SHEET_HEIGHT/5;
 
     //timer
-    grid->secondsLeft = 5;
+    grid->secondsLeft = 500;
     grid->timerID = SDL_AddTimer(1000,timer,grid);
     grid->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
     grid->fontColor.r = 255; grid->fontColor.g = 255; grid->fontColor.b = 255;
@@ -283,11 +283,14 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
                         j++;
                         grid->coord[cpt][j] = c;
                         printf("%d\n", grid->coord[cpt][j]); // affichage de Y
+                        letter_display(LOCATION_GRID, grid, screen);
                     }
                     else if(event.button.button == SDL_BUTTON_RIGHT) {
                                 grid->coord[cpt+1][j] = -1;
                                 //scoreWord(t,gride[&a][&b],tab);
                                 cpt=0;
+                                grid_window_draw(grid,screen, event);
+                                letter_display(LOCATION_GRID, grid, screen);
 
                     }
             break;
@@ -483,13 +486,14 @@ int mainDisplay()
                 principal_window_destroy(principal);
                 grid = grid_window_create();
                 state = 1;
+                grid_window_draw(grid,screen, event);
+                letter_display(LOCATION_GRID, grid, screen);
             }
             break;
         case 1:
-            grid_window_draw(grid,screen, event);
-            letter_display(LOCATION_GRID, grid, screen);
+
             grid_window_draw_on_clic(grid, screen, event, t, gride, cpt);
-            letter_display(LOCATION_GRID, grid, screen);
+            //letter_display(LOCATION_GRID, grid, screen);
 
             if(grid_window_update(grid) != 0){
                 grid_window_destroy(grid);
