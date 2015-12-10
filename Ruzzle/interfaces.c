@@ -326,7 +326,7 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
                                }
                             }
                             else{
-                                printf("Double clic");
+                                printf("Double clic\n");
                             }
                         }
 

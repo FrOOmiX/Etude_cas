@@ -15,6 +15,7 @@ int main(int argc, char* argv[]) {
     freopen("CON", "r", stdin);
     freopen("CON", "w", stderr);
 
+
     /***************************
     *** Dico & Grid creation ***
     ***************************/
@@ -28,9 +29,6 @@ int main(int argc, char* argv[]) {
     // Create grid
     createFullGrid(LOCATION_GRID, grid);
 
-    // word : vecurent
-    // int coord[17][2] = {{2, 0}, {2, 1}, {2, 2}, {2, 3}, {1, 2}, {0, 1}, {1, 1}, {0, 2}, {-1, 0}};
-
 
     /****************************
     ********** Display **********
@@ -43,7 +41,7 @@ int main(int argc, char* argv[]) {
     SDL_Surface* screen = NULL; // screen principal
     char continu = 1;
     int state = 0;
-    
+
     // array for coord
     int coord[17][2] = {{0,0}};
     int c = 0;
