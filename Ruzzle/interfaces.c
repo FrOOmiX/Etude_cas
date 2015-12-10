@@ -259,7 +259,7 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
     apply_surface( 240, 350, grid->faces, screen, &(grid->clip[ 1 ]),grid );
 }
 
-void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event, Trie *t, Cell gride[N][N], int coord[17][2], int *cpt) {
+int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event, Trie *t, Cell gride[N][N], int coord[17][2], int *cpt) {
 
     int a;
     int b;
@@ -272,6 +272,7 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
 
     int ii;
 
+    int quit = 0;
 
     SDL_PollEvent(&event);//permet que quand on reste sur la case, ne pas faie l'evenement du clic 30 000 fois
 
@@ -341,7 +342,10 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
 
             }
         break;
+        case SDL_QUIT:
+            quit = 1;break;
     }
+    return quit;
 }
 
 int onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB,int *pointeurSurR,int *pointeurSurC){
