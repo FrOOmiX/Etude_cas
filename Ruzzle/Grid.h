@@ -41,7 +41,6 @@ Cell createCell(char c);
 void createFullGrid(char *nameFile, Cell grid[N][N]);
 int scoreCell(char c);
 void setBonus(Cell grid[N][N]);
-void toString(Cell grid[N][N]);
 int bonusCell(Cell cell);
 int bonusWord(Cell cell);
 int bonusLength(int length);

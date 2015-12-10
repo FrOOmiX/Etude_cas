@@ -270,8 +270,6 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
     int *pointeurSurR = &r;
     int *pointeurSurC = &c;
 
-    int ii;
-
     int quit = 0;
 
     SDL_PollEvent(&event);//permet que quand on reste sur la case, ne pas faie l'evenement du clic 30 000 fois
@@ -287,7 +285,7 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
                                         ((gride[r][c-1].isVisited==1) && (coord[(*cpt)-1][0] == c-1 && coord[(*cpt)-1][1] == r)) /*<==haut*/ || ((gride[r][c+1].isVisited==1) && (coord[(*cpt)-1][0] == c+1 && coord[(*cpt)-1][1] == r)) /*<==bas*/||
                                             ((gride[r-1][c-1].isVisited==1) && (coord[(*cpt)-1][0] == c-1 && coord[(*cpt)-1][1] == r-1))/*diag bas droite*/ || ((gride[r-1][c+1].isVisited==1) && (coord[(*cpt)-1][0] == c+1 && coord[(*cpt)-1][1] == r-1))/*diag haut droite*/||
                                                 ((gride[r+1][c-1].isVisited==1) && (coord[(*cpt)-1][0] == c-1 && coord[(*cpt)-1][1] == r+1))/*diag bas gauche*/ || ((gride[r+1][c+1].isVisited==1) && (coord[(*cpt)-1][0] == c+1 && coord[(*cpt)-1][1] == r+1))/*diag haut gauche*/)  && *cpt>0){
-                                    
+
                                     if((*pointeurSurA == 240 && *pointeurSurB == 350) || (*pointeurSurA == 240 && *pointeurSurB == 150)){
                                         apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[1]), grid);
                                     }
@@ -303,11 +301,11 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
                                     else{
                                         apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[0]), grid);
                                     }
-                                    
+
                                     coord[*cpt][0] = c;
-                                    printf(" c %d", coord[*cpt][0]); //affichage de X
+                                    printf("%d", coord[*cpt][0]); //affichage de X
                                     coord[*cpt][1] = r;
-                                    printf(" r %d\n", coord[*cpt][1]); // affichage de Y
+                                    printf("%d\n", coord[*cpt][1]); // affichage de Y
                                     letter_display(LOCATION_GRID, grid, screen);
                                     gride[r][c].isVisited=1;
                                     (*cpt)++;
@@ -315,9 +313,9 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
                                else if(*cpt==0) {
                                 apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[0]), grid);
                                 coord[*cpt][0] = c;
-                                printf(" c %d", coord[*cpt][0]); //affichage de X
+                                printf("%d", coord[*cpt][0]); //affichage de X
                                 coord[*cpt][1] = r;
-                                printf(" r %d\n", coord[*cpt][1]); // affichage de Y
+                                printf("%d\n", coord[*cpt][1]); // affichage de Y
                                 letter_display(LOCATION_GRID, grid, screen);
                                 gride[r][c].isVisited=1;
                                 (*cpt)++;
@@ -338,19 +336,9 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
                         }
                     }
 
-
                     coord[*cpt][0] = -1;
-                    printf("CPT : %d\n", *cpt);
-
-
-                    for (ii = 0; ii < 17; ii++) {
-
-                        printf("%d", coord[ii][0]);
-                        printf("%d\n", coord[ii][1]);
-                    }
-
                     int score = scoreWord(t, gride, coord);
-                    printf("Score : %d", score);
+                    printf("Score : %d\n", score);
                     *cpt = 0;
                     grid_window_draw(grid, screen, event);
                     letter_display(LOCATION_GRID, grid, screen);

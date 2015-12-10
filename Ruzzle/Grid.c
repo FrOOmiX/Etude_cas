@@ -83,7 +83,6 @@ void createFullGrid(char *nameFile, Cell grid[N][N]) {
         initGrid(grid);
         createGrid(grid, charFile);
         setBonus(grid);
-        toString(grid);
 
     } else {
 
@@ -117,19 +116,6 @@ int scoreCell(char c) {
     }
 
     return score;
-}
-
-void toString(Cell grid[N][N]) {
-
-    int i, j;
-
-    for (i = 0; i < N; i++) {
-
-        for (j = 0; j < N; j++) {
-
-            printf("%c - score : %d - bonus : %s - isVisited : %d\n", grid[i][j].letter, grid[i][j].score, grid[i][j].bonus, grid[i][j].isVisited);
-        }
-    }
 }
 
 int bonusCell(Cell cell) {

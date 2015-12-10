@@ -73,10 +73,10 @@ int searchWordTrie(Trie *t, char *string) {
     int res = 0;
 
     if (i == 1) {
-        printf("Word found");
+        printf("Word found\n");
         res = 1;
     } else
-        printf("Not found");
+        printf("Not found\n");
 
     return res;
 }
