@@ -259,6 +259,25 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
     apply_surface( 240, 350, grid->faces, screen, &(grid->clip[ 1 ]),grid );
 }
 
+void bonusOrange(GridWindow* grid, SDL_Surface* screen, int *pointeurSurA, int *pointeurSurB){
+
+    if((*pointeurSurA == 240 && *pointeurSurB == 350) || (*pointeurSurA == 240 && *pointeurSurB == 150)){
+        apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[1]), grid);
+    }
+    else if((*pointeurSurA == 140 && *pointeurSurB == 150) || (*pointeurSurA == 340 && *pointeurSurB == 150)){
+        apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[2]), grid);
+    }
+    else if((*pointeurSurA == 140 && *pointeurSurB == 450)){
+        apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[3]), grid);
+    }
+    else if((*pointeurSurA == 240 && *pointeurSurB == 450)){
+        apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[4]), grid);
+    }
+    else{
+        apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[0]), grid);
+    }
+}
+
 int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event, Trie *t, Cell gride[N][N], int coord[17][2], int *cpt) {
 
     int a;
@@ -286,22 +305,7 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
                                             ((gride[r-1][c-1].isVisited==1) && (coord[(*cpt)-1][0] == c-1 && coord[(*cpt)-1][1] == r-1))/*diag bas droite*/ || ((gride[r-1][c+1].isVisited==1) && (coord[(*cpt)-1][0] == c+1 && coord[(*cpt)-1][1] == r-1))/*diag haut droite*/||
                                                 ((gride[r+1][c-1].isVisited==1) && (coord[(*cpt)-1][0] == c-1 && coord[(*cpt)-1][1] == r+1))/*diag bas gauche*/ || ((gride[r+1][c+1].isVisited==1) && (coord[(*cpt)-1][0] == c+1 && coord[(*cpt)-1][1] == r+1))/*diag haut gauche*/)  && *cpt>0){
 
-                                    if((*pointeurSurA == 240 && *pointeurSurB == 350) || (*pointeurSurA == 240 && *pointeurSurB == 150)){
-                                        apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[1]), grid);
-                                    }
-                                    else if((*pointeurSurA == 140 && *pointeurSurB == 150) || (*pointeurSurA == 340 && *pointeurSurB == 150)){
-                                        apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[2]), grid);
-                                    }
-                                    else if((*pointeurSurA == 140 && *pointeurSurB == 450)){
-                                        apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[3]), grid);
-                                    }
-                                    else if((*pointeurSurA == 240 && *pointeurSurB == 450)){
-                                        apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[4]), grid);
-                                    }
-                                    else{
-                                        apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[0]), grid);
-                                    }
-
+                                    bonusOrange(grid, screen, pointeurSurA, pointeurSurB);
                                     coord[*cpt][0] = c;
                                     printf("%d", coord[*cpt][0]); //affichage de X
                                     coord[*cpt][1] = r;
@@ -311,7 +315,7 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
                                     (*cpt)++;
                                }
                                else if(*cpt==0) {
-                                apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[0]), grid);
+                                bonusOrange(grid, screen, pointeurSurA, pointeurSurB);
                                 coord[*cpt][0] = c;
                                 printf("%d", coord[*cpt][0]); //affichage de X
                                 coord[*cpt][1] = r;
