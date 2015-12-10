@@ -315,13 +315,13 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
     }
 }
 
-int onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB,int *pointeurSurR,int *pointeurSurC,int coord[17][2]){
+int onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB,int *pointeurSurR,int *pointeurSurC){
 
-int retour = 0;
-//TEST AVEC DOUBLE BOUCLE
-
-int i,s,l,c;
-l=40; //l comme ligne
+    int retour = 0;
+    //TEST AVEC DOUBLE BOUCLE
+    
+    int i,s,l,c;
+    l=40; //l comme ligne
 
     for (i = 0; i < 4; i++){
             c=150;//c comme colones
