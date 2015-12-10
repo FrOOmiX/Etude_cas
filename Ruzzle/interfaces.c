@@ -279,17 +279,32 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
         case SDL_MOUSEBUTTONUP:
 
             if (event.button.button == SDL_BUTTON_LEFT) {
-
+//|| gride[r+1][c].isVisited==1 || gride[r-1][c-1].isVisited==1 || gride[r+1][c-1].isVisited==1 || gride[r][c-1].isVisited==1 || gride[r-1][c+1].isVisited==1 || gride[r+1][c+1].isVisited==1 || gride[r][c+1].isVisited==1)
                         if(onClic(grid, event.button.x, event.button.y, pointeurSurA, pointeurSurB, pointeurSurR, pointeurSurC)) {
                             if(gride[r][c].isVisited!=1){
+                               if(  (((gride[r-1][c].isVisited==1) && (coord[(*cpt)-1][0] == c && coord[(*cpt)-1][1] == r-1))/*<==gauche*/ || ((gride[r+1][c].isVisited==1) && (coord[(*cpt)-1][0] == c && coord[(*cpt)-1][1] == r+1))/*<=== droite*/ ||
+                                        ((gride[r][c-1].isVisited==1) && (coord[(*cpt)-1][0] == c-1 && coord[(*cpt)-1][1] == r)) /*<==haut*/ || ((gride[r][c+1].isVisited==1) && (coord[(*cpt)-1][0] == c+1 && coord[(*cpt)-1][1] == r)) /*<==bas*/||
+                                            ((gride[r-1][c-1].isVisited==1) && (coord[(*cpt)-1][0] == c-1 && coord[(*cpt)-1][1] == r-1))/*diag bas droite*/ || ((gride[r-1][c+1].isVisited==1) && (coord[(*cpt)-1][0] == c+1 && coord[(*cpt)-1][1] == r-1))/*diag haut droite*/||
+                                                ((gride[r+1][c-1].isVisited==1) && (coord[(*cpt)-1][0] == c-1 && coord[(*cpt)-1][1] == r+1))/*diag bas gauche*/ || ((gride[r+1][c+1].isVisited==1) && (coord[(*cpt)-1][0] == c+1 && coord[(*cpt)-1][1] == r+1))/*diag haut gauche*/)  && *cpt>0){
+                                    apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[0]), grid);
+                                    coord[*cpt][0] = c;
+                                    printf(" c %d", coord[*cpt][0]); //affichage de X
+                                    coord[*cpt][1] = r;
+                                    printf(" r %d\n", coord[*cpt][1]); // affichage de Y
+                                    letter_display(LOCATION_GRID, grid, screen);
+                                    gride[r][c].isVisited=1;
+                                    (*cpt)++;
+                               }
+                               else if(*cpt==0) {
                                 apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[0]), grid);
                                 coord[*cpt][0] = c;
-                                printf("%d", coord[*cpt][0]); //affichage de X
+                                printf(" c %d", coord[*cpt][0]); //affichage de X
                                 coord[*cpt][1] = r;
-                                printf("%d\n", coord[*cpt][1]); // affichage de Y
+                                printf(" r %d\n", coord[*cpt][1]); // affichage de Y
                                 letter_display(LOCATION_GRID, grid, screen);
                                 gride[r][c].isVisited=1;
                                 (*cpt)++;
+                               }
                             }
                             else{
                                 printf("Double clic");
