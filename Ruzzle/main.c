@@ -43,7 +43,11 @@ int main(int argc, char* argv[]) {
     SDL_Surface* screen = NULL; // screen principal
     char continu = 1;
     int state = 0;
-    int cpt=0;
+    
+    // array for coord
+    int coord[17][2] = {{0,0}};
+    int c = 0;
+    int *cpt = &c;
 
     if (init() != 0) {
 
@@ -88,7 +92,7 @@ int main(int argc, char* argv[]) {
             break;
         case 1:
 
-            grid_window_draw_on_clic(gride, screen, event, t, grid, cpt);
+            grid_window_draw_on_clic(gride, screen, event, t, grid, coord, cpt);
 
             if (grid_window_update(gride) != 0) {
 
