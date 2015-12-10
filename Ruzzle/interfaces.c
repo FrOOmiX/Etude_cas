@@ -30,7 +30,7 @@ PrincipalWindow* principal_window_create()
     SDL_Color textColor = {255,255,255};
     principal->gameStart = TTF_RenderText_Solid(principal->font,"COMMENCER",textColor);
     principal->gameStartPosition.x = 150;
-    principal->gameStartPosition.y = 400;
+    principal->gameStartPosition.y = 600;
 
     return  principal;
 }
@@ -272,27 +272,40 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
 
     int ii;
 
+
     SDL_PollEvent(&event);//permet que quand on reste sur la case, ne pas faie l'evenement du clic 30 000 fois
 
     switch (event.type) {
-
         case SDL_MOUSEBUTTONUP:
 
             if (event.button.button == SDL_BUTTON_LEFT) {
 
-                if(onClic(grid, event.button.x, event.button.y, pointeurSurA, pointeurSurB, pointeurSurR, pointeurSurC)) {
+                        if(onClic(grid, event.button.x, event.button.y, pointeurSurA, pointeurSurB, pointeurSurR, pointeurSurC)) {
+                            if(gride[r][c].isVisited!=1){
+                                apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[0]), grid);
+                                coord[*cpt][0] = c;
+                                printf("%d", coord[*cpt][0]); //affichage de X
+                                coord[*cpt][1] = r;
+                                printf("%d\n", coord[*cpt][1]); // affichage de Y
+                                letter_display(LOCATION_GRID, grid, screen);
+                                gride[r][c].isVisited=1;
+                                (*cpt)++;
+                            }
+                            else{
+                                printf("Double clic");
+                            }
+                        }
 
-                    apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[0]), grid);
+            }
+            else if (event.button.button == SDL_BUTTON_RIGHT) {
 
-                    coord[*cpt][0] = c;
-                    printf("%d", coord[*cpt][0]); //affichage de X
+                    int j,k;
+                    for(j=0;j<N;j++){
+                        for(k=0;k<N;k++){
+                            gride[j][k].isVisited=0;
+                        }
+                    }
 
-                    coord[*cpt][1] = r;
-                    printf("%d\n", coord[*cpt][1]); // affichage de Y
-                    (*cpt)++;
-                    letter_display(LOCATION_GRID, grid, screen);
-                }
-            } else if (event.button.button == SDL_BUTTON_RIGHT) {
 
                     coord[*cpt][0] = -1;
                     printf("CPT : %d\n", *cpt);
@@ -310,6 +323,7 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
                     grid_window_draw(grid, screen, event);
                     letter_display(LOCATION_GRID, grid, screen);
 
+
             }
         break;
     }
@@ -319,7 +333,7 @@ int onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB,
 
     int retour = 0;
     //TEST AVEC DOUBLE BOUCLE
-    
+
     int i,s,l,c;
     l=40; //l comme ligne
 
@@ -327,13 +341,14 @@ int onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB,
             c=150;//c comme colones
                     for (s = 0; s < 4; s++){
                         if( (x > l) && (x < l+ grid->pos.w) && (y > c) && (y < c+ grid->pos.h)){
-                            *pointeurSurA=l;
-                            *pointeurSurB=c;
-                            *pointeurSurR=i;
-                            *pointeurSurC=s;
-                             //affichage de Y
 
-                            retour = 1;
+                                    *pointeurSurA=l;
+                                    *pointeurSurB=c;
+                                    *pointeurSurR=i;
+                                    *pointeurSurC=s;
+                                     retour = 1;
+
+
                         }
                         c += 100;
                     }
