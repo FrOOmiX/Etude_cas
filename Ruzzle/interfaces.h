@@ -46,6 +46,7 @@ extern void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SD
 extern void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen);
 extern int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event,Trie *t,Cell gride[N][N], int coord[17][2], int *cpt);
 extern int onClic(GridWindow* grid,int x,int y, int *pointeurSurA, int *pointeurSurB,int *pointeurSurR,int *pointeurSurC);
+extern void bonusOrange(GridWindow* grid, SDL_Surface* screen, int *pointeurSurA, int *pointeurSurB);
 extern Uint32 timer(Uint32 interval, void* grid);
 extern int grid_window_update(GridWindow *grid);
 
