@@ -92,7 +92,9 @@ int main(int argc, char* argv[]) {
             break;
         case 1:
 
-            grid_window_draw_on_clic(gride, screen, event, t, grid, coord, cpt);
+            if(grid_window_draw_on_clic(gride, screen, event, t, grid, coord, cpt) == 1){
+                continu = 0;
+            }
 
             if (grid_window_update(gride) != 0) {
 
