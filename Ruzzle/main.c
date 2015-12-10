@@ -125,6 +125,7 @@ int main(int argc, char* argv[]) {
         }
 
         SDL_PollEvent(&event);
+        SDL_Delay(10);
         SDL_Flip(screen);
     }
 
