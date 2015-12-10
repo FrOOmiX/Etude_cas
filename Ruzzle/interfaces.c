@@ -259,10 +259,8 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
     apply_surface( 240, 350, grid->faces, screen, &(grid->clip[ 1 ]),grid );
 }
 
+void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event, Trie *t, Cell gride[N][N], int coord[17][2], int *cpt) {
 
-void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event,Trie *t,Cell gride[N][N], int cpt)
-{
-    int j=0;
     int a;
     int b;
     int *pointeurSurA = &a;
@@ -272,32 +270,49 @@ void grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event e
     int *pointeurSurR = &r;
     int *pointeurSurC = &c;
 
-        SDL_PollEvent(&event);//permet que quand on reste sur la case, ne pas faie l'evenement du clic 30 000 fois
-        switch(event.type){
-            case SDL_MOUSEBUTTONUP:{
-                    if( event.button.button == SDL_BUTTON_LEFT ){
-                        j=0;
-                        if(onClic(grid,event.button.x,event.button.y,pointeurSurA,pointeurSurB,pointeurSurR,pointeurSurC, grid->coord) ==1){
-                            apply_surface( *pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[ 0 ]),grid );
-                            grid->coord[cpt][j] = c;
-                            printf("%d", grid->coord[cpt][j]); //affichage de X
-                            j++;
-                            grid->coord[cpt][j] = r;
-                            printf("%d\n", grid->coord[cpt][j]); // affichage de Y
-                            letter_display(LOCATION_GRID, grid, screen);
-                        }
-                    }
-                    else if(event.button.button == SDL_BUTTON_RIGHT) {
-                                grid->coord[cpt+1][j] = -1;
-                                //scoreWord(t,gride[&a][&b],tab);
-                                cpt=0;
-                                grid_window_draw(grid,screen, event);
-                                letter_display(LOCATION_GRID, grid, screen);
+    int ii;
 
+    SDL_PollEvent(&event);//permet que quand on reste sur la case, ne pas faie l'evenement du clic 30 000 fois
+
+    switch (event.type) {
+
+        case SDL_MOUSEBUTTONUP:
+
+            if (event.button.button == SDL_BUTTON_LEFT) {
+
+                if(onClic(grid, event.button.x, event.button.y, pointeurSurA, pointeurSurB, pointeurSurR, pointeurSurC)) {
+
+                    apply_surface(*pointeurSurA, *pointeurSurB, grid->faces, screen, &(grid->clipClic[0]), grid);
+
+                    coord[*cpt][0] = c;
+                    printf("%d", coord[*cpt][0]); //affichage de X
+
+                    coord[*cpt][1] = r;
+                    printf("%d\n", coord[*cpt][1]); // affichage de Y
+                    (*cpt)++;
+                    letter_display(LOCATION_GRID, grid, screen);
+                }
+            } else if (event.button.button == SDL_BUTTON_RIGHT) {
+
+                    coord[*cpt][0] = -1;
+                    printf("CPT : %d\n", *cpt);
+
+
+                    for (ii = 0; ii < 17; ii++) {
+
+                        printf("%d", coord[ii][0]);
+                        printf("%d\n", coord[ii][1]);
                     }
-            break;
+
+                    int score = scoreWord(t, gride, coord);
+                    printf("Score : %d", score);
+                    *cpt = 0;
+                    grid_window_draw(grid, screen, event);
+                    letter_display(LOCATION_GRID, grid, screen);
+
             }
-       }
+        break;
+    }
 }
 
 int onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB,int *pointeurSurR,int *pointeurSurC,int coord[17][2]){
