@@ -92,7 +92,7 @@ int main(int argc, char* argv[]) {
             if (principal_window_load_window_grid(principal,event) != 0) {
 
                 principal_window_destroy(principal);
-                gride = grid_window_create();
+                gride = grid_window_create(pScore, grid);
                 grid_window_draw(gride,screen, event);
                 letter_display(LOCATION_GRID, gride, screen);
                 state = 1;
@@ -108,7 +108,6 @@ int main(int argc, char* argv[]) {
             if (grid_window_update(gride) != 0) {
 
                 grid_window_destroy(gride);
-                *pScore = 0;
                 score = score_window_create();
                 state = 2;
             }
