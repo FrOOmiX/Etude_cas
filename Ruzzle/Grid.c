@@ -1,5 +1,11 @@
 #include "Grid.h"
 
+/** \brief Create the grid with char from a file
+ *
+ * \param Cell[][] : array of Cell
+ * \param char[][] : array of char
+ *
+ */
 void createGrid(Cell grid[N][N], char charFile[]) {
 
     int i, j;
@@ -15,6 +21,11 @@ void createGrid(Cell grid[N][N], char charFile[]) {
     }
 }
 
+/** \brief Initialized all the Cell
+ *
+ * \param Cel[][] : array of Cell
+ *
+ */
 void initGrid(Cell grid[N][N]) {
 
     int i, j;
@@ -30,6 +41,12 @@ void initGrid(Cell grid[N][N]) {
     }
 }
 
+/** \brief Create a single Cell by initializing his parameters
+ *
+ * \param char : a letter
+ * \return Cell
+ *
+ */
 Cell createCell(char c) {
 
     Cell cell;
@@ -41,6 +58,11 @@ Cell createCell(char c) {
     return cell;
 }
 
+/** \brief Set bonus on the grid
+ *
+ * \param Cell[][] : array of Cell
+ *
+ */
 void setBonus(Cell grid[N][N]) {
 
     strcpy(grid[0][1].bonus, "DW");
@@ -51,6 +73,12 @@ void setBonus(Cell grid[N][N]) {
     strcpy(grid[2][2].bonus, "TL");
 }
 
+/** \brief Create the Grid by reading a file
+ *
+ * \param char* : name of a file
+ * \param grid[][] : array of Cell
+ *
+ */
 void createFullGrid(char *nameFile, Cell grid[N][N]) {
 
     FILE* readFile = NULL;
@@ -58,8 +86,7 @@ void createFullGrid(char *nameFile, Cell grid[N][N]) {
     char charFile[16];
     char c;
 
-    // open the file (r)
-    // There must be a \n at the end of the file
+    // open the file in reading mode
     readFile = fopen(nameFile, "r");
 
     if (readFile != NULL) {
@@ -92,6 +119,12 @@ void createFullGrid(char *nameFile, Cell grid[N][N]) {
     }
 }
 
+/** \brief Get the score of a letter
+ *
+ * \param char : a letter in the grid
+ * \return int : score of a letter
+ *
+ */
 int scoreCell(char c) {
 
     int i, score;
@@ -118,6 +151,12 @@ int scoreCell(char c) {
     return score;
 }
 
+/** \brief Check if a Cell has a letter bonus or not
+ *
+ * \param Cell : a Cell in the grid
+ * \return int : score of a letter by his bonus
+ *
+ */
 int bonusCell(Cell cell) {
 
     if (strcmp(cell.bonus, "DL") == 0)
@@ -127,6 +166,12 @@ int bonusCell(Cell cell) {
     return cell.score;
 }
 
+/** \brief Check if a Cell has a word bonus or not
+ *
+ * \param Cell : a Cell in the grid
+ * \return int : bonus of the word
+ *
+ */
 int bonusWord(Cell cell) {
 
     if (strcmp(cell.bonus, "DW") == 0)
@@ -136,6 +181,12 @@ int bonusWord(Cell cell) {
     return 1;
 }
 
+/** \brief Get the bonus of the length's word
+ *
+ * \param Int : length of the word
+ * \return int : bonus of the length's word
+ *
+ */
 int bonusLength(int length) {
 
     int bonus = 0;
@@ -186,6 +237,13 @@ int bonusLength(int length) {
     return bonus;
 }
 
+/** \brief Form the word by his letter's position
+ *
+ * \param Cell[][] : array of Cell
+ * \param int[][] : position of each letter
+ * \return char* : the entire word
+ *
+ */
 char *getWordFromCoord(Cell grid[N][N], int coord[17][2]) {
 
     int i, j, x, y;
@@ -210,6 +268,15 @@ char *getWordFromCoord(Cell grid[N][N], int coord[17][2]) {
     return word;
 }
 
+/** \brief Check if the word has already be set
+ *
+ * \param Trie : the dictionnary
+ * \param Trie : words set in the grid
+ * \param Cell[][] : grid of cell
+ * \param int[][] : position of each letter
+ * \return int : score of the word
+ *
+ */
 int scoreWord(Trie *t, Trie *tGrid, Cell grid[N][N], int coord[17][2]) {
 
     int scoreWord = 0;
@@ -217,24 +284,36 @@ int scoreWord(Trie *t, Trie *tGrid, Cell grid[N][N], int coord[17][2]) {
     char *word = getWordFromCoord(grid, coord);
     int lengthWord = strlen(word);
 
+    // if the word has already been set
     if (searchNode(tGrid, word)) {
 
         printf("Word already found\n");
     } else {
 
+        // If the word exist in dictionnary
         if (searchWordTrie(t, word)) {
 
-            searchWordGrid(grid, coord, pScoreWord, lengthWord);
+            scoreTotal(grid, coord, pScoreWord, lengthWord);
         }
     }
 
+    // insert in the trie the word set
     insertNode(tGrid, word);
     free(word);
 
     return *pScoreWord;
 }
 
-int searchWordGrid(Cell grid[N][N], int coord[17][2], int *pScoreWord, int lengthWord) {
+/** \brief Get the total score of the word
+ *
+ * \param Cell[][] : grid of cell
+ * \param int[][] : position of each letter
+ * \param int* : score to be determined
+ * \param int : length of the word
+ * \return int : total score of the word
+ *
+ */
+int scoreTotal(Cell grid[N][N], int coord[17][2], int *pScoreWord, int lengthWord) {
 
     int bCell = 0, bWord = 1, x = 0, y = 0, i, j;
     int bLength = bonusLength(lengthWord);

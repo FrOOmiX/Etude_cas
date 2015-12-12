@@ -4,7 +4,7 @@
 
 /** \brief Create a Node and initialize his parameters
  *
- * \return Pointers on Node
+ * \return Node* : pointers on a Node
  *
  */
 Node *createNode() {
@@ -39,7 +39,7 @@ void createTrie(Trie *t) {
 /** \brief Insert a word in the Trie
  *
  * \param Trie
- * \param Char*
+ * \param char* : a word
  *
  */
 void insertNode(Trie *t, char *string) {
@@ -70,8 +70,8 @@ void insertNode(Trie *t, char *string) {
 /** \brief Search a word in the Trie
  *
  * \param Trie
- * \param Char *
- * \return 1 if the word is in the Trie, 0 instead
+ * \param char* : a word
+ * \return int : 1 if the word is in the Trie, 0 instead
  *
  */
 int searchNode(Trie *t, char *string) {
@@ -100,8 +100,8 @@ int searchNode(Trie *t, char *string) {
 /** \brief Display a message if the word is in the Trie or not
  *
  * \param Trie
- * \param Char*
- * \return 1 if it's in the trie, 0 instead
+ * \param char* : a word
+ * \return int : 1 if the word is in the Trie, 0 instead
  *
  */
 int searchWordTrie(Trie *t, char *string) {
@@ -120,7 +120,7 @@ int searchWordTrie(Trie *t, char *string) {
 
 /** \brief Create the Trie by adding words from a file
  *
- * \param Char*, name of the file
+ * \param char* : name of the file to be used
  * \param Trie
  *
  */
@@ -158,6 +158,11 @@ void createFullTrie(char *nameFile, Trie *t) {
     }
 }
 
+/** \brief Free the memory for the Trie
+ *
+ * \param Trie
+ *
+ */
 void destroyTrie(Trie *t) {
 
     free(t->root);
