@@ -88,7 +88,6 @@ int main(int argc, char* argv[]) {
 
         case 0:
             principal_window_draw(principal,screen);
-            *pScore = 0;
             if (principal_window_load_window_grid(principal,event) != 0) {
 
                 principal_window_destroy(principal);
