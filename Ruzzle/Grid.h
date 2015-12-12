@@ -27,6 +27,7 @@
  *
  */
 
+// Struct for a Cell
 typedef struct sCell {
 
     char letter;
