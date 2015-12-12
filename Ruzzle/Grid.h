@@ -45,7 +45,7 @@ int bonusCell(Cell cell);
 int bonusWord(Cell cell);
 int bonusLength(int length);
 char *getWordFromCoord(Cell grid[N][N], int coord[17][2]);
-int scoreWord(Trie *t, Cell grid[N][N], int coord[17][2]);
+int scoreWord(Trie *t, Trie *tGrid, Cell grid[N][N], int coord[17][2]);
 int searchWordGrid(Cell grid[N][N], int coord[17][2], int *pScoreWord, int lengthWord);
 
 #endif // _GRID_H

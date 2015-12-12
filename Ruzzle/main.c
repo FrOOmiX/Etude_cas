@@ -20,11 +20,20 @@ int main(int argc, char* argv[]) {
     *** Dico & Grid creation ***
     ***************************/
 
+    // Trie for dictionnary
     Trie *t = (Trie*)malloc(sizeof(Trie));
+
+    // Trie for grid
+    Trie *tGrid = (Trie*)malloc(sizeof(Trie));
+
+    // Grid
     Cell grid[N][N];
 
     // Create Trie with words from file
     createFullTrie(LOCATION_DICO, t);
+
+    // Create Trie for grid
+    createTrie(tGrid);
 
     // Create grid
     createFullGrid(LOCATION_GRID, grid);
@@ -46,6 +55,8 @@ int main(int argc, char* argv[]) {
     int coord[17][2] = {{0,0}};
     int c = 0;
     int *cpt = &c;
+    int scoreTotal = 0;
+    int *pScore = &scoreTotal;
 
     if (init() != 0) {
 
@@ -90,7 +101,7 @@ int main(int argc, char* argv[]) {
             break;
         case 1:
 
-            if(grid_window_draw_on_clic(gride, screen, event, t, grid, coord, cpt) == 1){
+            if(grid_window_draw_on_clic(gride, screen, event, t, tGrid, grid, coord, cpt, pScore) == 1){
                 continu = 0;
             }
 
@@ -128,6 +139,9 @@ int main(int argc, char* argv[]) {
     }
 
     close();
+
+    free(tGrid->root);
+    free(tGrid);
 
     free(t->root);
     free(t);

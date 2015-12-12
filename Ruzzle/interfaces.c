@@ -278,7 +278,7 @@ void bonusOrange(GridWindow* grid, SDL_Surface* screen, int *pointeurSurA, int *
     }
 }
 
-int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event, Trie *t, Cell gride[N][N], int coord[17][2], int *cpt) {
+int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event, Trie *t, Trie *tGrid, Cell gride[N][N], int coord[17][2], int *cpt, int *pScore) {
 
     int a;
     int b;
@@ -341,13 +341,13 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
                     }
 
                     coord[*cpt][0] = -1;
-                    int score = scoreWord(t, gride, coord);
-                    printf("Score : %d\n", score);
+                    int score = scoreWord(t, tGrid, gride, coord);
+                    *pScore += score;
+                    printf("Score Word : %d\n", score);
+                    printf("Score Total : %d\n", *pScore);
                     *cpt = 0;
                     grid_window_draw(grid, screen, event);
                     letter_display(LOCATION_GRID, grid, screen);
-
-
             }
         break;
         case SDL_QUIT:

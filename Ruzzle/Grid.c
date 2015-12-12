@@ -210,18 +210,25 @@ char *getWordFromCoord(Cell grid[N][N], int coord[17][2]) {
     return word;
 }
 
-int scoreWord(Trie *t, Cell grid[N][N], int coord[17][2]) {
+int scoreWord(Trie *t, Trie *tGrid, Cell grid[N][N], int coord[17][2]) {
 
     int scoreWord = 0;
     int *pScoreWord = &scoreWord;
     char *word = getWordFromCoord(grid, coord);
     int lengthWord = strlen(word);
 
-    if (searchWordTrie(t, word)) {
+    if (searchNode(tGrid, word)) {
 
-        searchWordGrid(grid, coord, pScoreWord, lengthWord);
+        printf("Word already found\n");
+    } else {
+
+        if (searchWordTrie(t, word)) {
+
+            searchWordGrid(grid, coord, pScoreWord, lengthWord);
+        }
     }
 
+    insertNode(tGrid, word);
     free(word);
 
     return *pScoreWord;
