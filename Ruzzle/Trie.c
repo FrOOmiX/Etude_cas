@@ -157,3 +157,9 @@ void createFullTrie(char *nameFile, Trie *t) {
         exit(1);
     }
 }
+
+void destroyTrie(Trie *t) {
+
+    free(t->root);
+    free(t);
+}

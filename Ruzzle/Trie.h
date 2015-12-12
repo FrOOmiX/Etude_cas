@@ -7,15 +7,15 @@
 
 #define ALPHABET 26
 
-// struct for a node in the trie
+// Struct for a node in the Trie
 typedef struct sNode {
 
-    int isEnd;                                  // if 1, node is a leaf
-    struct sNode *child[ALPHABET];              // pointer to every child
+    int isEnd;
+    struct sNode *child[ALPHABET];
 
 } Node;
 
-// struct of the trie
+// Struct of the Trie
 typedef struct sTrie {
 
     Node *root;
@@ -27,5 +27,6 @@ void insertNode(Trie *t, char *);
 int searchNode(Trie *t, char *);
 int searchWordTrie(Trie *t, char *);
 void createFullTrie(char *, Trie *t);
+void destroyTrie(Trie *t);
 
 #endif // _TRIE_H
