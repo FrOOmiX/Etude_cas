@@ -169,13 +169,10 @@ GridWindow* grid_window_create(int *pScore, Cell gride[N][N])
     grid->clipClic[ 4 ].w = SHEET_WIDTH;
     grid->clipClic[ 4 ].h = SHEET_HEIGHT/5;
 
-<<<<<<< HEAD
     //timer
     grid->secondsLeft = 90;
-=======
-   //timer
+    //timer
     grid->secondsLeft = 5;
->>>>>>> cb21efa4df6fef1cead8eff44d2ebd90b3dd38e1
     grid->timerID = SDL_AddTimer(1000,timer,grid);
     grid->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
     grid->fontColor.r = 255; grid->fontColor.g = 255; grid->fontColor.b = 255;

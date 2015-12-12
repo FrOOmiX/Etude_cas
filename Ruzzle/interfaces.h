@@ -1,12 +1,13 @@
 #ifndef _INTERFACES_H
 #define _INTERFACES_H
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_ttf.h>
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
 #include "Grid.h"
 #include "Grid.h"
 #include "Trie.h"
+
 //Struct for principal screen
 typedef struct{
     SDL_Surface *title, *background, *gameStart;
