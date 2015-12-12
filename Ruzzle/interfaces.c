@@ -179,6 +179,7 @@ GridWindow* grid_window_create(int *pScore, Cell gride[N][N])
     grid->timerPosition.y = 15;
 
     //init the full score
+    free(pScore);
     *pScore = 0;
 
     //say that boxes not even clic
@@ -200,6 +201,7 @@ void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SDL_Rect*
 
     //On blitte la surface
     SDL_BlitSurface( src, clip, dest, &(grid->pos) );
+    SDL_Flip(dest);
 }
 
 void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen){
@@ -230,6 +232,7 @@ void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen){
                             grid->letter = TTF_RenderText_Blended(grid->fontLetter,&buffer[0],textColor);
                             grid->letterPosition.x += 100;
                             SDL_BlitSurface(grid->letter,NULL,screen,&(grid->letterPosition));
+                            SDL_Flip(screen);
                         }
                     }
 
@@ -268,6 +271,8 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
     apply_surface( 140, 450, grid->faces, screen, &(grid->clip[ 3 ]),grid );
     apply_surface( 240, 150, grid->faces, screen, &(grid->clip[ 1 ]),grid );
     apply_surface( 240, 350, grid->faces, screen, &(grid->clip[ 1 ]),grid );
+
+
 }
 
 void bonusOrange(GridWindow* grid, SDL_Surface* screen, int *pointeurSurA, int *pointeurSurB){
