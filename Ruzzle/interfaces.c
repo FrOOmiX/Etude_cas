@@ -170,7 +170,7 @@ GridWindow* grid_window_create()
     grid->clipClic[ 4 ].h = SHEET_HEIGHT/5;
 
     //timer
-    grid->secondsLeft = 500;
+    grid->secondsLeft = 90;
     grid->timerID = SDL_AddTimer(1000,timer,grid);
     grid->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
     grid->fontColor.r = 255; grid->fontColor.g = 255; grid->fontColor.b = 255;

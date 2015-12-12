@@ -108,6 +108,7 @@ int main(int argc, char* argv[]) {
             if (grid_window_update(gride) != 0) {
 
                 grid_window_destroy(gride);
+                *pScore = 0;
                 score = score_window_create();
                 state = 2;
             }

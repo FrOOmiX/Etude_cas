@@ -2,7 +2,12 @@
 
 #define MAX_LENGTH 512
 
-Node *createNode() {                                    // create a Node and init his parameters
+/** \brief Create a Node and initialize his parameters
+ *
+ * \return Pointers on Node
+ *
+ */
+Node *createNode() {
 
     Node *n = (Node *)malloc(sizeof(Node));
 
@@ -11,6 +16,7 @@ Node *createNode() {                                    // create a Node and ini
         int i;
         n->isEnd = 0;
 
+        // Each child is initialized
         for (i = 0; i < 26; i++) {
 
             n->child[i] = NULL;
@@ -20,11 +26,22 @@ Node *createNode() {                                    // create a Node and ini
     return n;
 }
 
-void createTrie(Trie *t) {                              // Create a new trie and init the root
+/** \brief Create a new Trie and initialize the root
+ *
+ * \param Trie
+ *
+ */
+void createTrie(Trie *t) {
 
     t->root = createNode();
 }
 
+/** \brief Insert a word in the Trie
+ *
+ * \param Trie
+ * \param Char*
+ *
+ */
 void insertNode(Trie *t, char *string) {
 
     int i;
@@ -33,19 +50,30 @@ void insertNode(Trie *t, char *string) {
 
     for (i = 0; i < length; i++) {
 
-        int indexLetter = string[i] - 'a';              // For each letter, fetch his index
+        // For each letter, fetch his index
+        int indexLetter = string[i] - 'a';
 
-        if (temp->child[indexLetter] == NULL) {          // No child for this letter
+        // If there's no child for this letter
+        if (temp->child[indexLetter] == NULL) {
 
             temp->child[indexLetter] = createNode();
         }
 
-        temp = temp->child[indexLetter];                // New temp is the old temp
+        // New temp is the old temp
+        temp = temp->child[indexLetter];
     }
 
-    temp->isEnd = 1;                                    // Mark last node as leaf
+    // Mark last node as a leaf
+    temp->isEnd = 1;
 }
 
+/** \brief Search a word in the Trie
+ *
+ * \param Trie
+ * \param Char *
+ * \return 1 if the word is in the Trie, 0 instead
+ *
+ */
 int searchNode(Trie *t, char *string) {
 
     int i;
@@ -56,7 +84,8 @@ int searchNode(Trie *t, char *string) {
 
         int indexLetter = string[i] - 'a';
 
-        if (temp->child[indexLetter] == NULL) {          // No match
+        // If there's no child for this letter
+        if (temp->child[indexLetter] == NULL) {
 
             return 0;
         }
@@ -64,9 +93,17 @@ int searchNode(Trie *t, char *string) {
         temp = temp->child[indexLetter];
     }
 
-    return (temp != 0 && temp->isEnd);                  // Temp and isEnd shoud be != 0
+    // Temp and isEnd shoud be != 0
+    return (temp != 0 && temp->isEnd);
 }
 
+/** \brief Display a message if the word is in the Trie or not
+ *
+ * \param Trie
+ * \param Char*
+ * \return 1 if it's in the trie, 0 instead
+ *
+ */
 int searchWordTrie(Trie *t, char *string) {
 
     int i = searchNode(t, string);
@@ -81,19 +118,24 @@ int searchWordTrie(Trie *t, char *string) {
     return res;
 }
 
+/** \brief Create the Trie by adding words from a file
+ *
+ * \param Char*, name of the file
+ * \param Trie
+ *
+ */
 void createFullTrie(char *nameFile, Trie *t) {
 
     FILE* readFile = NULL;
     char myString[MAX_LENGTH];
     char *string;
 
-    // open the file (r)
-    // There must be a \n at the end of the file
+    // Open the file in read-mode
     readFile = fopen(nameFile, "r");
 
     if (readFile != NULL) {
 
-        // Create a new trie
+        // Initialize the root
         createTrie(t);
 
         // Populate the Trie
