@@ -56,7 +56,8 @@ int main(int argc, char* argv[]) {
     int c = 0;
     int *cpt = &c;
     int scoreTotal = 0;
-    int *pScore = &scoreTotal;
+    int *pScore = malloc(sizeof(int));
+    pScore = &scoreTotal;
 
     if (init() != 0) {
 
@@ -75,7 +76,7 @@ int main(int argc, char* argv[]) {
         return -2;
     }
 
-    PrincipalWindow* principal = principal_window_create();
+    PrincipalWindow *principal = principal_window_create();
     GridWindow *gride = NULL;
     ScoreWindow *score = NULL;
     SDL_Event event;
@@ -86,13 +87,13 @@ int main(int argc, char* argv[]) {
         switch (state) {
 
         case 0:
-
             principal_window_draw(principal,screen);
-
+            *pScore = 0;
             if (principal_window_load_window_grid(principal,event) != 0) {
 
                 principal_window_destroy(principal);
                 gride = grid_window_create(pScore, grid);
+
                 grid_window_draw(gride,screen, event);
                 letter_display(LOCATION_GRID, gride, screen);
                 state = 1;
@@ -108,7 +109,6 @@ int main(int argc, char* argv[]) {
             if (grid_window_update(gride) != 0) {
 
                 grid_window_destroy(gride);
-                destroyTrie(tGrid);
                 score = score_window_create();
                 state = 2;
             }
@@ -141,7 +141,11 @@ int main(int argc, char* argv[]) {
 
     close();
 
-    destroyTrie(t);
+    free(tGrid->root);
+    free(tGrid);
+
+    free(t->root);
+    free(t);
 
     return 0;
 }
