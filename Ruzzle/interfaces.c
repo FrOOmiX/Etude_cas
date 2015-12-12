@@ -85,7 +85,7 @@ Uint32 timer(Uint32 interval, void* grid){
     return interval;
 }
 
-GridWindow* grid_window_create()
+GridWindow* grid_window_create(int *pScore, Cell gride[N][N])
 {
     const int SHEET_WIDTH = 200;
     const int SHEET_HEIGHT = 512;
@@ -169,14 +169,25 @@ GridWindow* grid_window_create()
     grid->clipClic[ 4 ].w = SHEET_WIDTH;
     grid->clipClic[ 4 ].h = SHEET_HEIGHT/5;
 
-    //timer
-    grid->secondsLeft = 500;
+   //timer
+    grid->secondsLeft = 5;
     grid->timerID = SDL_AddTimer(1000,timer,grid);
     grid->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
     grid->fontColor.r = 255; grid->fontColor.g = 255; grid->fontColor.b = 255;
     grid->timer = TTF_RenderText_Blended(grid->fontTimer,"5 sec pour test (decompte console)",grid->fontColor);
     grid->timerPosition.x = 10;
     grid->timerPosition.y = 15;
+
+    //init the full score
+    *pScore = 0;
+
+    //say that boxes not even clic
+    int j,k;
+    for(j=0;j<N;j++){
+        for(k=0;k<N;k++){
+            gride[j][k].isVisited=0;
+        }
+    }
 
     return  grid;
 }
@@ -291,6 +302,10 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
 
     int quit = 0;
 
+
+                    grid->scorePos.x = 145;
+                    grid->scorePos.y = 100;
+
     SDL_PollEvent(&event);//permet que quand on reste sur la case, ne pas faie l'evenement du clic 30 000 fois
 
     switch (event.type) {
@@ -348,6 +363,15 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
                     *cpt = 0;
                     grid_window_draw(grid, screen, event);
                     letter_display(LOCATION_GRID, grid, screen);
+
+                    char *buf = (char*)malloc(10);
+                    sprintf(buf, "Score : %d", *pScore);
+                    SDL_FreeSurface(grid->scoreDisplay);
+                    grid->scoreDisplay = TTF_RenderText_Solid(grid->fontLetter,buf,grid->fontColor);
+                    SDL_BlitSurface(grid->scoreDisplay,NULL,screen,&(grid->scorePos));
+                    free(buf);
+
+
             }
         break;
         case SDL_QUIT:
@@ -403,6 +427,7 @@ void grid_window_destroy(GridWindow* grid)
     SDL_FreeSurface(grid->faces);
     SDL_FreeSurface(grid->title);
     SDL_FreeSurface(grid->letter);
+    SDL_FreeSurface(grid->scoreDisplay);
     free(grid);
 }
 
