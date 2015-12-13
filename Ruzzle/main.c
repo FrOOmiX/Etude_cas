@@ -119,6 +119,7 @@ int main(int argc, char* argv[]) {
 
             if (score_window_load(score, event) != 0) {
                 score_window_destroy(score);
+                destroyTrie(tGrid);
                 principal = principal_window_create();
                 state = 0;
             }
@@ -140,11 +141,9 @@ int main(int argc, char* argv[]) {
 
     close();
 
-    free(tGrid->root);
-    free(tGrid);
+    destroyTrie(tGrid);
 
-    free(t->root);
-    free(t);
+    destroyTrie(t);
 
     return 0;
 }
