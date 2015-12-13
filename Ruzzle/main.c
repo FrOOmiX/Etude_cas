@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
     ****************************/
 
     const unsigned int SCREEN_WIDTH = 480;
-    const unsigned int SCREEN_HEIGHT = 800;
+    const unsigned int SCREEN_HEIGHT = 650;
 
     TTF_Init();
     SDL_Surface* screen = NULL; // screen principal
