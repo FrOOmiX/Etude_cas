@@ -6,8 +6,7 @@
 #include "interfaces.h"
 
 #define LOCATION_DICO "./res/txt/dico.txt"
-#define LOCATION_GRID "./res/txt/grille.txt"
-#define LOCATION_GRIDVALIDATION "./res/txt/grille_validation.txt"
+#define LOCATION_GRID "./res/txt/grille_validation.txt"
 
 int main(int argc, char* argv[]) {
 
@@ -140,7 +139,7 @@ int main(int argc, char* argv[]) {
     }
 
     close();
-    
+
     grid_window_destroy(gride);
 
     destroyTrie(tGrid);

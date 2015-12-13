@@ -1,5 +1,5 @@
 #include "interfaces.h"
-#define LOCATION_GRID "./res/txt/grille.txt"
+#define LOCATION_GRID "./res/txt/grille_validation.txt"
 
 /** \brief Create the principal window(menu)
  *
