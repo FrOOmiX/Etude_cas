@@ -140,6 +140,8 @@ int main(int argc, char* argv[]) {
     }
 
     close();
+    
+    grid_window_destroy(gride);
 
     destroyTrie(tGrid);
 
