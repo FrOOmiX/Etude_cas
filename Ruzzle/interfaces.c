@@ -1,7 +1,12 @@
 #include "interfaces.h"
 #define LOCATION_GRID "./res/txt/grille.txt"
-/*For principal screen*/
 
+/** \brief Create the principal window(menu)
+ *
+ * \param void
+ * \return PrincipalWindow : all elements needed to initialize the principal window
+ *
+ */
 PrincipalWindow* principal_window_create()
 {
     PrincipalWindow* principal = (PrincipalWindow*)malloc(sizeof(PrincipalWindow));
@@ -35,7 +40,13 @@ PrincipalWindow* principal_window_create()
     return  principal;
 }
 
-//function to catch the clic event on the principal screen
+/** \brief Detect mouse event in an area
+ *
+ * \param PrincipalWindow : principal window structure
+ * \param SDL_Event : event of SDL library
+ * \return int : event in the area or not
+ *
+ */
 int principal_window_load_window_grid(PrincipalWindow* game_menu, SDL_Event event)
 {
     int x, y;
@@ -55,7 +66,12 @@ int principal_window_load_window_grid(PrincipalWindow* game_menu, SDL_Event even
     return 0;
 }
 
-//function to draw elements on the screen
+/** \brief Display elements of principal window on the screen
+ *
+ * \param PrincipalWindow : principal window structure
+ * \param SDL_Surface : game screen
+ *
+ */
 void principal_window_draw(PrincipalWindow* menu,SDL_Surface* screen)
 {
     SDL_BlitSurface(menu->background,NULL,screen,&(menu->backgroundPosition));
@@ -63,7 +79,11 @@ void principal_window_draw(PrincipalWindow* menu,SDL_Surface* screen)
     SDL_BlitSurface(menu->gameStart,NULL,screen,&(menu->gameStartPosition));
 }
 
-//destroy elements -> free memory
+/** \brief Release memory of principal window (erase them)
+ *
+ * \param PrincipalWindow : principal window structure
+ *
+ */
 void principal_window_destroy(PrincipalWindow* menu)
 {
     SDL_FreeSurface(menu->title);
@@ -76,20 +96,27 @@ void principal_window_destroy(PrincipalWindow* menu)
 Uint32 timer(Uint32 interval, void* grid){
     GridWindow* g = grid;
     g->secondsLeft--;
- /*  char* buf = malloc(sizeof(char*));
+    char* buf = malloc(sizeof(char*));
    sprintf(buf, "%d", g->secondsLeft);
-    g->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
+    /*g->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
     SDL_FreeSurface(g->timer);
     g->timer = TTF_RenderText_Solid(g->fontTimer,buf,g->fontColor);*/
-   // printf("%d", g->secondsLeft);
-    return interval;
+   printf("%d", g->secondsLeft);
+   return interval;
 }
 
+/** \brief Create the grid window(game)
+ *
+ * \param int : full score of a game
+ * \param Cell : a Cell in the grid
+ * \return GridWindow : all elements needed to initialize the game window
+ *
+ */
 GridWindow* grid_window_create(int *pScore, Cell gride[N][N])
 {
     const int SHEET_WIDTH = 200;
     const int SHEET_HEIGHT = 512;
-    /*fenetre sans grille*/
+
     GridWindow* grid = (GridWindow*)malloc(sizeof(GridWindow));
 
     char const *titleIMG = "./res/gfx/game_over_logo.png";
@@ -114,7 +141,7 @@ GridWindow* grid_window_create(int *pScore, Cell gride[N][N])
     grid->trophyPosition.x = 0;
     grid->trophyPosition.y = 600;
 
-    //for the grid (srpitesheet)
+    //for the grid (spritesheet)
     grid->faces = IMG_Load("./res/gfx/tile_spritesheet_lowres.png");
 
     grid->clip[ 0 ].x = 0;
@@ -170,17 +197,18 @@ GridWindow* grid_window_create(int *pScore, Cell gride[N][N])
     grid->clipClic[ 4 ].h = SHEET_HEIGHT/5;
 
     //timer
-    grid->secondsLeft = 10;
+    grid->secondsLeft = 90; //1:30sec for a play
     grid->timerID = SDL_AddTimer(1000,timer,grid);
     grid->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
     grid->fontColor.r = 255; grid->fontColor.g = 255; grid->fontColor.b = 255;
-    grid->timer = TTF_RenderText_Blended(grid->fontTimer,"5 sec pour test (decompte console)",grid->fontColor);
+    grid->timer = TTF_RenderText_Blended(grid->fontTimer,"1:30 sec -> temps de jeu",grid->fontColor);
     grid->timerPosition.x = 10;
     grid->timerPosition.y = 15;
 
     //init the full score
-    free(pScore);
     *pScore = 0;
+    free(pScore);
+
 
     //say that boxes not even clic
     int j,k;
@@ -193,7 +221,16 @@ GridWindow* grid_window_create(int *pScore, Cell gride[N][N])
     return  grid;
 }
 
-//to draw the boxes imgs
+/** \brief Display elements in the screen
+ *
+ * \param int : horizontal position
+ * \param int : vertical position
+ * \param SDL_Surface : source surface
+ * \param SDL_Surface : destination surface
+ * \param SDL_Rect : a cell with images
+ * \param GridWindow : grid window structure
+ *
+ */
 void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SDL_Rect* clip, GridWindow* grid )
 {
     grid->pos.x = x;
@@ -204,6 +241,13 @@ void apply_surface( int x, int y, SDL_Surface *src, SDL_Surface* dest, SDL_Rect*
     SDL_Flip(dest);
 }
 
+/** \brief Display grid file's characters on the game grid
+ *
+ * \param char : name of the file
+ * \param GridWindow : grid window structure
+ * \param SDL_Surface : game screen
+ *
+ */
 void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen){
 
     char const *text = "./res/fonts/helvetica.ttf";
@@ -247,7 +291,13 @@ void letter_display(char * nameFile, GridWindow* grid, SDL_Surface* screen){
 }
 
 
-//to draw all elements on the play scren (with grid)
+/** \brief Apply all graphics elements of the grid windows on the screen
+ *
+ * \param GridWindow : grid window structure
+ * \param SDL_Surface : game screen
+ * \param SDL_Event : event of SDL library
+ *
+ */
 void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
 {
     SDL_BlitSurface(grid->background,NULL,screen,&(grid->backgroundPosition));
@@ -264,7 +314,7 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
                         }
                         l +=100;
         }
-    //Applications des bonus
+    //Bonus display
     apply_surface( 240, 450, grid->faces, screen, &(grid->clip[ 4 ]),grid );
     apply_surface( 140, 150, grid->faces, screen, &(grid->clip[ 2 ]),grid );
     apply_surface( 340, 150, grid->faces, screen, &(grid->clip[ 2 ]),grid );
@@ -275,6 +325,14 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
 
 }
 
+/** \brief Display orange bonus images (on click)
+ *
+ * \param GridWindow : grid window structure
+ * \param SDL_Surface : game screen
+ * \param int : vertical position
+ * \param int : horizontal position
+ *
+ */
 void bonusOrange(GridWindow* grid, SDL_Surface* screen, int *pointeurSurA, int *pointeurSurB){
 
     if((*pointeurSurA == 240 && *pointeurSurB == 350) || (*pointeurSurA == 240 && *pointeurSurB == 150)){
@@ -294,6 +352,20 @@ void bonusOrange(GridWindow* grid, SDL_Surface* screen, int *pointeurSurA, int *
     }
 }
 
+/** \brief Update game window display on click events
+ *
+ * \param GridWindow : grid window structure
+ * \param SDL_Surface : game screen
+ * \param SDL_Event : event of SDL library
+ * \param Trie :
+ * \param Trie :
+ * \param Cell : a Cell in the grid
+ * \param int[][] : table with letter positions
+ * \param int : counter
+ * \param int : score of a game
+ * \return int : 1 if user click on the window close cross
+ *
+ */
 int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event event, Trie *t, Trie *tGrid, Cell gride[N][N], int coord[17][2], int *cpt, int *pScore) {
 
     int a;
@@ -369,6 +441,7 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
                     grid_window_draw(grid, screen, event);
                     letter_display(LOCATION_GRID, grid, screen);
 
+                    //Display on game screen
                     char *buf = (char*)malloc(10);
                     sprintf(buf, "Score : %d", *pScore);
                     SDL_FreeSurface(grid->scoreDisplay);
@@ -385,6 +458,18 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
     return quit;
 }
 
+/** \brief Define if a click event is in a game box
+ *
+ * \param GridWindow : grid window structure
+ * \param int : vertical position
+ * \param int : horizontal position
+ * \param int :
+ * \param int :
+ * \param int :
+ * \param int :
+ * \return int : 1 if the click is in an valid area
+ *
+ */
 int onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB,int *pointeurSurR,int *pointeurSurC){
 
     int retour = 0;
@@ -415,7 +500,12 @@ int onClic(GridWindow* grid, int x, int y, int *pointeurSurA, int *pointeurSurB,
     return retour;
 }
 
-
+/** \brief Use to know when the time is out to update the screen
+ *
+ * \param GridWindow : grid window structure
+ * \return int : 1 if time is out
+ *
+ */
 int grid_window_update(GridWindow *grid){
     if(grid->secondsLeft <= 0){
             SDL_RemoveTimer(grid->timerID);
@@ -424,7 +514,11 @@ int grid_window_update(GridWindow *grid){
     return 0;
 }
 
-//destroy elements -> free memory
+/** \brief Release memory of grid window (erase them)
+ *
+ * \param GridWindow : grid window structure
+ *
+ */
 void grid_window_destroy(GridWindow* grid)
 {
     SDL_FreeSurface(grid->background);
@@ -436,7 +530,12 @@ void grid_window_destroy(GridWindow* grid)
     free(grid);
 }
 
-//functions for ScoreWindow
+/** \brief Create the score window
+ *
+ * \param void
+ * \return SCoreWindow : all elements needed to initialize the score window
+ *
+ */
 ScoreWindow* score_window_create()
 {
     ScoreWindow* score = (ScoreWindow*)malloc(sizeof(ScoreWindow*));
@@ -470,7 +569,13 @@ ScoreWindow* score_window_create()
     return  score;
 }
 
-//function to catch the clic event on the principal screen
+/** \brief Detect mouse event in an area
+ *
+ * \param ScoreWindow : score window structure
+ * \param SDL_Event : event of SDL library
+ * \return int : event in the area or not
+ *
+ */
 int score_window_load(ScoreWindow* score_menu, SDL_Event event)
 {
     int x, y;
@@ -491,7 +596,12 @@ int score_window_load(ScoreWindow* score_menu, SDL_Event event)
     return 0;
 }
 
-//function to draw elements on the screen
+/** \brief Display elements of score window on the screen
+ *
+ * \param ScoreWindow : score window structure
+ * \param SDL_Surface : game screen
+ *
+ */
 void score_window_draw(ScoreWindow* score,SDL_Surface* screen)
 {
     SDL_BlitSurface(score->background,NULL,screen,&(score->backgroundPosition));
@@ -499,7 +609,11 @@ void score_window_draw(ScoreWindow* score,SDL_Surface* screen)
     SDL_BlitSurface(score->replay,NULL,screen,&(score->replayPosition));
 }
 
-//destroy elements -> free memory
+/** \brief Release memory of score window (erase them)
+ *
+ * \param GridWindow : score window structure
+ *
+ */
 void score_window_destroy(ScoreWindow* score)
 {
     SDL_FreeSurface(score->title);
@@ -508,7 +622,10 @@ void score_window_destroy(ScoreWindow* score)
     free(score);
 }
 
-//to SDL
+/** \brief Close elements of SDL library
+ *
+ *
+ */
 void close()
 {
     TTF_Quit();
@@ -516,7 +633,10 @@ void close()
     SDL_Quit();
 }
 
-//to init SDL
+/** \brief Initialize the SDL library
+ *
+ *
+ */
 int init()
 {
     if ( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) == -1 )
