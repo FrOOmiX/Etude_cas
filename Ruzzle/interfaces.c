@@ -357,8 +357,8 @@ void bonusOrange(GridWindow* grid, SDL_Surface* screen, int *pointeurSurA, int *
  * \param GridWindow : grid window structure
  * \param SDL_Surface : game screen
  * \param SDL_Event : event of SDL library
- * \param Trie :
- * \param Trie :
+ * \param Trie : dictionary trie structure
+ * \param Trie : dictionary trie structure
  * \param Cell : a Cell in the grid
  * \param int[][] : table with letter positions
  * \param int : counter
@@ -383,13 +383,11 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
                     grid->scorePos.x = 145;
                     grid->scorePos.y = 100;
 
-    SDL_PollEvent(&event);//permet que quand on reste sur la case, ne pas faie l'evenement du clic 30 000 fois
-
+    SDL_PollEvent(&event);
     switch (event.type) {
         case SDL_MOUSEBUTTONUP:
 
             if (event.button.button == SDL_BUTTON_LEFT) {
-//|| gride[r+1][c].isVisited==1 || gride[r-1][c-1].isVisited==1 || gride[r+1][c-1].isVisited==1 || gride[r][c-1].isVisited==1 || gride[r-1][c+1].isVisited==1 || gride[r+1][c+1].isVisited==1 || gride[r][c+1].isVisited==1)
                         if(onClic(grid, event.button.x, event.button.y, pointeurSurA, pointeurSurB, pointeurSurR, pointeurSurC)) {
                             if(gride[r][c].isVisited!=1){
                                if(  (((gride[r-1][c].isVisited==1) && (coord[(*cpt)-1][0] == c && coord[(*cpt)-1][1] == r-1))/*<==gauche*/ || ((gride[r+1][c].isVisited==1) && (coord[(*cpt)-1][0] == c && coord[(*cpt)-1][1] == r+1))/*<=== droite*/ ||
@@ -409,9 +407,9 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
                                else if(*cpt==0) {
                                 bonusOrange(grid, screen, pointeurSurA, pointeurSurB);
                                 coord[*cpt][0] = c;
-                                printf("%d", coord[*cpt][0]); //affichage de X
+                                printf("%d", coord[*cpt][0]);
                                 coord[*cpt][1] = r;
-                                printf("%d\n", coord[*cpt][1]); // affichage de Y
+                                printf("%d\n", coord[*cpt][1]);
                                 letter_display(LOCATION_GRID, grid, screen);
                                 gride[r][c].isVisited=1;
                                 (*cpt)++;
@@ -463,10 +461,10 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
  * \param GridWindow : grid window structure
  * \param int : vertical position
  * \param int : horizontal position
- * \param int :
- * \param int :
- * \param int :
- * \param int :
+ * \param int : position in grid file
+ * \param int : position in grid file
+ * \param int : coord in Cell used
+ * \param int : coord in Cell used
  * \return int : 1 if the click is in an valid area
  *
  */
