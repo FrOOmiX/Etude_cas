@@ -96,12 +96,12 @@ void principal_window_destroy(PrincipalWindow* menu)
 Uint32 timer(Uint32 interval, void* grid){
     GridWindow* g = grid;
     g->secondsLeft--;
-    char* buf = malloc(sizeof(char*));
-   sprintf(buf, "%d", g->secondsLeft);
-    /*g->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
+    /*char* buf = malloc(sizeof(char*));
+    sprintf(buf, "%d", g->secondsLeft);
+    g->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
     SDL_FreeSurface(g->timer);
     g->timer = TTF_RenderText_Solid(g->fontTimer,buf,g->fontColor);*/
-   printf("%d", g->secondsLeft);
+    printf("%d", g->secondsLeft);
    return interval;
 }
 
@@ -121,7 +121,6 @@ GridWindow* grid_window_create(int *pScore, Cell gride[N][N])
 
     char const *titleIMG = "./res/gfx/game_over_logo.png";
     char const *backgroundIMG = "./res/gfx/background.png";
-    char const *trophyIMG = "./res/gfx/trophy_decoration.png";
 
     //Background
     grid->background = IMG_Load(backgroundIMG);
@@ -134,12 +133,6 @@ GridWindow* grid_window_create(int *pScore, Cell gride[N][N])
 
     grid->logoRuzzlePosition.x = 150;
     grid->logoRuzzlePosition.y = 50;
-
-    //bottom img
-    grid->trophy = IMG_Load(trophyIMG);
-
-    grid->trophyPosition.x = 0;
-    grid->trophyPosition.y = 600;
 
     //for the grid (spritesheet)
     grid->faces = IMG_Load("./res/gfx/tile_spritesheet_lowres.png");
@@ -197,13 +190,13 @@ GridWindow* grid_window_create(int *pScore, Cell gride[N][N])
     grid->clipClic[ 4 ].h = SHEET_HEIGHT/5;
 
     //timer
-    grid->secondsLeft = 90; //1:30sec for a play
+    grid->secondsLeft = 10; //1:30sec for a play
     grid->timerID = SDL_AddTimer(1000,timer,grid);
     grid->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
     grid->fontColor.r = 255; grid->fontColor.g = 255; grid->fontColor.b = 255;
-    grid->timer = TTF_RenderText_Blended(grid->fontTimer,"1:30 sec -> temps de jeu",grid->fontColor);
+    /*grid->timer = TTF_RenderText_Blended(grid->fontTimer,"1:30 sec -> temps de jeu",grid->fontColor);
     grid->timerPosition.x = 10;
-    grid->timerPosition.y = 15;
+    grid->timerPosition.y = 15;*/
 
     //init the full score
     *pScore = 0;
@@ -302,7 +295,6 @@ void grid_window_draw(GridWindow* grid, SDL_Surface* screen, SDL_Event event)
 {
     SDL_BlitSurface(grid->background,NULL,screen,&(grid->backgroundPosition));
     SDL_BlitSurface(grid->timer,NULL,screen,&(grid->timerPosition));
-    SDL_BlitSurface(grid->trophy,NULL,screen,&(grid->trophyPosition));
     int i,s,l,c;
     l=40; //l comme ligne
 
@@ -520,7 +512,6 @@ int grid_window_update(GridWindow *grid){
 void grid_window_destroy(GridWindow* grid)
 {
     SDL_FreeSurface(grid->background);
-    SDL_FreeSurface(grid->trophy);
     SDL_FreeSurface(grid->faces);
     SDL_FreeSurface(grid->title);
     SDL_FreeSurface(grid->letter);
