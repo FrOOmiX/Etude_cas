@@ -190,7 +190,7 @@ GridWindow* grid_window_create(int *pScore, Cell gride[N][N])
     grid->clipClic[ 4 ].h = SHEET_HEIGHT/5;
 
     //timer
-    grid->secondsLeft = 10; //1:30sec for a play
+    grid->secondsLeft = 90; //1:30sec for a play
     grid->timerID = SDL_AddTimer(1000,timer,grid);
     grid->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
     grid->fontColor.r = 255; grid->fontColor.g = 255; grid->fontColor.b = 255;
@@ -371,9 +371,8 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
 
     int quit = 0;
 
-
-                    grid->scorePos.x = 145;
-                    grid->scorePos.y = 100;
+    grid->scorePos.x = 145;
+    grid->scorePos.y = 60;
 
     SDL_PollEvent(&event);
     switch (event.type) {
