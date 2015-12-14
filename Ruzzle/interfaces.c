@@ -7,7 +7,7 @@
  */
 
 #include "interfaces.h"
-#define LOCATION_GRID "./res/txt/grille_validation.txt"
+#define LOCATION_GRID "./res/txt/grille.txt"
 
 /** \brief Create the principal window(menu)
  *

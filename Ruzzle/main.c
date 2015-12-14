@@ -12,7 +12,7 @@
 #include "interfaces.h"
 
 #define LOCATION_DICO "./res/txt/dico.txt"
-#define LOCATION_GRID "./res/txt/grille_validation.txt"
+#define LOCATION_GRID "./res/txt/grille.txt"
 
 int main(int argc, char* argv[]) {
 
