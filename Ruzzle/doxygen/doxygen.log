@@ -1,0 +1,79 @@
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Interfaces.c:2: warning: the name `Interface.c' supplied as the second argument in the \file statement is not an input file
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:162: warning: argument 'Cell' of command @param is not found in the argument list of bonusCell(Cell cell)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:168: warning: The following parameters of bonusCell(Cell cell) are not documented:
+  parameter 'cell'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:192: warning: argument 'Int' of command @param is not found in the argument list of bonusLength(int length)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:198: warning: The following parameters of bonusLength(int length) are not documented:
+  parameter 'length'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:177: warning: argument 'Cell' of command @param is not found in the argument list of bonusWord(Cell cell)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:183: warning: The following parameters of bonusWord(Cell cell) are not documented:
+  parameter 'cell'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:52: warning: argument 'char' of command @param is not found in the argument list of createCell(char c)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:58: warning: The following parameters of createCell(char c) are not documented:
+  parameter 'c'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:84: warning: argument 'char' of command @param is not found in the argument list of createFullGrid(char *nameFile, Cell grid[N][N])
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:90: warning: The following parameters of createFullGrid(char *nameFile, Cell grid[N][N]) are not documented:
+  parameter 'nameFile'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:11: warning: argument 'Cell' of command @param is not found in the argument list of createGrid(Cell grid[N][N], char charFile[])
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:11: warning: argument 'char' of command @param is not found in the argument list of createGrid(Cell grid[N][N], char charFile[])
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:17: warning: The following parameters of createGrid(Cell grid[N][N], char charFile[]) are not documented:
+  parameter 'grid'
+  parameter 'charFile'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:248: warning: argument 'Cell' of command @param is not found in the argument list of getWordFromCoord(Cell grid[N][N], int coord[17][2])
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:248: warning: argument 'int' of command @param is not found in the argument list of getWordFromCoord(Cell grid[N][N], int coord[17][2])
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:255: warning: The following parameters of getWordFromCoord(Cell grid[N][N], int coord[17][2]) are not documented:
+  parameter 'grid'
+  parameter 'coord'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:32: warning: argument 'Cel' of command @param is not found in the argument list of initGrid(Cell grid[N][N])
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:37: warning: The following parameters of initGrid(Cell grid[N][N]) are not documented:
+  parameter 'grid'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:130: warning: argument 'char' of command @param is not found in the argument list of scoreCell(char c)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:136: warning: The following parameters of scoreCell(char c) are not documented:
+  parameter 'c'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:315: warning: argument 'Cell' of command @param is not found in the argument list of scoreTotal(Cell grid[N][N], int coord[17][2], int *pScoreWord, int lengthWord)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:315: warning: argument 'int' of command @param is not found in the argument list of scoreTotal(Cell grid[N][N], int coord[17][2], int *pScoreWord, int lengthWord)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:315: warning: argument 'int' of command @param is not found in the argument list of scoreTotal(Cell grid[N][N], int coord[17][2], int *pScoreWord, int lengthWord)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:315: warning: argument 'int' of command @param is not found in the argument list of scoreTotal(Cell grid[N][N], int coord[17][2], int *pScoreWord, int lengthWord)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:324: warning: The following parameters of scoreTotal(Cell grid[N][N], int coord[17][2], int *pScoreWord, int lengthWord) are not documented:
+  parameter 'grid'
+  parameter 'coord'
+  parameter 'pScoreWord'
+  parameter 'lengthWord'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:279: warning: argument 'Trie' of command @param is not found in the argument list of scoreWord(Trie *t, Trie *tGrid, Cell grid[N][N], int coord[17][2])
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:279: warning: argument 'Trie' of command @param is not found in the argument list of scoreWord(Trie *t, Trie *tGrid, Cell grid[N][N], int coord[17][2])
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:279: warning: argument 'Cell' of command @param is not found in the argument list of scoreWord(Trie *t, Trie *tGrid, Cell grid[N][N], int coord[17][2])
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:279: warning: argument 'int' of command @param is not found in the argument list of scoreWord(Trie *t, Trie *tGrid, Cell grid[N][N], int coord[17][2])
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:288: warning: The following parameters of scoreWord(Trie *t, Trie *tGrid, Cell grid[N][N], int coord[17][2]) are not documented:
+  parameter 't'
+  parameter 'tGrid'
+  parameter 'grid'
+  parameter 'coord'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:69: warning: argument 'Cell' of command @param is not found in the argument list of setBonus(Cell grid[N][N])
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Grid.c:74: warning: The following parameters of setBonus(Cell grid[N][N]) are not documented:
+  parameter 'grid'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:129: warning: argument 'char' of command @param is not found in the argument list of createFullTrie(char *nameFile, Trie *t)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:129: warning: argument 'Trie' of command @param is not found in the argument list of createFullTrie(char *nameFile, Trie *t)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:135: warning: The following parameters of createFullTrie(char *nameFile, Trie *t) are not documented:
+  parameter 'nameFile'
+  parameter 't'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:37: warning: argument 'Trie' of command @param is not found in the argument list of createTrie(Trie *t)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:42: warning: The following parameters of createTrie(Trie *t) are not documented:
+  parameter 't'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:169: warning: argument 'Trie' of command @param is not found in the argument list of destroyTrie(Trie *t)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:174: warning: The following parameters of destroyTrie(Trie *t) are not documented:
+  parameter 't'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:47: warning: argument 'Trie' of command @param is not found in the argument list of insertNode(Trie *t, char *string)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:47: warning: argument 'char' of command @param is not found in the argument list of insertNode(Trie *t, char *string)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:53: warning: The following parameters of insertNode(Trie *t, char *string) are not documented:
+  parameter 't'
+  parameter 'string'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:78: warning: argument 'Trie' of command @param is not found in the argument list of searchNode(Trie *t, char *string)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:78: warning: argument 'char' of command @param is not found in the argument list of searchNode(Trie *t, char *string)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:85: warning: The following parameters of searchNode(Trie *t, char *string) are not documented:
+  parameter 't'
+  parameter 'string'
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:108: warning: argument 'Trie' of command @param is not found in the argument list of searchWordTrie(Trie *t, char *string)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:108: warning: argument 'char' of command @param is not found in the argument list of searchWordTrie(Trie *t, char *string)
+C:/Users/FrOOmiX/Desktop/Etude_cas/Ruzzle/Trie.c:115: warning: The following parameters of searchWordTrie(Trie *t, char *string) are not documented:
+  parameter 't'
+  parameter 'string'

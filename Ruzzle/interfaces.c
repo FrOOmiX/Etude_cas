@@ -6,7 +6,7 @@
  *
  */
 
-#include "interfaces.h"
+#include "Interfaces.h"
 #define LOCATION_GRID "./res/txt/grille.txt"
 
 /** \brief Create the principal window(menu)
@@ -67,7 +67,7 @@ int principal_window_load_window_grid(PrincipalWindow* game_menu, SDL_Event even
         //Si la souris est dans le bouton
         if( ( x > game_menu->gameStartPosition.x ) && ( x < game_menu->gameStartPosition.x + game_menu->gameStartPosition.w ) && ( y > game_menu->gameStartPosition.y ) && ( y < game_menu->gameStartPosition.y + game_menu->gameStartPosition.h ) )
         {
-            //Mise Ã  jour du sprite du bouton
+            //Mise à jour du sprite du bouton
             return 1;
         }
     }
@@ -109,7 +109,7 @@ Uint32 timer(Uint32 interval, void* grid){
     g->fontTimer = TTF_OpenFont("./res/fonts/edgothic.ttf",35);
     SDL_FreeSurface(g->timer);
     g->timer = TTF_RenderText_Solid(g->fontTimer,buf,g->fontColor);*/
-    printf("%d", g->secondsLeft);
+    printf("%d\n", g->secondsLeft);
    return interval;
 }
 
@@ -382,6 +382,12 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
     grid->scorePos.x = 145;
     grid->scorePos.y = 60;
 
+    char *buf = (char*)malloc(10);
+    sprintf(buf, "Score : %d", *pScore);
+    SDL_FreeSurface(grid->scoreDisplay);
+    grid->scoreDisplay = TTF_RenderText_Solid(grid->fontLetter,buf,grid->fontColor);
+    SDL_BlitSurface(grid->scoreDisplay,NULL,screen,&(grid->scorePos));
+
     SDL_PollEvent(&event);
     switch (event.type) {
         case SDL_MOUSEBUTTONUP:
@@ -396,9 +402,9 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
 
                                     bonusOrange(grid, screen, pointeurSurA, pointeurSurB);
                                     coord[*cpt][0] = c;
-                                    printf("%d", coord[*cpt][0]); //affichage de X
+                                    //printf("%d", coord[*cpt][0]); //affichage de X
                                     coord[*cpt][1] = r;
-                                    printf("%d\n", coord[*cpt][1]); // affichage de Y
+                                    //printf("%d\n", coord[*cpt][1]); // affichage de Y
                                     letter_display(LOCATION_GRID, grid, screen);
                                     gride[r][c].isVisited=1;
                                     (*cpt)++;
@@ -406,9 +412,9 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
                                else if(*cpt==0) {
                                 bonusOrange(grid, screen, pointeurSurA, pointeurSurB);
                                 coord[*cpt][0] = c;
-                                printf("%d", coord[*cpt][0]);
+                                //printf("%d", coord[*cpt][0]);
                                 coord[*cpt][1] = r;
-                                printf("%d\n", coord[*cpt][1]);
+                                //printf("%d\n", coord[*cpt][1]);
                                 letter_display(LOCATION_GRID, grid, screen);
                                 gride[r][c].isVisited=1;
                                 (*cpt)++;
@@ -433,17 +439,10 @@ int grid_window_draw_on_clic(GridWindow* grid, SDL_Surface* screen, SDL_Event ev
                     int score = scoreWord(t, tGrid, gride, coord);
                     *pScore += score;
                     printf("Score Word : %d\n", score);
-                    printf("Score Total : %d\n", *pScore);
                     *cpt = 0;
                     grid_window_draw(grid, screen, event);
                     letter_display(LOCATION_GRID, grid, screen);
 
-                    //Display on game screen
-                    char *buf = (char*)malloc(10);
-                    sprintf(buf, "Score : %d", *pScore);
-                    SDL_FreeSurface(grid->scoreDisplay);
-                    grid->scoreDisplay = TTF_RenderText_Solid(grid->fontLetter,buf,grid->fontColor);
-                    SDL_BlitSurface(grid->scoreDisplay,NULL,screen,&(grid->scorePos));
                     free(buf);
 
 
@@ -585,7 +584,7 @@ int score_window_load(ScoreWindow* score_menu, SDL_Event event)
         if( ( x > score_menu->replayPosition.x ) && ( x < score_menu->replayPosition.x + score_menu->replayPosition.w ) &&
            ( y > score_menu->replayPosition.y ) &&( y < score_menu->replayPosition.y + score_menu->replayPosition.h ) )
         {
-            //Mise Ã  jour du sprite du bouton
+            //Mise à jour du sprite du bouton
             return 1;
         }
     }
@@ -642,5 +641,3 @@ int init()
     }
     return 0;
 }
-
-

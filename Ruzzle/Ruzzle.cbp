@@ -48,14 +48,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Grid.h" />
+		<Unit filename="Interfaces.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Interfaces.h" />
 		<Unit filename="Trie.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Trie.h" />
-		<Unit filename="interfaces.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="interfaces.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

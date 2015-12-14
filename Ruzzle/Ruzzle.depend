@@ -206,13 +206,13 @@
 	"Grid.h"
 	"interfaces.h"
 
-1450112946 source:c:\users\froomix\desktop\etude_cas\ruzzle\main.c
+1450113276 source:c:\users\froomix\desktop\etude_cas\ruzzle\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"Trie.h"
 	"Grid.h"
-	"interfaces.h"
+	"Interfaces.h"
 
 1450112199 source:c:\users\froomix\desktop\etude_cas\ruzzle\trie.c
 	"Trie.h"
@@ -231,10 +231,10 @@
 	<string.h>
 	"Trie.h"
 
-1450112952 source:c:\users\froomix\desktop\etude_cas\ruzzle\interfaces.c
+1450113677 source:c:\users\froomix\desktop\etude_cas\ruzzle\interfaces.c
 	"interfaces.h"
 
-1449941801 c:\users\froomix\desktop\etude_cas\ruzzle\interfaces.h
+1450113326 c:\users\froomix\desktop\etude_cas\ruzzle\interfaces.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>

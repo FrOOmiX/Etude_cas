@@ -1,0 +1,26 @@
+var struct_grid_window =
+[
+    [ "background", "struct_grid_window.html#a1dc412c7336b84d36cdc37c46f17aa8a", null ],
+    [ "backgroundPosition", "struct_grid_window.html#a598fc703f66807bdd820a44ab1a2e47a", null ],
+    [ "clip", "struct_grid_window.html#a3d705fd6e17357c933922e637156886f", null ],
+    [ "clipClic", "struct_grid_window.html#a69a8fd58bfbded4f87b8c908acccc50b", null ],
+    [ "coord", "struct_grid_window.html#ab93e980f6793d5a1cf418ab4960975d6", null ],
+    [ "faces", "struct_grid_window.html#a0b8bc4791d20fa5917f8b2a33cb447af", null ],
+    [ "fontColor", "struct_grid_window.html#a07cf9640e336f3edfd4509cc4e29cc91", null ],
+    [ "fontLetter", "struct_grid_window.html#a79608d72352665c1ba46c1890b8410b6", null ],
+    [ "fontScore", "struct_grid_window.html#a92e68ea51ae9f9f67b0ac54f1ffee2fe", null ],
+    [ "fontTimer", "struct_grid_window.html#acc6ab75ec8f6e0e8e865ac611627aca5", null ],
+    [ "letter", "struct_grid_window.html#a475daa53801158da2d315410c0b237f9", null ],
+    [ "letterPosition", "struct_grid_window.html#aee1145536148344191e0081101aa398d", null ],
+    [ "logoRuzzlePosition", "struct_grid_window.html#ac0f383c71e306e79fd683ef51875af52", null ],
+    [ "pos", "struct_grid_window.html#a294c5492db3ece725b68947cafdaafec", null ],
+    [ "scoreDisplay", "struct_grid_window.html#a0a3637e488e9220f58c74a398638dbc1", null ],
+    [ "scorePos", "struct_grid_window.html#aa1c21dd1cffc33688c237ec718f59b4b", null ],
+    [ "secondsLeft", "struct_grid_window.html#af9202ab469891d8573a60fab4b102ad7", null ],
+    [ "timer", "struct_grid_window.html#ad648ab78bc0f499e333501b06c242abc", null ],
+    [ "timerID", "struct_grid_window.html#a7d4365a45d06f68fb2244f9d8aecf41d", null ],
+    [ "timerPosition", "struct_grid_window.html#ad9900ba4126159be0501e5799be9ccf2", null ],
+    [ "title", "struct_grid_window.html#ae9027e6b7cfbff23b0604fd0a6c70094", null ],
+    [ "trophy", "struct_grid_window.html#a18be51149b1f6badee81ee7d203b708e", null ],
+    [ "trophyPosition", "struct_grid_window.html#aaff15846d3eb147c87ddc2ea3ae98cef", null ]
+];
