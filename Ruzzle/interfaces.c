@@ -1,3 +1,11 @@
+/**
+ * \file Interface.c
+ * \brief Generate a Grid
+ * \author RUSIECKI.R, DECHAUME.S, BADENS.R
+ * \date 14 decembre 2015
+ *
+ */
+
 #include "interfaces.h"
 #define LOCATION_GRID "./res/txt/grille_validation.txt"
 
