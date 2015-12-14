@@ -8,14 +8,22 @@
 #include "Grid.h"
 #include "Trie.h"
 
-//Struct for principal screen
+/**
+ * \struct PrincipalWindow
+ * \brief Structure for the Game Menu
+ *
+ */
 typedef struct{
     SDL_Surface *title, *background, *gameStart;
     SDL_Rect logoRuzzlePosition, backgroundPosition, gameStartPosition;
     TTF_Font *font;
 }PrincipalWindow;
 
-//Struct for screen with the play grid
+/**
+ * \struct GridWindow
+ * \brief Structure for the Game Grid
+ *
+ */
 typedef struct{
     SDL_Color fontColor;
     SDL_TimerID timerID;
@@ -26,7 +34,11 @@ typedef struct{
     TTF_Font *fontLetter, *fontTimer, *fontScore;
 }GridWindow;
 
-//Struct for screen with the score and replay grid
+/**
+ * \struct ScoreWindow
+ * \brief Structure for the final menu (relay)
+ *
+ */
 typedef struct{
     SDL_Surface *title, *background, *trophy, *replay, *score;
     SDL_Rect logoRuzzlePosition, backgroundPosition, trophyPosition, replayPosition, scorePosition;
