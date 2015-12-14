@@ -27,13 +27,17 @@
  *
  */
 
-// Struct for a Cell
+/**
+ * \struct sCell
+ * \brief Structure for a Cell
+ *
+ */
 typedef struct sCell {
 
-    char letter;
-    int score;
-    int isVisited;
-    char bonus[2];
+    char letter;        /*!< Letter of a Cell */
+    int score;          /*!< Score of a Cell */
+    int isVisited;      /*!< 1 if Cell is visited, 0 instead */
+    char bonus[2];      /*!< Bonus or not */
 } Cell;
 
 void createGrid(Cell grid[N][N], char charFile[]);

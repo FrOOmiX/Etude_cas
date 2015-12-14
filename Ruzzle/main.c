@@ -1,3 +1,9 @@
+/**
+ * \author RUSIECKI.R, DECHAUME.S, BADENS.R
+ * \date 14 decembre 2015
+ *
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

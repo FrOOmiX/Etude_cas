@@ -7,18 +7,26 @@
 
 #define ALPHABET 26
 
-// Struct for a node in the Trie
+/**
+ * \struct sNode
+ * \brief Structure for a Node in the Trie
+ *
+ */
 typedef struct sNode {
 
-    int isEnd;
-    struct sNode *child[ALPHABET];
+    int isEnd;                          /*!< 1 if it's a leaf, 0 instead */
+    struct sNode *child[ALPHABET];      /*!< Pointers to children */
 
 } Node;
 
-// Struct of the Trie
+/**
+ * \struct sTrie
+ * \brief Structure for the whole Trie
+ *
+ */
 typedef struct sTrie {
 
-    Node *root;
+    Node *root;                         /*!< Root of the Trie */
 } Trie;
 
 void createTrie(Trie *t);

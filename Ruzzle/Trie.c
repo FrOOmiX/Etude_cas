@@ -1,3 +1,11 @@
+/**
+ * \file Trie.c
+ * \brief Generate a Trie and search words in it
+ * \author RUSIECKI.R, DECHAUME.S, BADENS.R
+ * \date 14 decembre 2015
+ *
+ */
+
 #include "Trie.h"
 
 #define MAX_LENGTH 512

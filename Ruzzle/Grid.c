@@ -1,3 +1,11 @@
+/**
+ * \file Grid.c
+ * \brief Generate a Grid
+ * \author RUSIECKI.R, DECHAUME.S, BADENS.R
+ * \date 14 decembre 2015
+ *
+ */
+
 #include "Grid.h"
 
 /** \brief Create the grid with char from a file
